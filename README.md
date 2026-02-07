@@ -1,5 +1,3 @@
-<<<<<<< HEAD
-# personal-page
 My personal webpage
 =======
 # 🌍 Personal Page
