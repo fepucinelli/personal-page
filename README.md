@@ -4,6 +4,8 @@ This is a web application that lets users discover and listen to online radio st
 
 It focuses on **simplicity, discovery, and performance**, providing a smooth listening experience with modern web technologies.
 
+https://fepucinelli.github.io/personal-page/
+
 ---
 
 ## ✨ Features
