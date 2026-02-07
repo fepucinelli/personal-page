@@ -1,6 +1,4 @@
-My personal webpage
-=======
-# 🌍 Personal Page
+# Personal Page
 
 This is a web application that lets users discover and listen to online radio stations from all over the world, and is also my personal site.
 
@@ -136,4 +134,3 @@ Open:
 ```
 http://localhost:3000
 ```
->>>>>>> 50f5390 (Initial commit)
