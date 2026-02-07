@@ -19,6 +19,6 @@
 const links = [
   { icon: 'pi-instagram', url: 'https://www.instagram.com/felipepucinelli' },
   { icon: 'pi-linkedin', url: 'https://www.linkedin.com/in/felipepucinelli' },
-  { icon: 'pi-github', url: 'https://github.com/felipepucinelli' },
+  { icon: 'pi-github', url: 'https://github.com/fepucinelli' },
 ]
 </script>
