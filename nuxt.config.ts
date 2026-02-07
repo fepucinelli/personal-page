@@ -1,12 +1,12 @@
 export default defineNuxtConfig({
   css: ['~/assets/css/main.css'],
   modules: ['@pinia/nuxt'],
+  nitro: {
+    preset: 'github-pages'
+  },
   app: {
     baseURL: '/personal-page/',
     buildAssetsDir: 'assets'
-  },
-  nitro: {
-    preset: 'github-pages'
   },
   ssr: false,
   postcss: {

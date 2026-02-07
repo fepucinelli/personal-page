@@ -5,8 +5,7 @@
     "dev": "nuxt dev",
     "build": "nuxt build",
     "preview": "nuxt preview",
-    "generate": "nuxt generate",
-    "deploy": "npm run generate && gh-pages -d .output/public"
+    "deploy": "npm run build && gh-pages -d dist"
   },
   "dependencies": {
     "@pinia/nuxt": "^0.5.1",

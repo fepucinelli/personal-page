@@ -30,7 +30,7 @@
 
     <SocialLinks />
 
-    <h4 class="font-bold mb-4 dark:text-gray-100">
+    <h4 class="font-bold dark:text-gray-100">
       <i class="pi pi-headphones"></i>
       By the way, my personal webpage is also a global radio station, enjoy:
     </h4>
@@ -98,12 +98,12 @@
       </div>
     </section>
 
-    <NuxtLink
+    <!-- <NuxtLink
       to="/stations"
       class="mt-8 text-sm text-gray-500 hover:underline"
     >
       Browse all stations →
-    </NuxtLink>
+    </NuxtLink> -->
   </div>
 </template>
 

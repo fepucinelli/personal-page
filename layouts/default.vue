@@ -12,17 +12,17 @@
       </NuxtLink>
 
       <nav class="flex items-center gap-2 text-sm">
-        <span class="text-gray-500 dark:text-gray-400 hidden md:inline">
+        <!-- <span class="text-gray-500 dark:text-gray-400 hidden md:inline">
           Search radio stations by:
-        </span>
+        </span> -->
 
-        <NuxtLink to="/countries" class="hover:underline">
+        <!-- <NuxtLink to="/countries" class="hover:underline">
           countries
         </NuxtLink>
 
         <NuxtLink to="/genres" class="hover:underline">
           genres
-        </NuxtLink>
+        </NuxtLink> -->
 
         <NuxtLink to="/favorites">
           <i class="pi pi-bookmark-fill ml-2 p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-800"></i>
