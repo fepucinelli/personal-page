@@ -21,6 +21,5 @@
 
 <script setup>
   import Loader from '~/components/ui/Loader.vue'
-  const { data, pending } = await useFetch('/api/countries')
-  const countries = computed(() => data.value?.countries || [])
+  const { data: countries, pending } = await useCountries()
 </script>

@@ -108,8 +108,6 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, watchEffect } from 'vue'
-
 import { usePlayerStore } from '~/stores/player'
 import { useFavoritesStore } from '~/stores/favorites'
 import type { Station } from '~/types/station'
@@ -122,22 +120,21 @@ const favorites = useFavoritesStore()
 const player = usePlayerStore()
 
 // Fetch stations
-const { data, pending } = await useFetch('/api/stations')
-const stations = computed<Station[]>(() => data.value?.stations || [])
+const { data: stations, pending } = await useStations()
 
 // Current station
 const currentStation = ref<Station | null>(null)
 
 // Pick random station
 const pickRandomStation = () => {
-  if (stations.value.length === 0) return
+  if (!stations.value?.length) return
   const index = Math.floor(Math.random() * stations.value.length)
   currentStation.value = stations.value[index]
 }
 
 // Initial random pick
 watchEffect(() => {
-  if (!currentStation.value && stations.value.length > 0) {
+  if (!currentStation.value && stations.value?.length) {
     pickRandomStation()
   }
 })

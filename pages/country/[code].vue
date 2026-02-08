@@ -22,9 +22,5 @@ import StationCard from '~/components/station/StationCard.vue'
 import Loader from '~/components/ui/Loader.vue'
 
 const route = useRoute()
-const { data, pending } = await useFetch('/api/stations', {
-  query: { country: route.params.code },
-})
-
-const stations = computed(() => data.value?.stations || [])
+const { data: stations, pending } = await useStations({ country: String(route.params.code) })
 </script>

@@ -26,7 +26,5 @@
 <script setup>
   import Loader from '~/components/ui/Loader.vue'
 
-  const { data, pending } = await useFetch('/api/genres')
-
-  const genres = computed(() => data.value?.genres || [])
+  const { data: genres, pending } = await useGenres()
 </script>

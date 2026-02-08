@@ -20,11 +20,6 @@
 import StationCard from '~/components/station/StationCard.vue'
 import Loader from '~/components/ui/Loader.vue'
 
-const route = useRoute() // ✅ correct here
-
-const { data, pending } = await useFetch('/api/stations', {
-  query: { genre: route.params.slug },
-})
-
-const stations = computed(() => data.value?.stations || [])
+const route = useRoute()
+const { data: stations, pending } = await useStations({ genre: String(route.params.slug) })
 </script>

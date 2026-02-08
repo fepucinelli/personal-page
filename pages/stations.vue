@@ -18,6 +18,5 @@
   import StationCard from '~/components/station/StationCard.vue'
   import Loader from '~/components/ui/Loader.vue'
 
-  const { data, pending } = await useFetch('/api/stations')
-  const stations = computed(() => data.value?.stations || [])
+  const { data: stations, pending } = await useStations()
 </script>
