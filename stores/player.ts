@@ -5,7 +5,7 @@ export const usePlayerStore = defineStore('player', () => {
   const currentStation = ref<Station | null>(null)
   const isPlaying = ref(false)
   const isLoading = ref(false)
-  const volume = ref(1)
+  const volume = ref(import.meta.client ? Number(localStorage.getItem('player-volume') ?? 1) : 1)
   const error = ref<string | null>(null)
 
   let audio: HTMLAudioElement | null = null
@@ -88,6 +88,7 @@ export const usePlayerStore = defineStore('player', () => {
   function setVolume(value: number) {
     volume.value = value
     if (audio) audio.volume = value
+    localStorage.setItem('player-volume', String(value))
   }
 
   return {

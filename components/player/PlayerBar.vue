@@ -41,6 +41,21 @@
       </div>
     </div>
 
+    <!-- Favorite -->
+    <button
+      @click="actions.toggleFavorite(player.currentStation!)"
+      class="flex-shrink-0 p-2 rounded-full
+             text-ink-secondary dark:text-neutral-400
+             hover:text-brand hover:bg-brand/5
+             transition-all duration-200"
+      :title="actions.isFavorite(player.currentStation!) ? 'Remove from favorites' : 'Add to favorites'"
+    >
+      <i
+        class="pi text-sm"
+        :class="actions.isFavorite(player.currentStation!) ? 'pi-star-fill text-brand' : 'pi-star'"
+      ></i>
+    </button>
+
     <!-- Volume -->
     <div class="hidden sm:flex items-center gap-3 flex-shrink-0">
       <i class="pi pi-volume-down text-xs text-ink-muted dark:text-neutral-500"></i>
@@ -70,6 +85,7 @@ import { usePlayerStore } from '~/stores/player'
 import { fetchStations } from '~/composables/useStations'
 
 const player = usePlayerStore()
+const actions = useStationActions()
 
 const toggle = () => {
   player.toggle()
