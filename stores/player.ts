@@ -1,12 +1,17 @@
-import { defineStore } from 'pinia'
+import { defineStore, skipHydrate } from 'pinia'
 import type { Station } from '~/types/radio'
 
 export const usePlayerStore = defineStore('player', () => {
   const currentStation = ref<Station | null>(null)
   const isPlaying = ref(false)
   const isLoading = ref(false)
-  const volume = ref(import.meta.client ? Number(localStorage.getItem('player-volume') ?? 1) : 1)
+  const volume = ref(1)
   const error = ref<string | null>(null)
+
+  if (import.meta.client) {
+    const saved = localStorage.getItem('player-volume')
+    if (saved !== null) volume.value = Number(saved)
+  }
 
   let audio: HTMLAudioElement | null = null
   let _onError: (() => void) | null = null
@@ -95,7 +100,7 @@ export const usePlayerStore = defineStore('player', () => {
     currentStation,
     isPlaying,
     isLoading,
-    volume,
+    volume: skipHydrate(volume),
     error,
     play,
     toggle,

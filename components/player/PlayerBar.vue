@@ -43,6 +43,7 @@
 
     <!-- Favorite -->
     <button
+      v-if="!favorites.isSystemFavorite(player.currentStation!.id)"
       @click="actions.toggleFavorite(player.currentStation!)"
       class="flex-shrink-0 p-2 rounded-full
              text-ink-secondary dark:text-neutral-400
@@ -82,9 +83,11 @@
 
 <script setup lang="ts">
 import { usePlayerStore } from '~/stores/player'
+import { useFavoritesStore } from '~/stores/favorites'
 import { fetchStations } from '~/composables/useStations'
 
 const player = usePlayerStore()
+const favorites = useFavoritesStore()
 const actions = useStationActions()
 
 const toggle = () => {

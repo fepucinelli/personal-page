@@ -10,7 +10,7 @@ Personal site and internet radio discovery app built by [Felipe Pucinelli](https
 
 - **Random Radio Discovery** — Start listening to a random station with one click, shuffle to discover new ones
 - **Auto-Skip on Failure** — Broken streams are detected automatically and the player skips to the next available station
-- **Curated System Stations** — Handpicked stations pinned to favorites that can't be removed
+- **Curated System Stations** — Handpicked stations pinned to favorites that can't be removed or unfavorited
 - **Now Playing Toast** — Toast notification appears when switching between stations
 - **Avatar Pulse Animation** — Breathing ring animation on the avatar while music is playing
 - **Recently Played** — Tracks last 10 played stations, persisted in localStorage, shown on the landing page
@@ -19,7 +19,8 @@ Personal site and internet radio discovery app built by [Felipe Pucinelli](https
 - **Browse by Country** — Explore stations filtered by country with dedicated pages
 - **Browse by Genre** — Explore stations filtered by music genre with dedicated pages
 - **Infinite Scroll** — Stations, countries, and genres load progressively as you scroll
-- **Persistent Player** — Audio keeps playing across page navigation with play/pause and volume control
+- **Persistent Player** — Audio keeps playing across page navigation with play/pause, volume control, and inline favorite toggle
+- **Persistent Volume** — Volume level saved to localStorage and restored across sessions
 - **Dark Mode** — Light/dark theme toggle, preference persisted in localStorage
 - **SEO Optimized** — SSR pre-rendering, meta tags, Open Graph, structured data (JSON-LD), sitemap, and robots.txt
 
@@ -75,7 +76,7 @@ All stores use Pinia's Composition API style and are self-initializing (no `init
 
 | Store | Responsibility |
 |-------|---------------|
-| `player.ts` | Audio playback state, lazy `HTMLAudioElement` via `ensureAudio()`, error callback for auto-skip |
+| `player.ts` | Audio playback state, lazy `HTMLAudioElement` via `ensureAudio()`, persistent volume (`skipHydrate`), error callback for auto-skip |
 | `favorites.ts` | User favorites + system-curated stations, localStorage persistence |
 | `recentlyPlayed.ts` | Last 10 played stations (deduplicated), localStorage persistence |
 | `theme.ts` | Dark/light mode toggle, reads system preference at creation |
@@ -84,8 +85,8 @@ All stores use Pinia's Composition API style and are self-initializing (no `init
 
 ```
 components/
-  station/StationCard.vue   # Presentational — props: station, isPlaying, isFavorite; emits: play, toggleFavorite
-  player/PlayerBar.vue      # Global persistent player bar with auto-skip fallback on stream errors
+  station/StationCard.vue   # Presentational — props: station, isPlaying, isFavorite, hideFavorite; emits: play, toggleFavorite
+  player/PlayerBar.vue      # Global persistent player bar with favorite toggle, auto-skip fallback on stream errors
   ui/Loader.vue             # Shared loading spinner
   ui/SocialLinks.vue        # Social media links
 ```
