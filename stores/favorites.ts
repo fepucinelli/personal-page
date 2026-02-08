@@ -70,6 +70,7 @@ export const useFavoritesStore = defineStore('favorites', () => {
   return {
     stations,
     allFavorites,
+    isSystemFavorite,
     isFavorite,
     toggleFavorite,
   }

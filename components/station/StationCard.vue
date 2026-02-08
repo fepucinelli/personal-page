@@ -42,6 +42,7 @@
       </button>
 
       <button
+        v-if="!hideFavorite"
         @click="$emit('toggleFavorite', station)"
         class="p-1 transition-all duration-200
                hover:scale-110"
@@ -66,6 +67,7 @@ defineProps<{
   station: Station
   isPlaying: boolean
   isFavorite: boolean
+  hideFavorite?: boolean
 }>()
 
 defineEmits<{
