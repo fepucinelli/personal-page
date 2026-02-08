@@ -98,12 +98,12 @@
       </div>
     </section>
 
-    <!-- <NuxtLink
+    <NuxtLink
       to="/stations"
       class="mt-8 text-sm text-gray-500 hover:underline"
     >
       Browse all stations →
-    </NuxtLink> -->
+    </NuxtLink>
   </div>
 </template>
 
