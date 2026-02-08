@@ -67,6 +67,7 @@
 
 <script setup lang="ts">
 import { usePlayerStore } from '~/stores/player'
+import { fetchStations } from '~/composables/useStations'
 
 const player = usePlayerStore()
 
@@ -79,4 +80,21 @@ const onVolume = (e: Event) => {
 }
 
 const volumePercent = computed(() => player.volume * 100)
+
+// Auto-skip to a random station when the current one fails
+let skipping = false
+
+player.onError(async () => {
+  if (skipping) return
+  skipping = true
+
+  try {
+    const randomOffset = Math.floor(Math.random() * 500)
+    const stations = await fetchStations({ offset: randomOffset, limit: 10 })
+    const next = stations.find(s => s.id !== player.currentStation?.id)
+    if (next) await player.play(next)
+  } finally {
+    skipping = false
+  }
+})
 </script>

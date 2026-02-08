@@ -9,6 +9,11 @@ export const usePlayerStore = defineStore('player', () => {
   const error = ref<string | null>(null)
 
   let audio: HTMLAudioElement | null = null
+  let _onError: (() => void) | null = null
+
+  function onError(cb: () => void) {
+    _onError = cb
+  }
 
   function ensureAudio() {
     if (audio) return
@@ -39,6 +44,7 @@ export const usePlayerStore = defineStore('player', () => {
       error.value = 'Station unavailable'
       isLoading.value = false
       isPlaying.value = false
+      _onError?.()
     })
   }
 
@@ -61,6 +67,7 @@ export const usePlayerStore = defineStore('player', () => {
     } catch {
       error.value = 'Unable to play station'
       isLoading.value = false
+      _onError?.()
     }
   }
 
@@ -93,5 +100,6 @@ export const usePlayerStore = defineStore('player', () => {
     toggle,
     pause,
     setVolume,
+    onError,
   }
 })
