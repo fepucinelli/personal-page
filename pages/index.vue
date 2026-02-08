@@ -155,6 +155,36 @@ import Loader from '~/components/ui/Loader.vue'
 import SocialLinks from '~/components/ui/SocialLinks.vue'
 import StationCard from '~/components/station/StationCard.vue'
 
+useHead({
+  title: 'Senior Front-End Engineer, Lead Developer & DJ',
+  script: [
+    {
+      type: 'application/ld+json',
+      innerHTML: JSON.stringify({
+        '@context': 'https://schema.org',
+        '@type': 'Person',
+        name: 'Felipe Pucinelli',
+        jobTitle: 'Senior Front-End Engineer',
+        url: 'https://pucinelli.me',
+        image: 'https://pucinelli.me/avatar.jpg',
+        description: 'Senior Front-End Engineer, Lead Developer & DJ with 12+ years of experience building products that feel good to use.',
+        sameAs: [
+          'https://www.instagram.com/felipepucinelli',
+          'https://www.linkedin.com/in/felipepucinelli',
+          'https://github.com/fepucinelli',
+        ],
+      }),
+    },
+  ],
+})
+
+useSeoMeta({
+  description: 'Felipe Pucinelli — Senior Front-End Engineer, Lead Developer & DJ. Explore my curated collection of internet radio stations from around the world.',
+  ogTitle: 'Felipe Pucinelli — Senior Front-End Engineer, Lead Developer & DJ',
+  ogDescription: 'Senior Front-End Engineer, Lead Developer & DJ. Explore internet radio stations from around the world.',
+  ogUrl: 'https://pucinelli.me',
+})
+
 const favorites = useFavoritesStore()
 const player = usePlayerStore()
 

@@ -2,6 +2,15 @@
   import { useFavoritesStore } from '~/stores/favorites'
   import StationCard from '~/components/station/StationCard.vue'
 
+  useHead({ title: 'Favorites' })
+  useSeoMeta({
+    description: 'Your saved radio stations. Keep track of the stations you love.',
+    ogTitle: 'Favorites | Felipe Pucinelli',
+    ogDescription: 'Your saved radio stations.',
+    ogUrl: 'https://pucinelli.me/favorites',
+    robots: 'noindex',
+  })
+
   const favorites = useFavoritesStore()
 </script>
 

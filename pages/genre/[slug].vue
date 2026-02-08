@@ -30,5 +30,17 @@ import StationCard from '~/components/station/StationCard.vue'
 import Loader from '~/components/ui/Loader.vue'
 
 const route = useRoute()
+const genreName = computed(() =>
+  String(route.params.slug).replace(/\b\w/g, c => c.toUpperCase())
+)
+
+useHead({ title: () => `${genreName.value} Radio Stations` })
+useSeoMeta({
+  description: () => `Listen to ${genreName.value} radio stations. Stream the best ${genreName.value} music from around the world.`,
+  ogTitle: () => `${genreName.value} Radio Stations | Felipe Pucinelli`,
+  ogDescription: () => `Listen to ${genreName.value} radio stations. Stream the best ${genreName.value} music from around the world.`,
+  ogUrl: () => `https://pucinelli.me/genre/${route.params.slug}`,
+})
+
 const { data: stations, pending } = await useStations({ genre: String(route.params.slug) })
 </script>

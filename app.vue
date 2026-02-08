@@ -29,6 +29,24 @@ router.beforeEach(() => {
 router.afterEach(() => {
   loading.value = false
 })
+
+// -----------------------------
+// WebSite structured data
+// -----------------------------
+useHead({
+  script: [
+    {
+      type: 'application/ld+json',
+      innerHTML: JSON.stringify({
+        '@context': 'https://schema.org',
+        '@type': 'WebSite',
+        name: 'Felipe Pucinelli',
+        url: 'https://pucinelli.me',
+        description: 'Senior Front-End Engineer, Lead Developer & DJ. Explore internet radio stations from around the world.',
+      }),
+    },
+  ],
+})
 </script>
 
 <template>

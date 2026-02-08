@@ -9,7 +9,7 @@
         &larr; All countries
       </NuxtLink>
       <h1 class="font-display text-3xl italic text-ink dark:text-neutral-50">
-        Stations
+        {{ countryName }} Stations
       </h1>
     </div>
 
@@ -31,4 +31,14 @@ import Loader from '~/components/ui/Loader.vue'
 
 const route = useRoute()
 const { data: stations, pending } = await useStations({ country: String(route.params.code) })
+
+const countryName = computed(() => stations.value?.[0]?.country || String(route.params.code).toUpperCase())
+
+useHead({ title: () => `${countryName.value} Radio Stations` })
+useSeoMeta({
+  description: () => `Listen to radio stations from ${countryName.value}. Browse and stream internet radio.`,
+  ogTitle: () => `${countryName.value} Radio Stations | Felipe Pucinelli`,
+  ogDescription: () => `Listen to radio stations from ${countryName.value}. Browse and stream internet radio.`,
+  ogUrl: () => `https://pucinelli.me/country/${route.params.code}`,
+})
 </script>

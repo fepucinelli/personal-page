@@ -35,5 +35,14 @@
 
 <script setup>
   import Loader from '~/components/ui/Loader.vue'
+
+  useHead({ title: 'Countries' })
+  useSeoMeta({
+    description: 'Explore radio stations by country. Find internet radio from every corner of the world.',
+    ogTitle: 'Countries | Felipe Pucinelli',
+    ogDescription: 'Explore radio stations by country. Find internet radio from every corner of the world.',
+    ogUrl: 'https://pucinelli.me/countries',
+  })
+
   const { data: countries, pending } = await useCountries()
 </script>

@@ -39,5 +39,13 @@
 <script setup>
   import Loader from '~/components/ui/Loader.vue'
 
+  useHead({ title: 'Genres' })
+  useSeoMeta({
+    description: 'Browse radio stations by music genre. Find your favorite style of music from jazz to electronic, rock, pop, and more.',
+    ogTitle: 'Genres | Felipe Pucinelli',
+    ogDescription: 'Browse radio stations by music genre. Find your favorite style from jazz to electronic, rock, pop, and more.',
+    ogUrl: 'https://pucinelli.me/genres',
+  })
+
   const { data: genres, pending } = await useGenres()
 </script>

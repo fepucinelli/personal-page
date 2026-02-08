@@ -25,5 +25,13 @@
   import StationCard from '~/components/station/StationCard.vue'
   import Loader from '~/components/ui/Loader.vue'
 
+  useHead({ title: 'All Stations' })
+  useSeoMeta({
+    description: 'Discover radio stations from around the world. Browse and listen to a curated collection of internet radio.',
+    ogTitle: 'All Stations | Felipe Pucinelli',
+    ogDescription: 'Discover radio stations from around the world. Browse and listen to internet radio.',
+    ogUrl: 'https://pucinelli.me/stations',
+  })
+
   const { data: stations, pending } = await useStations()
 </script>
