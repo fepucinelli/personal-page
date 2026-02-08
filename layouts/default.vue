@@ -60,11 +60,29 @@
 
     <!-- Persistent Player -->
     <PlayerBar />
+
+    <!-- Toast notification -->
+    <Toast />
   </div>
 </template>
 
 <script setup lang="ts">
 import { useThemeStore } from '~/stores/theme'
+import { usePlayerStore } from '~/stores/player'
+import { useRecentlyPlayedStore } from '~/stores/recentlyPlayed'
 
 const theme = useThemeStore()
+const player = usePlayerStore()
+const recentlyPlayed = useRecentlyPlayedStore()
+const toast = useToast()
+
+watch(() => player.currentStation, (newStation, oldStation) => {
+  if (!newStation) return
+
+  recentlyPlayed.addStation(newStation)
+
+  if (oldStation) {
+    toast.show(`Now playing: ${newStation.name}`)
+  }
+})
 </script>

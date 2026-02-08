@@ -5,7 +5,7 @@
   >
     <!-- Avatar -->
     <div class="animate-fade-up delay-1">
-      <div class="relative group">
+      <div class="relative group" :class="{ 'animate-avatar-pulse': player.isPlaying }">
         <div
           class="absolute -inset-1 rounded-full bg-gradient-to-br from-brand/30 to-brand-dark/10
                  blur-md group-hover:blur-lg transition-all duration-500"
@@ -140,19 +140,60 @@
       </div>
     </section>
 
-    <NuxtLink
-      to="/stations"
-      class="mt-10 text-xs tracking-widest uppercase text-ink-muted dark:text-neutral-500
-             hover:text-brand transition-colors duration-300"
+    <!-- Recently Played section -->
+    <section
+      v-if="recentlyPlayed.stations.length > 0"
+      class="mt-20 w-full max-w-5xl"
     >
-      Browse all stations &rarr;
-    </NuxtLink>
+      <div class="flex items-center gap-3 mb-6">
+        <div class="h-px flex-1 bg-ink/5 dark:bg-white/5" />
+        <h2 class="font-display text-lg italic text-ink dark:text-neutral-200 whitespace-nowrap">
+          Recently Played
+        </h2>
+        <div class="h-px flex-1 bg-ink/5 dark:bg-white/5" />
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        <StationCard
+          v-for="station in recentlyPlayed.stations"
+          :key="station.id"
+          :station="station"
+          :is-playing="actions.isPlaying(station)"
+          :is-favorite="actions.isFavorite(station)"
+          @play="actions.playStation"
+          @toggle-favorite="actions.toggleFavorite"
+        />
+      </div>
+    </section>
+
+    <div class="mt-10 flex flex-col items-center gap-2">
+      <NuxtLink
+        to="/stations"
+        class="text-xs tracking-widest uppercase text-ink-muted dark:text-neutral-500
+               hover:text-brand transition-colors duration-300"
+      >
+        Browse all stations &rarr;
+      </NuxtLink>
+
+      <span
+        v-if="stats?.stations"
+        class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full
+               text-[11px] tracking-wide
+               bg-brand/5 dark:bg-brand/10
+               text-ink-muted dark:text-neutral-500
+               border border-brand/10"
+      >
+        <i class="pi pi-wifi text-brand text-[10px]"></i>
+        {{ stats.stations.toLocaleString() }} stations &middot; {{ stats.countries }} countries
+      </span>
+    </div>
   </div>
 </template>
 
 <script setup lang="ts">
 import { usePlayerStore } from '~/stores/player'
 import { useFavoritesStore } from '~/stores/favorites'
+import { useRecentlyPlayedStore } from '~/stores/recentlyPlayed'
 import type { Station } from '~/types/radio'
 
 useHead({
@@ -187,10 +228,12 @@ useSeoMeta({
 
 const favorites = useFavoritesStore()
 const player = usePlayerStore()
+const recentlyPlayed = useRecentlyPlayedStore()
 const actions = useStationActions()
 
-// Fetch stations
+// Fetch stations & stats
 const { data: stations, pending } = await useStations()
+const { data: stats } = await useRadioStats()
 
 // Current station
 const currentStation = ref<Station | null>(null)

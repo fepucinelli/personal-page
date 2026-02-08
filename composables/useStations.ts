@@ -2,11 +2,24 @@ import type { Station, RawStation } from '~/types/radio'
 import { radioFetch } from '~/composables/api/client'
 import { mapStation } from '~/composables/api/mappers'
 
+function buildSearchParams(opts: { country?: string; genre?: string; offset: number; limit: number }): Record<string, string> {
+  const params: Record<string, string> = {
+    limit: String(opts.limit),
+    offset: String(opts.offset),
+    hidebroken: 'true',
+    bitrateMin: '1',
+    order: 'clickcount',
+    reverse: 'true',
+  }
+  if (opts.country) params.countrycode = opts.country
+  if (opts.genre) params.tag = opts.genre
+  return params
+}
+
 function processStations(data: RawStation[]): Station[] {
   return data
-    .filter(s => s.url_resolved && s.bitrate > 0)
+    .filter(s => s.url_resolved)
     .map(mapStation)
-    .sort((a, b) => b.popularity - a.popularity)
 }
 
 export function useStations(params?: { country?: string; genre?: string; offset?: number; limit?: number }) {
@@ -15,26 +28,14 @@ export function useStations(params?: { country?: string; genre?: string; offset?
   const key = `stations-${params?.country || ''}-${params?.genre || ''}-${offset}-${limit}`
 
   return useAsyncData(key, async () => {
-    const searchParams: Record<string, string> = {
-      limit: String(limit),
-      offset: String(offset),
-    }
-    if (params?.country) searchParams.countrycode = params.country
-    if (params?.genre) searchParams.tag = params.genre
-
+    const searchParams = buildSearchParams({ ...params, limit, offset })
     const data = await radioFetch<RawStation[]>('/stations/search', searchParams)
     return processStations(data)
   })
 }
 
 export async function fetchStations(params: { country?: string; genre?: string; offset: number; limit: number }): Promise<Station[]> {
-  const searchParams: Record<string, string> = {
-    limit: String(params.limit),
-    offset: String(params.offset),
-  }
-  if (params.country) searchParams.countrycode = params.country
-  if (params.genre) searchParams.tag = params.genre
-
+  const searchParams = buildSearchParams(params)
   const data = await radioFetch<RawStation[]>('/stations/search', searchParams)
   return processStations(data)
 }

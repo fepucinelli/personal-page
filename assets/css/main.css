@@ -121,6 +121,48 @@
   animation: spin-slow 2s linear infinite;
 }
 
+/* ---------- Avatar pulse (breathing ring) ---------- */
+@keyframes avatar-ring-breathe {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.5;
+  }
+  50% {
+    transform: scale(1.06);
+    opacity: 0;
+  }
+}
+
+.animate-avatar-pulse {
+  position: relative;
+}
+
+.animate-avatar-pulse::after {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: 9999px;
+  border: 2px solid #c493ff;
+  animation: avatar-ring-breathe 3s ease-in-out infinite;
+  pointer-events: none;
+}
+
+/* ---------- Toast transitions ---------- */
+.toast-enter-active,
+.toast-leave-active {
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.toast-enter-from {
+  opacity: 0;
+  transform: translateY(12px);
+}
+
+.toast-leave-to {
+  opacity: 0;
+  transform: translateY(-8px);
+}
+
 /* ---------- Staggered delays ---------- */
 .delay-1 { animation-delay: 0.05s; }
 .delay-2 { animation-delay: 0.1s; }
