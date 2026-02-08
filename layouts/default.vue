@@ -34,6 +34,16 @@
         </NuxtLink>
 
         <NuxtLink
+          to="/about"
+          class="px-3 py-1.5 text-sm text-ink-secondary dark:text-neutral-400
+                 hover:text-ink dark:hover:text-neutral-100
+                 rounded-lg hover:bg-ink/5 dark:hover:bg-white/5
+                 transition-all duration-200"
+        >
+          about
+        </NuxtLink>
+
+        <NuxtLink
           to="/favorites"
           class="ml-1 p-2 rounded-lg text-ink-secondary dark:text-neutral-400
                  hover:text-brand hover:bg-brand/5
