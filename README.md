@@ -8,6 +8,7 @@ Personal site and internet radio discovery app built by [Felipe Pucinelli](https
 
 ## Features
 
+- **About Page** — Personal bio with avatar, centered header with decorative lines
 - **Random Radio Discovery** — Start listening to a random station with one click, shuffle to discover new ones
 - **Auto-Skip on Failure** — Broken streams are detected automatically and the player skips to the next available station
 - **Curated System Stations** — Handpicked stations pinned to favorites that can't be removed or unfavorited
@@ -110,6 +111,7 @@ components/
 │   └── default.vue            # Header, nav, theme toggle, persistent PlayerBar
 ├── pages/
 │   ├── index.vue              # Landing page with random station + favorites
+│   ├── about.vue              # About page with bio and avatar
 │   ├── stations.vue           # All stations with infinite scroll
 │   ├── favorites.vue          # User's favorite stations
 │   ├── countries.vue          # Country listing
