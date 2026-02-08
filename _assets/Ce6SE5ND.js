@@ -1,0 +1,1 @@
+import{v as u,x as c,q as l}from"./D5QM857S.js";function a(i){const e=l(null);let n=null;function r(){n&&(n.disconnect(),n=null)}return u(e,t=>{r(),t&&(n=new IntersectionObserver(s=>{var o;(o=s[0])!=null&&o.isIntersecting&&i()},{rootMargin:"200px"}),n.observe(t))}),c(r),{sentinelRef:e}}export{a as u};
