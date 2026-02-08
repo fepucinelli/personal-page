@@ -55,7 +55,7 @@
         :style="{
           background: `linear-gradient(
             to right,
-            #2B7A5B ${volumePercent}%,
+            #c493ff ${volumePercent}%,
             rgba(58, 53, 48, 0.2) ${volumePercent}%
           )`
         }"
