@@ -11,6 +11,10 @@ Personal site and internet radio discovery app built by [Felipe Pucinelli](https
 - **Random Radio Discovery** — Start listening to a random station with one click, shuffle to discover new ones
 - **Auto-Skip on Failure** — Broken streams are detected automatically and the player skips to the next available station
 - **Curated System Stations** — Handpicked stations pinned to favorites that can't be removed
+- **Now Playing Toast** — Toast notification appears when switching between stations
+- **Avatar Pulse Animation** — Breathing ring animation on the avatar while music is playing
+- **Recently Played** — Tracks last 10 played stations, persisted in localStorage, shown on the landing page
+- **Station Count Badge** — Displays total available stations and countries from the Radio Browser API
 - **Favorites** — Save and manage favorite stations, persisted in localStorage
 - **Browse by Country** — Explore stations filtered by country with dedicated pages
 - **Browse by Genre** — Explore stations filtered by music genre with dedicated pages
@@ -56,7 +60,9 @@ composables/
   useStations.ts        # Station fetching with useAsyncData + direct fetch variant
   useCountries.ts       # Country listing
   useGenres.ts          # Genre listing
+  useRadioStats.ts      # Total station/country counts from API stats endpoint
   useInfiniteScroll.ts  # Reusable infinite scroll with IntersectionObserver
+  useToast.ts           # Singleton toast notification state and show()
   useSeoPage.ts         # Shared SEO setup (title suffix, og:url prefix)
   useStationActions.ts  # Unified play/favorite actions for components
 ```
@@ -71,6 +77,7 @@ All stores use Pinia's Composition API style and are self-initializing (no `init
 |-------|---------------|
 | `player.ts` | Audio playback state, lazy `HTMLAudioElement` via `ensureAudio()`, error callback for auto-skip |
 | `favorites.ts` | User favorites + system-curated stations, localStorage persistence |
+| `recentlyPlayed.ts` | Last 10 played stations (deduplicated), localStorage persistence |
 | `theme.ts` | Dark/light mode toggle, reads system preference at creation |
 
 ### Components
@@ -113,7 +120,8 @@ components/
 │   ├── player/PlayerBar.vue
 │   └── ui/
 │       ├── Loader.vue
-│       └── SocialLinks.vue
+│       ├── SocialLinks.vue
+│       └── Toast.vue
 ├── composables/
 │   ├── api/
 │   │   ├── client.ts
@@ -121,12 +129,15 @@ components/
 │   ├── useStations.ts
 │   ├── useCountries.ts
 │   ├── useGenres.ts
+│   ├── useRadioStats.ts
 │   ├── useInfiniteScroll.ts
+│   ├── useToast.ts
 │   ├── useSeoPage.ts
 │   └── useStationActions.ts
 ├── stores/
 │   ├── player.ts
 │   ├── favorites.ts
+│   ├── recentlyPlayed.ts
 │   └── theme.ts
 ├── types/
 │   └── radio.ts
