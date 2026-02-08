@@ -61,10 +61,22 @@
       </p>
 
       <!-- Controls -->
-      <div v-if="currentStation" class="flex flex-col sm:flex-row gap-3 items-center justify-center">
+      <div v-if="currentStation" class="flex items-center justify-center gap-3">
+        <button
+          @click="shuffle"
+          class="w-10 h-10 rounded-full flex items-center justify-center
+                 border border-ink/10 dark:border-white/10
+                 text-ink-secondary dark:text-neutral-400
+                 hover:border-brand/30 hover:text-brand
+                 transition-all duration-300"
+          title="Shuffle station"
+        >
+          <i class="pi pi-sync text-sm"></i>
+        </button>
+
         <button
           @click="playCurrent"
-          class="group px-6 py-2.5 rounded-full
+          class="px-6 py-2.5 rounded-full
                  bg-brand text-white text-sm font-medium
                  hover:bg-brand-dark
                  shadow-lg shadow-brand/20 hover:shadow-brand/30
@@ -75,20 +87,8 @@
         </button>
 
         <button
-          @click="shuffle"
-          class="px-6 py-2.5 rounded-full text-sm font-medium
-                 border border-ink/10 dark:border-white/10
-                 text-ink-secondary dark:text-neutral-400
-                 hover:border-brand/30 hover:text-brand
-                 transition-all duration-300"
-        >
-          <i class="pi pi-sync mr-1.5"></i>
-          Shuffle station
-        </button>
-
-        <button
           @click="actions.toggleFavorite(currentStation)"
-          class="p-2.5 rounded-full
+          class="w-10 h-10 rounded-full flex items-center justify-center
                  border border-ink/10 dark:border-white/10
                  text-ink-secondary dark:text-neutral-400
                  hover:border-brand/30 hover:text-brand
