@@ -5,19 +5,16 @@
   >
     <!-- Avatar -->
     <div class="animate-fade-up delay-1">
-      <div class="relative group" :class="{ 'animate-avatar-pulse': player.isPlaying }">
-        <div
-          class="absolute -inset-1 rounded-full bg-gradient-to-br from-brand/30 to-brand-dark/10
-                 blur-md group-hover:blur-lg transition-all duration-500"
-        />
-        <img
-          src="/avatar.jpg"
-          alt="Felipe Pucinelli"
-          class="relative w-28 h-28 rounded-full object-cover
-                 ring-2 ring-brand/20
-                 group-hover:ring-brand/40
-                 transition-all duration-500"
-        />
+      <div class="avatar-blob-wrap" :class="{ 'is-playing': player.isPlaying }">
+        <div class="avatar-blob blob1"></div>
+        <div class="avatar-blob blob2"></div>
+        <div class="avatar-blob-inner">
+          <img
+            src="/avatar.jpg"
+            alt="Felipe Pucinelli"
+            class="w-28 h-28 rounded-full object-cover"
+          />
+        </div>
       </div>
     </div>
 

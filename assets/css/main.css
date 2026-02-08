@@ -121,30 +121,147 @@
   animation: spin-slow 2s linear infinite;
 }
 
-/* ---------- Avatar pulse (breathing ring) ---------- */
-@keyframes avatar-ring-breathe {
-  0%, 100% {
-    transform: scale(1);
-    opacity: 0.5;
-  }
-  50% {
-    transform: scale(1.06);
-    opacity: 0;
-  }
-}
-
-.animate-avatar-pulse {
+/* ---------- Avatar blob animation ---------- */
+.avatar-blob-wrap {
   position: relative;
+  width: 10rem;
+  height: 10rem;
+  border-radius: 100%;
 }
 
-.animate-avatar-pulse::after {
-  content: '';
+.avatar-blob {
   position: absolute;
-  inset: -1px;
-  border-radius: 9999px;
-  border: 2px solid #c493ff;
-  animation: avatar-ring-breathe 3s ease-in-out infinite;
-  pointer-events: none;
+  width: 75%;
+  height: 75%;
+  left: 12.5%;
+  top: 12.5%;
+  border-radius: 100%;
+  opacity: 0;
+  transition: opacity 0.8s ease;
+}
+
+.avatar-blob::before,
+.avatar-blob::after {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.5;
+  border-radius: 100%;
+  content: "";
+}
+
+.avatar-blob::after {
+  left: 3%;
+  top: 3%;
+}
+
+.avatar-blob.blob1 {
+  background: #845ec2;
+  animation: blob-rotate 4s linear infinite, blob-morph 6s linear infinite;
+}
+
+.avatar-blob.blob1::before {
+  left: 0;
+  background: rgba(132, 94, 194, 0.7);
+  animation: blob-morph 6s 0.5s linear infinite;
+}
+
+.avatar-blob.blob1::after {
+  background: #6b3fa0;
+  animation: blob-morph 6s 1s linear infinite;
+}
+
+.avatar-blob.blob2 {
+  background: #c493ff;
+  animation: blob-rotate 3.5s linear infinite, blob-morph 5.5s linear infinite;
+}
+
+.avatar-blob.blob2::before {
+  left: 0;
+  background: #d4aeff;
+  animation: blob-morph 5.5s 0.5s linear infinite;
+}
+
+.avatar-blob.blob2::after {
+  background: #9b6dd7;
+  animation: blob-morph 5.5s 1s linear infinite;
+}
+
+/* Only visible when playing */
+.avatar-blob-wrap.is-playing .avatar-blob {
+  opacity: 0.6;
+}
+
+@keyframes blob-rotate {
+  from { transform: rotate(0); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes blob-morph {
+  0%   { border-radius: 100%; }
+  10%  { border-radius: 100% 70% 100%; }
+  20%  { border-radius: 91% 88% 75% 69%; }
+  30%  { border-radius: 100% 100% 85%; }
+  40%  { border-radius: 88% 100% 70%; }
+  50%  { border-radius: 75% 100% 100%; }
+  60%  { border-radius: 87% 78% 55% 84%; }
+  70%  { border-radius: 79% 90% 80% 72%; }
+  80%  { border-radius: 76% 92% 90% 77%; }
+  90%  { border-radius: 83% 77% 99% 88%; }
+  100% { border-radius: 100%; }
+}
+
+.avatar-blob-inner {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 69%;
+  height: 69%;
+  background: rgba(132, 94, 194, 0);
+  border-radius: 100%;
+  transition: background 0.8s ease;
+}
+
+.avatar-blob-wrap.is-playing .avatar-blob-inner {
+  background: rgba(132, 94, 194, 0.4);
+}
+
+.avatar-blob-inner::before,
+.avatar-blob-inner::after {
+  position: absolute;
+  left: -1%;
+  top: -1%;
+  width: 105%;
+  height: 105%;
+  background: rgba(196, 147, 255, 0);
+  border-radius: 100%;
+  content: "";
+  transition: background 0.8s ease;
+}
+
+.avatar-blob-wrap.is-playing .avatar-blob-inner::before,
+.avatar-blob-wrap.is-playing .avatar-blob-inner::after {
+  background: rgba(196, 147, 255, 0.4);
+}
+
+.avatar-blob-inner::before {
+  animation: blob-rotate 4s linear infinite, blob-morph 6s linear infinite;
+}
+
+.avatar-blob-inner::after {
+  animation: blob-rotate 3s linear infinite, blob-morph 5s linear infinite;
+}
+
+.avatar-blob-inner > img {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 10;
+  box-shadow: 0 0 7px 2px rgba(0, 0, 0, 0.3);
 }
 
 /* ---------- Toast transitions ---------- */
