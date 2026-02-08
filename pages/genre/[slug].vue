@@ -1,12 +1,21 @@
 <template>
-  <div class="p-4 dark:bg-gray-950">
-    <h1 class="text-2xl font-bold mb-4 dark:text-gray-100">
-      <i class="pi pi-headphones"></i> {{ route.params.slug }}
-    </h1>
+  <div class="px-6 py-8 max-w-6xl mx-auto">
+    <div class="mb-8">
+      <NuxtLink
+        to="/genres"
+        class="inline-flex items-center gap-1 text-xs tracking-widest uppercase
+               text-ink-muted dark:text-neutral-500 hover:text-brand transition-colors mb-4"
+      >
+        &larr; All genres
+      </NuxtLink>
+      <h1 class="font-display text-3xl italic text-ink dark:text-neutral-50 capitalize">
+        {{ route.params.slug }}
+      </h1>
+    </div>
 
     <Loader v-if="pending" />
 
-    <div v-else class="grid grid-cols-1 md:grid-cols-3 gap-4">
+    <div v-else class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
       <StationCard
         v-for="station in stations"
         :key="station.id"

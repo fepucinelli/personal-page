@@ -1,18 +1,19 @@
 <template>
-  <section class="mb-20 flex justify-center">
-    <div class="flex gap-6 text-2xl">
-      <a
-        v-for="item in links"
-        :key="item.icon"
-        :href="item.url"
-        target="_blank"
-        rel="noopener noreferrer"
-        class="text-gray-500 dark:text-gray-400 hover:text-brand dark:hover:text-brand transition"
-      >
-        <i class="pi" :class="item.icon"></i>
-      </a>
-    </div>
-  </section>
+  <div class="flex gap-1 justify-center mb-6">
+    <a
+      v-for="item in links"
+      :key="item.icon"
+      :href="item.url"
+      target="_blank"
+      rel="noopener noreferrer"
+      class="p-3 rounded-full
+             text-ink-muted dark:text-neutral-500
+             hover:text-brand hover:bg-brand/5
+             transition-all duration-300"
+    >
+      <i class="pi text-base" :class="item.icon"></i>
+    </a>
+  </div>
 </template>
 
 <script setup>

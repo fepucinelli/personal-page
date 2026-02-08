@@ -33,15 +33,18 @@ router.afterEach(() => {
 
 <template>
   <div
-    class="min-h-screen
-           bg-gray-50 text-gray-900
-           dark:bg-gray-950 dark:text-gray-100"
+    class="grain min-h-screen font-body
+           bg-surface-light text-ink
+           dark:bg-night dark:text-neutral-100
+           transition-colors duration-500"
   >
     <!-- Top loading bar -->
     <div
       v-if="loading"
-      class="fixed top-0 left-0 right-0 h-1 bg-brand animate-pulse z-50"
-    />
+      class="fixed top-0 left-0 right-0 h-0.5 z-[60]"
+    >
+      <div class="h-full bg-brand animate-pulse rounded-r-full" style="width: 60%" />
+    </div>
 
     <NuxtLayout>
       <NuxtPage />

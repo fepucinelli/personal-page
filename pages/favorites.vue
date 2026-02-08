@@ -1,5 +1,3 @@
-
-
 <script setup lang="ts">
   import { useFavoritesStore } from '~/stores/favorites'
   import StationCard from '~/components/station/StationCard.vue'
@@ -8,10 +6,23 @@
 </script>
 
 <template>
-  <div class="p-6">
-     <h1 class="text-2xl font-bold mb-4"><i class="pi pi-bookmark"></i> Favorite radio stations</h1>
+  <div class="px-6 py-8 max-w-6xl mx-auto">
+    <div class="mb-8">
+      <h1 class="font-display text-3xl italic text-ink dark:text-neutral-50">
+        Favorites
+      </h1>
+      <p class="mt-2 text-sm text-ink-muted dark:text-neutral-500">
+        Your saved radio stations
+      </p>
+    </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+    <div v-if="favorites.allFavorites.length === 0" class="text-center py-16">
+      <p class="text-ink-muted dark:text-neutral-500 text-sm">
+        No favorites yet. Start exploring and save stations you love.
+      </p>
+    </div>
+
+    <div v-else class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
       <StationCard
         v-for="station in favorites.allFavorites"
         :key="station.id"

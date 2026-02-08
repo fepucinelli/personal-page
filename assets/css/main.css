@@ -1,3 +1,6 @@
+/* ---------- Fonts ---------- */
+@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap');
+@import url('https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700&display=swap');
 
 @import 'primeicons/primeicons.css';
 
@@ -5,53 +8,149 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ---------- Base ---------- */
+@layer base {
+  html {
+    font-family: 'Satoshi', system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    @apply bg-surface-light text-ink;
+    transition: background-color 0.4s ease, color 0.4s ease;
+  }
+
+  .dark body {
+    @apply bg-night text-neutral-100;
+  }
+}
+
+/* ---------- Grain overlay ---------- */
+.grain::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  pointer-events: none;
+  opacity: 0.03;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 128px 128px;
+}
+
+.dark .grain::before {
+  opacity: 0.05;
+}
+
 /* ---------- Range Slider ---------- */
 .range-slider {
   -webkit-appearance: none;
   appearance: none;
-  height: 4px;
-  background: theme('colors.gray.300');
-  border-radius: 0;
+  height: 3px;
+  background: #3A3530;
+  border-radius: 2px;
   outline: none;
   cursor: pointer;
+  transition: height 0.2s ease;
 }
 
-/* Thumb (Chrome, Safari, Edge) */
+.range-slider:hover {
+  height: 5px;
+}
+
 .range-slider::-webkit-slider-thumb {
   -webkit-appearance: none;
   appearance: none;
-  width: 4px;
-  height: 16px;
-  background: theme('colors.brand.DEFAULT');
+  width: 14px;
+  height: 14px;
+  background: #2B7A5B;
+  border-radius: 50%;
   cursor: pointer;
-  transition: transform 0.15s ease;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 0 0 3px rgba(43, 122, 91, 0.15);
 }
 
-/* Thumb hover */
 .range-slider::-webkit-slider-thumb:hover {
-  transform: scale(1.15);
+  transform: scale(1.2);
+  box-shadow: 0 0 0 5px rgba(43, 122, 91, 0.2);
 }
 
-/* Thumb (Firefox) */
 .range-slider::-moz-range-thumb {
   width: 14px;
   height: 14px;
-  background: theme('colors.brand.DEFAULT');
-  border-radius: 9999px;
+  background: #2B7A5B;
+  border-radius: 50%;
   border: none;
   cursor: pointer;
 }
 
-/* ---------- Avatar Flip Animation ---------- */
-
-.flip-container {
-  perspective: 800px;
+/* ---------- Animations ---------- */
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
-.flip-image {
-  transition: transform 0.6s ease, scale 0.3s ease;
+@keyframes pulse-glow {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(43, 122, 91, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 20px 4px rgba(43, 122, 91, 0.15);
+  }
 }
 
-.flip-container:hover .flip-image {
-  transform: rotateY(180deg) scale(1.05);
+@keyframes spin-slow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.animate-fade-up {
+  animation: fade-up 0.5s ease both;
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 2.5s ease-in-out infinite;
+}
+
+.animate-spin-slow {
+  animation: spin-slow 2s linear infinite;
+}
+
+/* ---------- Staggered delays ---------- */
+.delay-1 { animation-delay: 0.05s; }
+.delay-2 { animation-delay: 0.1s; }
+.delay-3 { animation-delay: 0.15s; }
+.delay-4 { animation-delay: 0.2s; }
+.delay-5 { animation-delay: 0.25s; }
+.delay-6 { animation-delay: 0.3s; }
+
+/* ---------- Scrollbar ---------- */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(154, 147, 138, 0.3);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(154, 147, 138, 0.5);
+}
+
+/* ---------- Selection ---------- */
+::selection {
+  background: rgba(43, 122, 91, 0.25);
+  color: inherit;
 }

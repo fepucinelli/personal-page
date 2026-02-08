@@ -1,54 +1,67 @@
 <template>
   <div
     v-if="player.currentStation"
-    class="fixed bottom-0 inset-x-0 h-20 px-4 gap-4
+    class="fixed bottom-0 inset-x-0 z-50
+           h-[72px] px-6 gap-5
            flex items-center
-           bg-white dark:bg-neutral-900
-           text-gray-900 dark:text-white
-           border-t border-gray-200 dark:border-gray-800"
+           backdrop-blur-xl
+           bg-white/90 dark:bg-night-surface/90
+           border-t border-ink/5 dark:border-white/5"
   >
     <!-- Play / Pause -->
-    <button @click="toggle">
+    <button
+      @click="toggle"
+      class="flex-shrink-0 w-10 h-10 rounded-full flex items-center justify-center
+             transition-all duration-300"
+      :class="{
+        'bg-brand/10 text-brand animate-pulse-glow': player.isPlaying,
+        'bg-ink/5 dark:bg-white/5 text-ink-secondary dark:text-neutral-400 hover:bg-brand/10 hover:text-brand': !player.isPlaying,
+      }"
+    >
       <i
-        class="pi text-xl"
+        class="pi text-lg"
         :class="{
-          'pi-spin pi-spinner text-gray-400': player.isLoading,
-          'pi-pause-circle text-brand': !player.isLoading && player.isPlaying,
-          'pi-play-circle text-gray-500': !player.isLoading && !player.isPlaying
+          'pi-spin pi-spinner text-ink-muted dark:text-neutral-500': player.isLoading,
+          'pi-pause': !player.isLoading && player.isPlaying,
+          'pi-play': !player.isLoading && !player.isPlaying
         }"
       ></i>
     </button>
 
     <!-- Station info -->
-    <div class="flex-1">
+    <div class="flex-1 min-w-0">
       <div
-        class="font-semibold truncate max-w-[250px] md:max-w-[680px]"
+        class="font-medium text-sm truncate text-ink dark:text-neutral-100"
         :title="player.currentStation.name"
       >
         {{ player.currentStation.name }}
       </div>
-      <div class="text-sm opacity-70">
+      <div class="text-xs text-ink-muted dark:text-neutral-500 tracking-wide uppercase mt-0.5">
         {{ player.currentStation.country }}
       </div>
     </div>
 
     <!-- Volume -->
-    <input
-      type="range"
-      min="0"
-      max="1"
-      step="0.01"
-      class="range-slider"
-      :value="player.volume"
-      @input="onVolume"
-      :style="{
-        background: `linear-gradient(
-          to right,
-          #16a34a ${volumePercent}%,
-          #374151 ${volumePercent}%
-        )`
-      }"
-    />
+    <div class="hidden sm:flex items-center gap-3 flex-shrink-0">
+      <i class="pi pi-volume-down text-xs text-ink-muted dark:text-neutral-500"></i>
+      <input
+        type="range"
+        min="0"
+        max="1"
+        step="0.01"
+        class="range-slider w-24"
+        :value="player.volume"
+        @input="onVolume"
+        :style="{
+          background: `linear-gradient(
+            to right,
+            #2B7A5B ${volumePercent}%,
+            rgba(58, 53, 48, 0.2) ${volumePercent}%
+          )`
+        }"
+      />
+      <i class="pi pi-volume-up text-xs text-ink-muted dark:text-neutral-500"></i>
+    </div>
   </div>
 </template>
 
