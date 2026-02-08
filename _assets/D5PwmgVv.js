@@ -1,0 +1,1 @@
+import{s as u,v as c,m as l}from"./B2p9uWlU.js";function a(s){const e=l(null);let n=null;function r(){n&&(n.disconnect(),n=null)}return u(e,t=>{r(),t&&(n=new IntersectionObserver(i=>{var o;(o=i[0])!=null&&o.isIntersecting&&s()},{rootMargin:"200px"}),n.observe(t))}),c(r),{sentinelRef:e}}export{a as u};
