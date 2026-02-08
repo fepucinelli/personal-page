@@ -11,13 +11,18 @@
 
     <Loader v-if="pending" />
 
-    <div v-else class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-      <StationCard
-        v-for="station in stations"
-        :key="station.id"
-        :station="station"
-      />
-    </div>
+    <template v-else>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        <StationCard
+          v-for="station in allStations"
+          :key="station.id"
+          :station="station"
+        />
+      </div>
+
+      <Loader v-if="loadingMore" />
+      <div v-if="hasMore" ref="sentinelRef" class="h-1" />
+    </template>
   </div>
 </template>
 
@@ -33,5 +38,27 @@
     ogUrl: 'https://pucinelli.me/stations',
   })
 
-  const { data: stations, pending } = await useStations()
+  const LIMIT = 50
+
+  const { data: initialStations, pending } = await useStations({ limit: LIMIT, offset: 0 })
+
+  const allStations = ref([...(initialStations.value || [])])
+  const offset = ref(LIMIT)
+  const hasMore = ref((initialStations.value?.length || 0) >= LIMIT)
+  const loadingMore = ref(false)
+
+  async function loadMore() {
+    if (loadingMore.value || !hasMore.value) return
+    loadingMore.value = true
+    try {
+      const batch = await fetchStations({ offset: offset.value, limit: LIMIT })
+      allStations.value.push(...batch)
+      offset.value += LIMIT
+      if (batch.length < LIMIT) hasMore.value = false
+    } finally {
+      loadingMore.value = false
+    }
+  }
+
+  const { sentinelRef } = useInfiniteScroll(loadMore)
 </script>

@@ -12,13 +12,16 @@ export function useCountries() {
   })
 }
 
-export function useStations(params?: { country?: string; genre?: string }) {
-  const key = `stations-${params?.country || ''}-${params?.genre || ''}`
+export function useStations(params?: { country?: string; genre?: string; offset?: number; limit?: number }) {
+  const limit = params?.limit ?? 50
+  const offset = params?.offset ?? 0
+  const key = `stations-${params?.country || ''}-${params?.genre || ''}-${offset}-${limit}`
   return useAsyncData(key, async () => {
     const url = new URL(`${BASE}/stations/search`)
     if (params?.country) url.searchParams.set('countrycode', params.country)
     if (params?.genre) url.searchParams.set('tag', params.genre)
-    url.searchParams.set('limit', '50')
+    url.searchParams.set('limit', String(limit))
+    url.searchParams.set('offset', String(offset))
     const data = await $fetch<any[]>(url.toString())
     return data
       .filter(s => s.url_resolved && s.bitrate > 0)
@@ -37,6 +40,31 @@ export function useStations(params?: { country?: string; genre?: string }) {
       }))
       .sort((a, b) => b.popularity - a.popularity)
   })
+}
+
+export async function fetchStations(params: { country?: string; genre?: string; offset: number; limit: number }): Promise<Station[]> {
+  const url = new URL(`${BASE}/stations/search`)
+  if (params.country) url.searchParams.set('countrycode', params.country)
+  if (params.genre) url.searchParams.set('tag', params.genre)
+  url.searchParams.set('limit', String(params.limit))
+  url.searchParams.set('offset', String(params.offset))
+  const data = await $fetch<any[]>(url.toString())
+  return data
+    .filter(s => s.url_resolved && s.bitrate > 0)
+    .map<Station>(s => ({
+      id: s.stationuuid,
+      name: s.name,
+      streamUrl: s.url_resolved,
+      favicon: s.favicon || null,
+      country: s.country,
+      countryCode: s.countrycode,
+      tags: s.tags ? s.tags.split(',') : [],
+      bitrate: s.bitrate,
+      codec: s.codec,
+      popularity: s.clickcount,
+      isPlayable: true,
+    }))
+    .sort((a, b) => b.popularity - a.popularity)
 }
 
 export function useGenres() {
