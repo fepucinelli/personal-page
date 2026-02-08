@@ -63,8 +63,7 @@
   </div>
 </template>
 
-<script setup>
-import PlayerBar from '~/components/player/PlayerBar.vue'
+<script setup lang="ts">
 import { useThemeStore } from '~/stores/theme'
 
 const theme = useThemeStore()

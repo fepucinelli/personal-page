@@ -1,17 +1,16 @@
 <script setup lang="ts">
-  import { useFavoritesStore } from '~/stores/favorites'
-  import StationCard from '~/components/station/StationCard.vue'
+import { useFavoritesStore } from '~/stores/favorites'
 
-  useHead({ title: 'Favorites' })
-  useSeoMeta({
-    description: 'Your saved radio stations. Keep track of the stations you love.',
-    ogTitle: 'Favorites | Felipe Pucinelli',
-    ogDescription: 'Your saved radio stations.',
-    ogUrl: 'https://pucinelli.me/favorites',
-    robots: 'noindex',
-  })
+const actions = useStationActions()
 
-  const favorites = useFavoritesStore()
+useSeoPage({
+  title: 'Favorites',
+  description: 'Your saved radio stations. Keep track of the stations you love.',
+  path: '/favorites',
+  robots: 'noindex',
+})
+
+const favorites = useFavoritesStore()
 </script>
 
 <template>
@@ -36,6 +35,10 @@
         v-for="station in favorites.allFavorites"
         :key="station.id"
         :station="station"
+        :is-playing="actions.isPlaying(station)"
+        :is-favorite="actions.isFavorite(station)"
+        @play="actions.playStation"
+        @toggle-favorite="actions.toggleFavorite"
       />
     </div>
   </div>

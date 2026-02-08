@@ -1,6 +1,11 @@
 export default defineNuxtConfig({
   css: ['~/assets/css/main.css'],
   modules: ['@pinia/nuxt'],
+  components: {
+    dirs: [
+      { path: '~/components', pathPrefix: false },
+    ],
+  },
   nitro: {
     preset: 'github-pages',
     prerender: {

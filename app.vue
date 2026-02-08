@@ -1,21 +1,4 @@
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
-import { useRouter } from 'vue-router'
-
-import { useThemeStore } from '~/stores/theme'
-import { useFavoritesStore } from '~/stores/favorites'
-
-const theme = useThemeStore()
-const favorites = useFavoritesStore()
-
-// -----------------------------
-// Init client-only logic
-// -----------------------------
-onMounted(() => {
-  theme.init()
-  favorites.init()
-})
-
 // -----------------------------
 // Global route loading indicator
 // -----------------------------

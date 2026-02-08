@@ -15,30 +15,37 @@
 
     <Loader v-if="pending" />
 
+    <div v-else-if="error" class="text-center py-16">
+      <p class="text-ink-muted dark:text-neutral-500 text-sm">Failed to load stations.</p>
+      <button @click="refresh" class="mt-4 text-sm text-brand hover:text-brand-dark transition-colors">
+        Try again
+      </button>
+    </div>
+
     <div v-else class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
       <StationCard
         v-for="station in stations"
         :key="station.id"
         :station="station"
+        :is-playing="actions.isPlaying(station)"
+        :is-favorite="actions.isFavorite(station)"
+        @play="actions.playStation"
+        @toggle-favorite="actions.toggleFavorite"
       />
     </div>
   </div>
 </template>
 
-<script setup>
-import StationCard from '~/components/station/StationCard.vue'
-import Loader from '~/components/ui/Loader.vue'
-
+<script setup lang="ts">
 const route = useRoute()
-const { data: stations, pending } = await useStations({ country: String(route.params.code) })
+const actions = useStationActions()
+const { data: stations, pending, error, refresh } = await useStations({ country: String(route.params.code) })
 
 const countryName = computed(() => stations.value?.[0]?.country || String(route.params.code).toUpperCase())
 
-useHead({ title: () => `${countryName.value} Radio Stations` })
-useSeoMeta({
+useSeoPage({
+  title: () => `${countryName.value} Radio Stations`,
   description: () => `Listen to radio stations from ${countryName.value}. Browse and stream internet radio.`,
-  ogTitle: () => `${countryName.value} Radio Stations | Felipe Pucinelli`,
-  ogDescription: () => `Listen to radio stations from ${countryName.value}. Browse and stream internet radio.`,
-  ogUrl: () => `https://pucinelli.me/country/${route.params.code}`,
+  path: () => `/country/${route.params.code}`,
 })
 </script>

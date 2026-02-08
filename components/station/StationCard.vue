@@ -17,16 +17,16 @@
     </div>
 
     <div class="font-medium text-sm text-ink dark:text-neutral-100 leading-snug pr-8">
-      {{ props.station.name }}
+      {{ station.name }}
     </div>
 
     <div class="mt-1 text-xs text-ink-muted dark:text-neutral-500 tracking-wide uppercase">
-      {{ props.station.country }}
+      {{ station.country }}
     </div>
 
     <div class="flex items-center justify-between mt-4 pt-3 border-t border-ink/5 dark:border-white/5">
       <button
-        @click="player.play(props.station)"
+        @click="$emit('play', station)"
         class="flex items-center gap-2 text-xs font-medium tracking-wide uppercase
                text-ink-secondary dark:text-neutral-400
                hover:text-brand transition-colors duration-200"
@@ -42,14 +42,14 @@
       </button>
 
       <button
-        @click="favorites.toggleFavorite(props.station)"
+        @click="$emit('toggleFavorite', station)"
         class="p-1 transition-all duration-200
                hover:scale-110"
       >
         <i
           class="pi text-sm"
           :class="
-            favorites.isFavorite(props.station.id)
+            isFavorite
               ? 'pi-bookmark-fill text-brand'
               : 'pi-bookmark text-ink-muted dark:text-neutral-500 hover:text-brand'
           "
@@ -60,17 +60,16 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from "vue";
-import type { Station } from "~/types/station";
-import { usePlayerStore } from "~/stores/player";
-import { useFavoritesStore } from "~/stores/favorites";
+import type { Station } from '~/types/radio'
 
-const props = defineProps<{ station: Station }>();
+defineProps<{
+  station: Station
+  isPlaying: boolean
+  isFavorite: boolean
+}>()
 
-const player = usePlayerStore();
-const favorites = useFavoritesStore();
-
-const isPlaying = computed(() => {
-  return player.currentStation?.id === props.station.id && player.isPlaying;
-});
+defineEmits<{
+  play: [station: Station]
+  toggleFavorite: [station: Station]
+}>()
 </script>

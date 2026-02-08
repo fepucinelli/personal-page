@@ -11,6 +11,13 @@
 
     <Loader v-if="pending" />
 
+    <div v-else-if="error" class="text-center py-16">
+      <p class="text-ink-muted dark:text-neutral-500 text-sm">Failed to load genres.</p>
+      <button @click="refresh" class="mt-4 text-sm text-brand hover:text-brand-dark transition-colors">
+        Try again
+      </button>
+    </div>
+
     <template v-else>
       <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3">
         <NuxtLink
@@ -37,28 +44,24 @@
   </div>
 </template>
 
-<script setup>
-  import Loader from '~/components/ui/Loader.vue'
+<script setup lang="ts">
+useSeoPage({
+  title: 'Genres',
+  description: 'Browse radio stations by music genre. Find your favorite style of music from jazz to electronic, rock, pop, and more.',
+  path: '/genres',
+})
 
-  useHead({ title: 'Genres' })
-  useSeoMeta({
-    description: 'Browse radio stations by music genre. Find your favorite style of music from jazz to electronic, rock, pop, and more.',
-    ogTitle: 'Genres | Felipe Pucinelli',
-    ogDescription: 'Browse radio stations by music genre. Find your favorite style from jazz to electronic, rock, pop, and more.',
-    ogUrl: 'https://pucinelli.me/genres',
-  })
+const CHUNK = 40
 
-  const CHUNK = 40
+const { data: genres, pending, error, refresh } = await useGenres()
 
-  const { data: genres, pending } = await useGenres()
+const visibleCount = ref(CHUNK)
+const visibleGenres = computed(() => (genres.value || []).slice(0, visibleCount.value))
+const hasMore = computed(() => visibleCount.value < (genres.value?.length || 0))
 
-  const visibleCount = ref(CHUNK)
-  const visibleGenres = computed(() => (genres.value || []).slice(0, visibleCount.value))
-  const hasMore = computed(() => visibleCount.value < (genres.value?.length || 0))
+function showMore() {
+  visibleCount.value += CHUNK
+}
 
-  function showMore() {
-    visibleCount.value += CHUNK
-  }
-
-  const { sentinelRef } = useInfiniteScroll(showMore)
+const { sentinelRef } = useInfiniteScroll(showMore)
 </script>

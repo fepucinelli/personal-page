@@ -2,36 +2,35 @@ import { defineStore } from 'pinia'
 
 type Theme = 'light' | 'dark'
 
-export const useThemeStore = defineStore('theme', {
-  state: () => ({
-    theme: 'light' as Theme,
-  }),
+function getInitialTheme(): Theme {
+  if (!import.meta.client) return 'light'
 
-  actions: {
-    init() {
-      if (!process.client) return
+  const saved = localStorage.getItem('theme') as Theme | null
+  if (saved) return saved
 
-      const saved = localStorage.getItem('theme') as Theme | null
-      if (saved) {
-        this.theme = saved
-      } else {
-        // respect system preference
-        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches
-        this.theme = prefersDark ? 'dark' : 'light'
-      }
+  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches
+  return prefersDark ? 'dark' : 'light'
+}
 
-      this.apply()
-    },
+function applyTheme(theme: Theme) {
+  if (!import.meta.client) return
+  document.documentElement.classList.toggle('dark', theme === 'dark')
+}
 
-    toggle() {
-      this.theme = this.theme === 'dark' ? 'light' : 'dark'
-      localStorage.setItem('theme', this.theme)
-      this.apply()
-    },
+export const useThemeStore = defineStore('theme', () => {
+  const theme = ref<Theme>(getInitialTheme())
 
-    apply() {
-      const html = document.documentElement
-      html.classList.toggle('dark', this.theme === 'dark')
-    },
-  },
+  // Apply on creation (client-side only)
+  applyTheme(theme.value)
+
+  function toggle() {
+    theme.value = theme.value === 'dark' ? 'light' : 'dark'
+    localStorage.setItem('theme', theme.value)
+    applyTheme(theme.value)
+  }
+
+  return {
+    theme,
+    toggle,
+  }
 })

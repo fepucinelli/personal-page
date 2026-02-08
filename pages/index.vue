@@ -90,21 +90,21 @@
         </button>
 
         <button
-          @click="favorites.toggleFavorite(currentStation)"
+          @click="actions.toggleFavorite(currentStation)"
           class="p-2.5 rounded-full
                  border border-ink/10 dark:border-white/10
                  text-ink-secondary dark:text-neutral-400
                  hover:border-brand/30 hover:text-brand
                  transition-all duration-300"
           :title="
-            favorites.isFavorite(currentStation.id)
+            actions.isFavorite(currentStation)
               ? 'Remove from favorites'
               : 'Add to favorites'
           "
         >
           <i
             class="pi text-sm"
-            :class="favorites.isFavorite(currentStation.id)
+            :class="actions.isFavorite(currentStation)
               ? 'pi-star-fill text-brand'
               : 'pi-star'"
           ></i>
@@ -132,6 +132,10 @@
           v-for="station in favorites.allFavorites"
           :key="station.id"
           :station="station"
+          :is-playing="actions.isPlaying(station)"
+          :is-favorite="actions.isFavorite(station)"
+          @play="actions.playStation"
+          @toggle-favorite="actions.toggleFavorite"
         />
       </div>
     </section>
@@ -149,11 +153,7 @@
 <script setup lang="ts">
 import { usePlayerStore } from '~/stores/player'
 import { useFavoritesStore } from '~/stores/favorites'
-import type { Station } from '~/types/station'
-
-import Loader from '~/components/ui/Loader.vue'
-import SocialLinks from '~/components/ui/SocialLinks.vue'
-import StationCard from '~/components/station/StationCard.vue'
+import type { Station } from '~/types/radio'
 
 useHead({
   title: 'Senior Front-End Engineer, Lead Developer & DJ',
@@ -187,6 +187,7 @@ useSeoMeta({
 
 const favorites = useFavoritesStore()
 const player = usePlayerStore()
+const actions = useStationActions()
 
 // Fetch stations
 const { data: stations, pending } = await useStations()

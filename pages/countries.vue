@@ -11,6 +11,13 @@
 
     <Loader v-if="pending" />
 
+    <div v-else-if="error" class="text-center py-16">
+      <p class="text-ink-muted dark:text-neutral-500 text-sm">Failed to load countries.</p>
+      <button @click="refresh" class="mt-4 text-sm text-brand hover:text-brand-dark transition-colors">
+        Try again
+      </button>
+    </div>
+
     <template v-else>
       <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3">
         <NuxtLink
@@ -37,28 +44,24 @@
   </div>
 </template>
 
-<script setup>
-  import Loader from '~/components/ui/Loader.vue'
+<script setup lang="ts">
+useSeoPage({
+  title: 'Countries',
+  description: 'Explore radio stations by country. Find internet radio from every corner of the world.',
+  path: '/countries',
+})
 
-  useHead({ title: 'Countries' })
-  useSeoMeta({
-    description: 'Explore radio stations by country. Find internet radio from every corner of the world.',
-    ogTitle: 'Countries | Felipe Pucinelli',
-    ogDescription: 'Explore radio stations by country. Find internet radio from every corner of the world.',
-    ogUrl: 'https://pucinelli.me/countries',
-  })
+const CHUNK = 40
 
-  const CHUNK = 40
+const { data: countries, pending, error, refresh } = await useCountries()
 
-  const { data: countries, pending } = await useCountries()
+const visibleCount = ref(CHUNK)
+const visibleCountries = computed(() => (countries.value || []).slice(0, visibleCount.value))
+const hasMore = computed(() => visibleCount.value < (countries.value?.length || 0))
 
-  const visibleCount = ref(CHUNK)
-  const visibleCountries = computed(() => (countries.value || []).slice(0, visibleCount.value))
-  const hasMore = computed(() => visibleCount.value < (countries.value?.length || 0))
+function showMore() {
+  visibleCount.value += CHUNK
+}
 
-  function showMore() {
-    visibleCount.value += CHUNK
-  }
-
-  const { sentinelRef } = useInfiniteScroll(showMore)
+const { sentinelRef } = useInfiniteScroll(showMore)
 </script>

@@ -1,5 +1,3 @@
-import { ref, watch, onUnmounted } from 'vue'
-
 export function useInfiniteScroll(onIntersect: () => void) {
   const sentinelRef = ref<HTMLElement | null>(null)
   let observer: IntersectionObserver | null = null

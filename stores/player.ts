@@ -1,96 +1,97 @@
 import { defineStore } from 'pinia'
-import { Station } from '~/types/station'
+import type { Station } from '~/types/radio'
 
-let audio: HTMLAudioElement | null = null
+export const usePlayerStore = defineStore('player', () => {
+  const currentStation = ref<Station | null>(null)
+  const isPlaying = ref(false)
+  const isLoading = ref(false)
+  const volume = ref(1)
+  const error = ref<string | null>(null)
 
-export const usePlayerStore = defineStore('player', {
-  state: () => ({
-    currentStation: null as Station | null,
-    isPlaying: false,
-    isLoading: false,
-    volume: 1,
-    error: null as string | null,
-  }),
+  let audio: HTMLAudioElement | null = null
 
-  getters: {
-    audioElement(): HTMLAudioElement | null {
-      return audio
+  function ensureAudio() {
+    if (audio) return
+
+    audio = new Audio()
+    audio.crossOrigin = 'anonymous'
+    audio.preload = 'none'
+    audio.volume = volume.value
+
+    audio.addEventListener('playing', () => {
+      isPlaying.value = true
+      isLoading.value = false
+    })
+
+    audio.addEventListener('pause', () => {
+      isPlaying.value = false
+    })
+
+    audio.addEventListener('waiting', () => {
+      isLoading.value = true
+    })
+
+    audio.addEventListener('canplay', () => {
+      isLoading.value = false
+    })
+
+    audio.addEventListener('error', () => {
+      error.value = 'Station unavailable'
+      isLoading.value = false
+      isPlaying.value = false
+    })
+  }
+
+  async function play(station: Station) {
+    ensureAudio()
+
+    if (currentStation.value?.id === station.id) {
+      toggle()
+      return
     }
-  },
 
-  actions: {
-    init() {
-      if (audio) return
+    currentStation.value = station
+    isLoading.value = true
+    error.value = null
 
-      audio = new Audio()
-      audio.crossOrigin = 'anonymous'
-      audio.preload = 'none'
-      audio.volume = this.volume
+    audio!.src = station.streamUrl
 
-      audio.addEventListener('playing', () => {
-        this.isPlaying = true
-        this.isLoading = false
-      })
+    try {
+      await audio!.play()
+    } catch {
+      error.value = 'Unable to play station'
+      isLoading.value = false
+    }
+  }
 
-      audio.addEventListener('pause', () => {
-        this.isPlaying = false
-      })
-
-      audio.addEventListener('waiting', () => {
-        this.isLoading = true
-      })
-
-      audio.addEventListener('canplay', () => {
-        this.isLoading = false
-      })
-
-      audio.addEventListener('error', () => {
-        this.error = 'Station unavailable'
-        this.isLoading = false
-        this.isPlaying = false
-      })
-    },
-
-    async play(station: Station) {
-      this.init()
-
-      if (this.currentStation?.id === station.id) {
-        this.toggle()
-        return
-      }
-
-      this.currentStation = station
-      this.isLoading = true
-      this.error = null
-
-      audio!.src = station.streamUrl
-
-      try {
-        await audio!.play()
-      } catch {
-        this.error = 'Unable to play station'
-        this.isLoading = false
-      }
-    },
-
-    toggle() {
-      if (!audio) return
-
-      if (audio.paused) {
-        audio.play()
-      } else {
-        audio.pause()
-      }
-    },
-
-    pause() {
-      if (!audio) return
+  function toggle() {
+    if (!audio) return
+    if (audio.paused) {
+      audio.play()
+    } else {
       audio.pause()
-    },
+    }
+  }
 
-    setVolume(value: number) {
-      this.volume = value
-      if (audio) audio.volume = value
-    },
-  },
+  function pause() {
+    if (!audio) return
+    audio.pause()
+  }
+
+  function setVolume(value: number) {
+    volume.value = value
+    if (audio) audio.volume = value
+  }
+
+  return {
+    currentStation,
+    isPlaying,
+    isLoading,
+    volume,
+    error,
+    play,
+    toggle,
+    pause,
+    setVolume,
+  }
 })
