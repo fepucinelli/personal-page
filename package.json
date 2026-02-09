@@ -3,9 +3,9 @@
   "private": true,
   "scripts": {
     "dev": "nuxt dev",
-    "build": "nuxt build",
+    "build": "nuxt generate",
     "preview": "nuxt preview",
-    "deploy": "npm run build && gh-pages -d dist"
+    "deploy": "npm run build && gh-pages --dotfiles -d .output/public"
   },
   "dependencies": {
     "@pinia/nuxt": "^0.5.1",
