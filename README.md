@@ -24,6 +24,8 @@ Personal site and internet radio discovery app built by [Felipe Pucinelli](https
 - **Persistent Volume** — Volume level saved to localStorage and restored across sessions
 - **Dark Mode** — Light/dark theme toggle, preference persisted in localStorage
 - **SEO Optimized** — SSR pre-rendering, meta tags, Open Graph, structured data (JSON-LD), sitemap, and robots.txt
+- **Performance Optimized** — Non-blocking font loading, compositor-hinted animations, cache headers for static assets
+- **Accessible** — All interactive elements have accessible names (aria-labels), semantic HTML
 
 ---
 
@@ -180,10 +182,12 @@ npm run dev
 npm run build
 ```
 
+Generates the full static site with pre-rendered pages.
+
 ### Deploy
 
 ```bash
 npm run deploy
 ```
 
-Builds the static site and publishes to GitHub Pages via `gh-pages`.
+Generates the static site and publishes to GitHub Pages via `gh-pages`.
