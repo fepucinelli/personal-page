@@ -28,6 +28,19 @@ const SYSTEM_FAVORITES: Station[] = [
     isPlayable: true,
     favicon: '',
   },
+  {
+    id: '7ada8a81-5ae1-418c-8f18-51d2f38d86a4',
+    name: 'Bossa Jazz Brasil',
+    streamUrl: 'https://centova5.transmissaodigital.com:20104/live',
+    country: 'Brazil',
+    countryCode: 'BR',
+    tags: ['bossa nova', 'jazz', 'mpb'],
+    bitrate: 64,
+    codec: 'AAC+',
+    popularity: 59,
+    isPlayable: true,
+    favicon: 'https://bossajazzbrasil.com/wp-content/uploads/2020/12/cropped-bjs-app-180x180.png',
+  },
 ]
 
 function loadFavorites(): Station[] {
