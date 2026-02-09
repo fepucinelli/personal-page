@@ -70,6 +70,7 @@
                  hover:border-brand/30 hover:text-brand
                  transition-all duration-300"
           title="Shuffle station"
+          aria-label="Shuffle station"
         >
           <i class="pi pi-sync text-sm"></i>
         </button>
@@ -94,6 +95,11 @@
                  hover:border-brand/30 hover:text-brand
                  transition-all duration-300"
           :title="
+            actions.isFavorite(currentStation)
+              ? 'Remove from favorites'
+              : 'Add to favorites'
+          "
+          :aria-label="
             actions.isFavorite(currentStation)
               ? 'Remove from favorites'
               : 'Add to favorites'

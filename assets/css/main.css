@@ -127,6 +127,7 @@
   width: 10rem;
   height: 10rem;
   border-radius: 100%;
+  contain: layout style;
 }
 
 .avatar-blob {
@@ -138,6 +139,7 @@
   border-radius: 100%;
   opacity: 0;
   transition: opacity 0.8s ease;
+  will-change: border-radius;
 }
 
 .avatar-blob::before,
@@ -150,6 +152,7 @@
   opacity: 0.5;
   border-radius: 100%;
   content: "";
+  will-change: border-radius;
 }
 
 .avatar-blob::after {
@@ -240,6 +243,7 @@
   border-radius: 100%;
   content: "";
   transition: background 0.8s ease;
+  will-change: border-radius;
 }
 
 .avatar-blob-wrap.is-playing .avatar-blob-inner::before,

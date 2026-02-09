@@ -11,6 +11,7 @@
     <!-- Play / Pause -->
     <button
       @click="toggle"
+      :aria-label="player.isPlaying ? 'Pause' : 'Play'"
       class="flex-shrink-0 w-10 h-10 rounded-full flex items-center justify-center
              transition-all duration-300"
       :class="{
@@ -50,6 +51,7 @@
              hover:text-brand hover:bg-brand/5
              transition-all duration-200"
       :title="actions.isFavorite(player.currentStation!) ? 'Remove from favorites' : 'Add to favorites'"
+      :aria-label="actions.isFavorite(player.currentStation!) ? 'Remove from favorites' : 'Add to favorites'"
     >
       <i
         class="pi text-sm"

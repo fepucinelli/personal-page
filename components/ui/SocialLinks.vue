@@ -4,6 +4,7 @@
       v-for="item in links"
       :key="item.icon"
       :href="item.url"
+      :aria-label="item.label"
       target="_blank"
       rel="noopener noreferrer"
       class="p-3 rounded-full
@@ -18,8 +19,8 @@
 
 <script setup lang="ts">
 const links = [
-  { icon: 'pi-instagram', url: 'https://www.instagram.com/felipepucinelli' },
-  { icon: 'pi-linkedin', url: 'https://www.linkedin.com/in/felipepucinelli' },
-  { icon: 'pi-github', url: 'https://github.com/fepucinelli' },
+  { icon: 'pi-instagram', url: 'https://www.instagram.com/felipepucinelli', label: 'Instagram' },
+  { icon: 'pi-linkedin', url: 'https://www.linkedin.com/in/felipepucinelli', label: 'LinkedIn' },
+  { icon: 'pi-github', url: 'https://github.com/fepucinelli', label: 'GitHub' },
 ]
 </script>

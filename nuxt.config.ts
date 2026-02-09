@@ -13,6 +13,9 @@ export default defineNuxtConfig({
       routes: ['/'],
       failOnError: false,
     },
+    routeRules: {
+      '/_assets/**': { headers: { 'cache-control': 'public, max-age=31536000, immutable' } },
+    },
   },
   app: {
     baseURL: '/',
@@ -27,8 +30,12 @@ export default defineNuxtConfig({
         { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
         { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossorigin: '' },
         { rel: 'preconnect', href: 'https://api.fontshare.com' },
-        { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap' },
-        { rel: 'stylesheet', href: 'https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700&display=swap' },
+        { rel: 'preload', as: 'style', href: 'https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap', onload: "this.onload=null;this.rel='stylesheet'" },
+        { rel: 'preload', as: 'style', href: 'https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700&display=swap', onload: "this.onload=null;this.rel='stylesheet'" },
+      ],
+      noscript: [
+        { innerHTML: '<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap">' },
+        { innerHTML: '<link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700&display=swap">' },
       ],
       meta: [
         { name: 'description', content: 'Felipe Pucinelli — Senior Front-End Engineer, Lead Developer & DJ. Explore my curated collection of internet radio stations from around the world.' },

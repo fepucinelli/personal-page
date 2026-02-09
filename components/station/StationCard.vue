@@ -44,6 +44,7 @@
       <button
         v-if="!hideFavorite"
         @click="$emit('toggleFavorite', station)"
+        :aria-label="isFavorite ? 'Remove from favorites' : 'Add to favorites'"
         class="p-1 transition-all duration-200
                hover:scale-110"
       >

@@ -45,6 +45,7 @@
 
         <NuxtLink
           to="/favorites"
+          aria-label="Favorites"
           class="ml-1 p-2 rounded-lg text-ink-secondary dark:text-neutral-400
                  hover:text-brand hover:bg-brand/5
                  transition-all duration-200"
@@ -54,6 +55,7 @@
 
         <button
           @click="theme.toggle()"
+          :aria-label="theme.theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'"
           class="p-2 rounded-lg text-ink-secondary dark:text-neutral-400
                  hover:text-brand hover:bg-brand/5
                  transition-all duration-200"
