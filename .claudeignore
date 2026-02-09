@@ -1,0 +1,34 @@
+# Dependencies
+node_modules
+
+# Build output
+.output
+.nuxt
+dist
+
+# Lock files
+package-lock.json
+
+# Logs and cache
+logs
+*.log
+.cache
+
+# Environment
+.env
+.env.*
+!.env.example
+
+# Binary assets (images, icons)
+public/apple-touch-icon.png
+public/og-image.png
+public/avatar.jpg
+public/favicon-*.png
+
+# Documentation
+CHANGELOG.md
+LICENSE
+README.md
+
+# Git
+.git
