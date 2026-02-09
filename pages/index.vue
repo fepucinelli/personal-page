@@ -164,6 +164,7 @@
           :station="station"
           :is-playing="actions.isPlaying(station)"
           :is-favorite="actions.isFavorite(station)"
+          :hide-favorite="favorites.isSystemFavorite(station.id)"
           @play="actions.playStation"
           @toggle-favorite="actions.toggleFavorite"
         />
