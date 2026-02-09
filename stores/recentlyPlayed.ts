@@ -1,4 +1,4 @@
-import { defineStore } from 'pinia'
+import { defineStore, skipHydrate } from 'pinia'
 import type { Station } from '~/types/radio'
 
 const MAX_STATIONS = 10
@@ -28,5 +28,5 @@ export const useRecentlyPlayedStore = defineStore('recentlyPlayed', () => {
     localStorage.setItem('recently-played', JSON.stringify(stations.value))
   }
 
-  return { stations, addStation }
+  return { stations: skipHydrate(stations), addStation }
 })

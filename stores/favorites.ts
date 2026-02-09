@@ -1,4 +1,4 @@
-import { defineStore } from 'pinia'
+import { defineStore, skipHydrate } from 'pinia'
 import type { Station } from '~/types/radio'
 
 const SYSTEM_FAVORITES: Station[] = [
@@ -68,7 +68,7 @@ export const useFavoritesStore = defineStore('favorites', () => {
   }
 
   return {
-    stations,
+    stations: skipHydrate(stations),
     allFavorites,
     isSystemFavorite,
     isFavorite,
