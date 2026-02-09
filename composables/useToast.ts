@@ -15,5 +15,5 @@ export function useToast() {
     }, duration)
   }
 
-  return { message: toastMessage, visible: toastVisible, show }
+  return { message: readonly(toastMessage), visible: readonly(toastVisible), show }
 }

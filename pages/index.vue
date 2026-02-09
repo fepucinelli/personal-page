@@ -115,61 +115,65 @@
       </div>
     </div>
 
-    <!-- Favorites section -->
-    <section
-      v-if="favorites.allFavorites.length > 0"
-      class="mt-20 w-full max-w-5xl"
-    >
-      <div class="flex items-center gap-3 mb-6">
-        <div class="h-px flex-1 bg-ink/5 dark:bg-white/5" />
-        <h2 class="font-display text-lg italic text-ink dark:text-neutral-200 whitespace-nowrap">
-          Favorite Stations
-        </h2>
-        <div class="h-px flex-1 bg-ink/5 dark:bg-white/5" />
-      </div>
+    <!-- Favorites section (client-only: user favorites come from localStorage) -->
+    <ClientOnly>
+      <section
+        v-if="favorites.allFavorites.length > 0"
+        class="mt-20 w-full max-w-5xl"
+      >
+        <div class="flex items-center gap-3 mb-6">
+          <div class="h-px flex-1 bg-ink/5 dark:bg-white/5" />
+          <h2 class="font-display text-lg italic text-ink dark:text-neutral-200 whitespace-nowrap">
+            Favorite Stations
+          </h2>
+          <div class="h-px flex-1 bg-ink/5 dark:bg-white/5" />
+        </div>
 
-      <Loader v-if="pending" />
+        <Loader v-if="pending" />
 
-      <div v-else class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-        <StationCard
-          v-for="station in favorites.allFavorites"
-          :key="station.id"
-          :station="station"
-          :is-playing="actions.isPlaying(station)"
-          :is-favorite="actions.isFavorite(station)"
-          :hide-favorite="favorites.isSystemFavorite(station.id)"
-          @play="actions.playStation"
-          @toggle-favorite="actions.toggleFavorite"
-        />
-      </div>
-    </section>
+        <div v-else class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          <StationCard
+            v-for="station in favorites.allFavorites"
+            :key="station.id"
+            :station="station"
+            :is-playing="actions.isPlaying(station)"
+            :is-favorite="actions.isFavorite(station)"
+            :hide-favorite="favorites.isSystemFavorite(station.id)"
+            @play="actions.playStation"
+            @toggle-favorite="actions.toggleFavorite"
+          />
+        </div>
+      </section>
+    </ClientOnly>
 
-    <!-- Recently Played section -->
-    <section
-      v-if="recentlyPlayed.stations.length > 0"
-      class="mt-20 w-full max-w-5xl"
-    >
-      <div class="flex items-center gap-3 mb-6">
-        <div class="h-px flex-1 bg-ink/5 dark:bg-white/5" />
-        <h2 class="font-display text-lg italic text-ink dark:text-neutral-200 whitespace-nowrap">
-          Recently Played
-        </h2>
-        <div class="h-px flex-1 bg-ink/5 dark:bg-white/5" />
-      </div>
+    <!-- Recently Played section (client-only: data comes from localStorage) -->
+    <ClientOnly>
+      <section
+        v-if="recentlyPlayed.stations.length > 0"
+        class="mt-20 w-full max-w-5xl"
+      >
+        <div class="flex items-center gap-3 mb-6">
+          <div class="h-px flex-1 bg-ink/5 dark:bg-white/5" />
+          <h2 class="font-display text-lg italic text-ink dark:text-neutral-200 whitespace-nowrap">
+            Recently Played
+          </h2>
+          <div class="h-px flex-1 bg-ink/5 dark:bg-white/5" />
+        </div>
 
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-        <StationCard
-          v-for="station in recentlyPlayed.stations"
-          :key="station.id"
-          :station="station"
-          :is-playing="actions.isPlaying(station)"
-          :is-favorite="actions.isFavorite(station)"
-          :hide-favorite="favorites.isSystemFavorite(station.id)"
-          @play="actions.playStation"
-          @toggle-favorite="actions.toggleFavorite"
-        />
-      </div>
-    </section>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          <StationCard
+            v-for="station in recentlyPlayed.stations"
+            :key="station.id"
+            :station="station"
+            :is-playing="actions.isPlaying(station)"
+            :is-favorite="actions.isFavorite(station)"
+            :hide-favorite="favorites.isSystemFavorite(station.id)"
+            @play="actions.playStation"
+            @toggle-favorite="actions.toggleFavorite"
+          />
+        </div>
+      </section>
+    </ClientOnly>
 
     <div class="mt-10 flex flex-col items-center gap-2">
       <NuxtLink
@@ -250,8 +254,8 @@ const pickRandomStation = () => {
   currentStation.value = stations.value[index]
 }
 
-// Initial random pick
-watchEffect(() => {
+// Pick on client only to avoid SSR/client mismatch (Math.random differs)
+onMounted(() => {
   if (!currentStation.value && stations.value?.length) {
     pickRandomStation()
   }

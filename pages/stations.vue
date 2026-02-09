@@ -21,7 +21,7 @@
     <template v-else>
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
         <StationCard
-          v-for="station in allStations"
+          v-for="station in displayedStations"
           :key="station.id"
           :station="station"
           :is-playing="actions.isPlaying(station)"
@@ -47,6 +47,7 @@ useSeoPage({
 })
 
 const LIMIT = 50
+const MAX_RENDERED = 150
 
 const { data: initialStations, pending, error, refresh } = await useStations({ limit: LIMIT, offset: 0 })
 
@@ -67,6 +68,8 @@ async function loadMore() {
     loadingMore.value = false
   }
 }
+
+const displayedStations = computed(() => allStations.value.slice(-MAX_RENDERED))
 
 const { sentinelRef } = useInfiniteScroll(loadMore)
 </script>
