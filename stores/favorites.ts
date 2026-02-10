@@ -29,7 +29,7 @@ const SYSTEM_FAVORITES: Station[] = [
     favicon: '',
   },
   {
-    id: '7ada8a81-5ae1-418c-8f18-51d2f38d86a4',
+    id: 'system-bossa-brazil',
     name: 'Bossa Jazz Brasil',
     streamUrl: 'https://centova5.transmissaodigital.com:20104/live',
     country: 'Brazil',
