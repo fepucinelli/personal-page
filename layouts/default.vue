@@ -59,10 +59,10 @@
           :aria-checked="theme.theme === 'dark'"
           :aria-label="theme.theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'"
           class="theme-toggle ml-1"
-          :class="theme.theme === 'dark' ? 'theme-toggle--dark' : 'theme-toggle--light'"
         >
           <span class="theme-toggle__knob">
-            <i :class="theme.theme === 'dark' ? 'pi pi-moon' : 'pi pi-sun'" class="theme-toggle__icon"></i>
+            <i class="pi pi-sun theme-toggle__icon theme-toggle__icon--light"></i>
+            <i class="pi pi-moon theme-toggle__icon theme-toggle__icon--dark"></i>
           </span>
         </button>
       </nav>

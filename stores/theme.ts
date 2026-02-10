@@ -1,4 +1,4 @@
-import { defineStore, skipHydrate } from 'pinia'
+import { defineStore } from 'pinia'
 
 type Theme = 'light' | 'dark'
 
@@ -30,7 +30,7 @@ export const useThemeStore = defineStore('theme', () => {
   }
 
   return {
-    theme: skipHydrate(theme),
+    theme,
     toggle,
   }
 })
