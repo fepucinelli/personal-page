@@ -55,12 +55,15 @@
 
         <button
           @click="theme.toggle()"
+          role="switch"
+          :aria-checked="theme.theme === 'dark'"
           :aria-label="theme.theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'"
-          class="p-2 rounded-lg text-ink-secondary dark:text-neutral-400
-                 hover:text-brand hover:bg-brand/5
-                 transition-all duration-200"
+          class="theme-toggle ml-1"
+          :class="theme.theme === 'dark' ? 'theme-toggle--dark' : 'theme-toggle--light'"
         >
-          <i class="pi pi-moon text-sm"></i>
+          <span class="theme-toggle__knob">
+            <i :class="theme.theme === 'dark' ? 'pi pi-moon' : 'pi pi-sun'" class="theme-toggle__icon"></i>
+          </span>
         </button>
       </nav>
     </header>
