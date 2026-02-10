@@ -18,16 +18,41 @@
       </div>
     </div>
 
+    <!-- Name + Role (accessible text for screen readers) -->
+    <span class="sr-only">Felipe Pucinelli. Senior Front-End Engineer, Lead Developer, DJ.</span>
+
     <!-- Name -->
-    <h1 class="animate-fade-up delay-2 mt-8 font-display text-4xl md:text-5xl italic
-               text-ink dark:text-neutral-50 tracking-tight">
-      Felipe Pucinelli
+    <h1
+      aria-hidden="true"
+      class="animate-fade-up delay-2 mt-8 font-display text-4xl md:text-5xl italic
+             text-ink dark:text-neutral-50 tracking-tight"
+      style="min-height: 1.2em"
+    >
+      <template v-if="!typewriter.isReady">Felipe Pucinelli</template>
+      <template v-else>
+        {{ typewriter.nameText }}<span
+          v-show="typewriter.cursorOnName"
+          class="typewriter-cursor"
+          :class="{ 'typewriter-cursor--typing': typewriter.phase === 'typing-name' }"
+        ></span>
+      </template>
     </h1>
 
     <!-- Role -->
-    <p class="animate-fade-up delay-3 mt-3 text-sm tracking-widest uppercase
-              text-ink-muted dark:text-neutral-500 font-medium">
-      Senior Front-End Engineer &middot; Lead Developer &middot; DJ
+    <p
+      aria-hidden="true"
+      class="animate-fade-up delay-3 mt-3 text-sm tracking-widest uppercase
+             text-ink-muted dark:text-neutral-500 font-medium"
+      style="min-height: 1.5em"
+    >
+      <template v-if="!typewriter.isReady">Senior Front-End Engineer &middot; Lead Developer &middot; DJ</template>
+      <template v-else>
+        {{ typewriter.roleText }}<span
+          v-show="typewriter.cursorOnRole"
+          class="typewriter-cursor typewriter-cursor--gradient"
+          :class="{ 'typewriter-cursor--typing': typewriter.phase === 'typing-role' || typewriter.phase === 'deleting-role' }"
+        ></span>
+      </template>
     </p>
 
     <!-- Bio -->
@@ -239,6 +264,11 @@ const favorites = useFavoritesStore()
 const player = usePlayerStore()
 const recentlyPlayed = useRecentlyPlayedStore()
 const actions = useStationActions()
+
+const typewriter = useTypewriter({
+  name: 'Felipe Pucinelli',
+  roles: ['Senior Front-End Engineer', 'Lead Developer', 'DJ'],
+})
 
 // Fetch stations & stats
 const { data: stations, pending } = await useStations()

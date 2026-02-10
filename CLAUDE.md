@@ -1,4 +1,4 @@
-# Radio Discovery App — Nuxt 3 Static Site
+# Radio Discovery App & Personal Website — Nuxt 3 Static Site
 
 ## Commands
 - Dev: `npm run dev`
@@ -31,6 +31,7 @@ Three-layer data flow: `radioFetch()` → Raw API types → Mappers → App type
 
 ## Styling
 
+- Touch targets use invisible padding + negative margins (e.g. `py-2 -my-2`) to meet 44px minimum without shifting layout
 - TailwindCSS with `class` strategy for dark mode (`dark:` prefix)
 - Custom palette in tailwind.config.cjs: brand (#c493ff), surface, ink, night
 - Custom fonts: Instrument Serif (display), Satoshi (body)

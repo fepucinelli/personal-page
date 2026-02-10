@@ -121,6 +121,31 @@
   animation: spin-slow 2s linear infinite;
 }
 
+/* ---------- Typewriter cursor ---------- */
+@keyframes blink-cursor {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+.typewriter-cursor {
+  display: inline-block;
+  width: 2px;
+  height: 1em;
+  margin-left: 1px;
+  background: #c493ff;
+  vertical-align: text-bottom;
+  animation: blink-cursor 1.06s step-end infinite;
+}
+
+.typewriter-cursor--gradient {
+  background: linear-gradient(180deg, #c493ff, #845ec2);
+}
+
+.typewriter-cursor--typing {
+  animation: none;
+  opacity: 1;
+}
+
 /* ---------- Avatar blob animation ---------- */
 .avatar-blob-wrap {
   position: relative;

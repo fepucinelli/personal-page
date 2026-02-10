@@ -27,7 +27,7 @@
     <div class="flex items-center justify-between mt-4 pt-3 border-t border-ink/5 dark:border-white/5">
       <button
         @click="$emit('play', station)"
-        class="flex items-center gap-2 text-xs font-medium tracking-wide uppercase
+        class="flex items-center gap-2 py-2 -my-2 -ml-2 pl-2 pr-4 text-xs font-medium tracking-wide uppercase
                text-ink-secondary dark:text-neutral-400
                hover:text-brand transition-colors duration-200"
       >
@@ -45,7 +45,7 @@
         v-if="!hideFavorite"
         @click="$emit('toggleFavorite', station)"
         :aria-label="isFavorite ? 'Remove from favorites' : 'Add to favorites'"
-        class="p-1 transition-all duration-200
+        class="p-2 -m-1 transition-all duration-200
                hover:scale-110"
       >
         <i

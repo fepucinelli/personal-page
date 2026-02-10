@@ -13,6 +13,7 @@ Personal site and internet radio discovery app built by [Felipe Pucinelli](https
 - **Auto-Skip on Failure** — Broken streams are detected automatically and the player skips to the next available station
 - **Curated System Stations** — Handpicked stations pinned to favorites that can't be removed or unfavorited
 - **Now Playing Toast** — Toast notification appears when switching between stations
+- **Typewriter Hero** — Name and roles animate with a typing effect on the landing page, respects `prefers-reduced-motion`
 - **Avatar Pulse Animation** — Breathing ring animation on the avatar while music is playing
 - **Recently Played** — Tracks last 10 played stations, persisted in localStorage, shown on the landing page
 - **Station Count Badge** — Displays total available stations and countries from the Radio Browser API
@@ -25,6 +26,7 @@ Personal site and internet radio discovery app built by [Felipe Pucinelli](https
 - **Dark Mode** — Light/dark theme toggle, preference persisted in localStorage
 - **SEO Optimized** — SSR pre-rendering, meta tags, Open Graph, structured data (JSON-LD), sitemap, and robots.txt
 - **Performance Optimized** — Non-blocking font loading, compositor-hinted animations, cache headers for static assets
+- **Mobile-Friendly Touch Targets** — Interactive buttons meet the 44px minimum tap target guideline
 - **Accessible** — All interactive elements have accessible names (aria-labels), semantic HTML
 
 ---
@@ -69,6 +71,7 @@ composables/
   useToast.ts           # Singleton toast notification state and show()
   useSeoPage.ts         # Shared SEO setup (title suffix, og:url prefix)
   useStationActions.ts  # Unified play/favorite actions for components
+  useTypewriter.ts      # Typewriter text animation with configurable speed and phases
 ```
 
 Composables are auto-imported by Nuxt. Store imports (`usePlayerStore`, etc.) are **not** auto-imported and require explicit imports.
@@ -138,7 +141,8 @@ components/
 │   ├── useInfiniteScroll.ts
 │   ├── useToast.ts
 │   ├── useSeoPage.ts
-│   └── useStationActions.ts
+│   ├── useStationActions.ts
+│   └── useTypewriter.ts
 ├── stores/
 │   ├── player.ts
 │   ├── favorites.ts
