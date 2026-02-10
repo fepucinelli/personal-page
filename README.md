@@ -43,6 +43,7 @@ Personal site and internet radio discovery app built by [Felipe Pucinelli](https
 | Icons | PrimeIcons |
 | Audio | HTML5 Audio API |
 | Data | [Radio Browser API](https://www.radio-browser.info/) |
+| Testing | **Vitest** + Vue Test Utils + happy-dom |
 | Deploy | **GitHub Pages** via `gh-pages` |
 
 ---
@@ -148,6 +149,13 @@ components/
 │   ├── favorites.ts
 │   ├── recentlyPlayed.ts
 │   └── theme.ts
+├── tests/
+│   ├── setup.ts                  # Vue auto-import globals for test env
+│   ├── unit/mappers.test.ts
+│   ├── stores/favorites.test.ts
+│   ├── stores/recentlyPlayed.test.ts
+│   ├── composables/useToast.test.ts
+│   └── components/StationCard.test.ts
 ├── types/
 │   └── radio.ts
 ├── assets/css/
@@ -179,6 +187,14 @@ npm install
 ```bash
 npm run dev
 ```
+
+### Test
+
+```bash
+npm run test:run
+```
+
+Runs unit and component tests with Vitest (API mappers, Pinia stores, composables, components).
 
 ### Build
 
