@@ -1,12 +1,16 @@
 <script setup lang="ts">
 import { useScriptGoogleAnalytics } from '#nuxt-scripts/registry/google-analytics'
+import { useScriptTriggerIdleTimeout } from '#nuxt-scripts/composables/useScriptTriggerIdleTimeout'
 
 // -----------------------------
 // Google Analytics 4
 // -----------------------------
 useScriptGoogleAnalytics({
   id: 'G-4JTC9K9T3N',
-  scriptOptions: { trigger: 'onNuxtReady' },
+  scriptOptions: {
+    trigger: useScriptTriggerIdleTimeout({ timeout: 3000 }),
+    warmupStrategy: false,
+  },
 })
 
 // -----------------------------
