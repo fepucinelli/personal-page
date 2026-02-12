@@ -25,7 +25,8 @@ Personal site and internet radio discovery app built by [Felipe Pucinelli](https
 - **Persistent Volume** — Volume level saved to localStorage and restored across sessions
 - **Dark Mode** — Light/dark theme toggle, preference persisted in localStorage
 - **SEO Optimized** — SSR pre-rendering, meta tags, Open Graph, structured data (JSON-LD), sitemap, and robots.txt
-- **Performance Optimized** — Non-blocking font loading, compositor-hinted animations, cache headers for static assets
+- **Google Analytics 4** — GA4 tracking via `@nuxt/scripts`, deferred with idle timeout to protect Core Web Vitals
+- **Performance Optimized** — Non-blocking font loading, compositor-hinted animations, cache headers for static assets, CWV-safe analytics loading
 - **Mobile-Friendly Touch Targets** — Interactive buttons meet the 44px minimum tap target guideline
 - **Accessible** — All interactive elements have accessible names (aria-labels), semantic HTML
 
@@ -42,6 +43,7 @@ Personal site and internet radio discovery app built by [Felipe Pucinelli](https
 | Typography | Instrument Serif + Satoshi (Fontshare) |
 | Icons | PrimeIcons |
 | Audio | HTML5 Audio API |
+| Analytics | **@nuxt/scripts** + Google Analytics 4 (idle-deferred) |
 | Data | [Radio Browser API](https://www.radio-browser.info/) |
 | Testing | **Vitest** + Vue Test Utils + happy-dom |
 | Deploy | **GitHub Pages** via `gh-pages` |
