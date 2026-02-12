@@ -1,6 +1,16 @@
 export default defineNuxtConfig({
   css: ['~/assets/css/main.css'],
-  modules: ['@pinia/nuxt'],
+  modules: ['@pinia/nuxt', '@nuxt/scripts'],
+  scripts: {
+    registry: {
+      googleAnalytics: {
+        id: 'G-4JTC9K9T3',
+      },
+    },
+    defaultScriptOptions: {
+      trigger: 'onNuxtReady',
+    },
+  },
   components: {
     dirs: [
       { path: '~/components', pathPrefix: false },
