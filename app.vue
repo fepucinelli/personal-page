@@ -1,4 +1,14 @@
 <script setup lang="ts">
+import { useScriptGoogleAnalytics } from '#nuxt-scripts/registry/google-analytics'
+
+// -----------------------------
+// Google Analytics 4
+// -----------------------------
+useScriptGoogleAnalytics({
+  id: 'G-4JTC9K9T3',
+  scriptOptions: { trigger: 'onNuxtReady' },
+})
+
 // -----------------------------
 // Global route loading indicator
 // -----------------------------
