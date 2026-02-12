@@ -5,7 +5,7 @@ import { useScriptGoogleAnalytics } from '#nuxt-scripts/registry/google-analytic
 // Google Analytics 4
 // -----------------------------
 useScriptGoogleAnalytics({
-  id: 'G-4JTC9K9T3',
+  id: 'G-4JTC9K9T3N',
   scriptOptions: { trigger: 'onNuxtReady' },
 })
 
