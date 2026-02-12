@@ -42,6 +42,12 @@ Three-layer data flow: `radioFetch()` → Raw API types → Mappers → App type
 - Use `useSeoPage()` in every page — it adds title suffix and og:url prefix automatically
 - Structured data (JSON-LD) in app.vue and index.vue
 
+## Analytics
+
+- GA4 via `@nuxt/scripts` — `useScriptGoogleAnalytics` composable in `app.vue`
+- Deferred with `useScriptTriggerIdleTimeout` (3s after Nuxt ready) to protect Core Web Vitals
+- Preload warmup disabled (`warmupStrategy: false`) to avoid competing with critical resources
+
 ## Error Handling
 
 - Global: `error.vue` (404/500 templates)
