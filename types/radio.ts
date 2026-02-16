@@ -10,6 +10,15 @@ export interface Station {
   codec: string
   popularity: number
   isPlayable: boolean
+  homepage?: string | null
+  language?: string | null
+  votes?: number
+  clickTrend?: number
+  isHls?: boolean
+  lastCheckOk?: boolean
+  geoLat?: number | null
+  geoLong?: number | null
+  state?: string | null
 }
 
 export interface Country {
@@ -34,6 +43,16 @@ export interface RawStation {
   bitrate: number
   codec: string
   clickcount: number
+  homepage: string
+  language: string
+  languagecodes: string
+  votes: number
+  clicktrend: number
+  hls: number
+  lastcheckok: number
+  geo_lat: number | null
+  geo_long: number | null
+  state: string
 }
 
 export interface RawCountry {

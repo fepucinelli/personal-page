@@ -15,6 +15,7 @@ export default defineNuxtConfig({
     },
     routeRules: {
       '/_assets/**': { headers: { 'cache-control': 'public, max-age=31536000, immutable' } },
+      '/station/**': { prerender: false },
     },
   },
   app: {

@@ -13,25 +13,54 @@
       </NuxtLink>
 
       <nav class="flex items-center gap-1">
-        <NuxtLink
-          to="/countries"
-          class="px-3 py-1.5 text-sm text-ink-secondary dark:text-neutral-400
-                 hover:text-ink dark:hover:text-neutral-100
-                 rounded-lg hover:bg-ink/5 dark:hover:bg-white/5
-                 transition-all duration-200"
-        >
-          countries
-        </NuxtLink>
+        <div class="relative" ref="listenMenuRef">
+          <button
+            @click="listenOpen = !listenOpen"
+            aria-haspopup="true"
+            :aria-expanded="listenOpen"
+            aria-controls="listen-menu"
+            class="px-3 py-1.5 text-sm text-ink-secondary dark:text-neutral-400
+                   hover:text-ink dark:hover:text-neutral-100
+                   rounded-lg hover:bg-ink/5 dark:hover:bg-white/5
+                   transition-all duration-200 flex items-center gap-1"
+          >
+            listen
+            <i class="pi pi-chevron-down text-[10px] transition-transform duration-200" :class="{ 'rotate-180': listenOpen }" />
+          </button>
 
-        <NuxtLink
-          to="/genres"
-          class="px-3 py-1.5 text-sm text-ink-secondary dark:text-neutral-400
-                 hover:text-ink dark:hover:text-neutral-100
-                 rounded-lg hover:bg-ink/5 dark:hover:bg-white/5
-                 transition-all duration-200"
-        >
-          genres
-        </NuxtLink>
+          <Transition
+            enter-active-class="transition duration-150 ease-out"
+            enter-from-class="opacity-0 scale-95 -translate-y-1"
+            enter-to-class="opacity-100 scale-100 translate-y-0"
+            leave-active-class="transition duration-100 ease-in"
+            leave-from-class="opacity-100 scale-100 translate-y-0"
+            leave-to-class="opacity-0 scale-95 -translate-y-1"
+          >
+            <div
+              v-if="listenOpen"
+              id="listen-menu"
+              role="menu"
+              class="absolute right-0 top-full mt-1 w-40 py-1
+                     rounded-xl border border-ink/5 dark:border-white/5
+                     bg-white dark:bg-night-elevated
+                     shadow-lg shadow-ink/5 dark:shadow-black/20"
+            >
+              <NuxtLink
+                v-for="item in listenItems"
+                :key="item.to"
+                :to="item.to"
+                role="menuitem"
+                @click="listenOpen = false"
+                class="block px-4 py-2 text-sm text-ink-secondary dark:text-neutral-400
+                       hover:text-ink dark:hover:text-neutral-100
+                       hover:bg-ink/5 dark:hover:bg-white/5
+                       transition-colors duration-150"
+              >
+                {{ item.label }}
+              </NuxtLink>
+            </div>
+          </Transition>
+        </div>
 
         <NuxtLink
           to="/about"
@@ -90,6 +119,23 @@ const theme = useThemeStore()
 const player = usePlayerStore()
 const recentlyPlayed = useRecentlyPlayedStore()
 const toast = useToast()
+
+const listenOpen = ref(false)
+const listenMenuRef = ref<HTMLElement | null>(null)
+const listenItems = [
+  { to: '/stations', label: 'stations' },
+  { to: '/countries', label: 'countries' },
+  { to: '/genres', label: 'genres' },
+]
+
+function onClickOutside(e: Event) {
+  if (listenMenuRef.value && !listenMenuRef.value.contains(e.target as Node)) {
+    listenOpen.value = false
+  }
+}
+
+onMounted(() => document.addEventListener('click', onClickOutside))
+onUnmounted(() => document.removeEventListener('click', onClickOutside))
 
 watch(() => player.currentStation, (newStation, oldStation) => {
   if (!newStation) return

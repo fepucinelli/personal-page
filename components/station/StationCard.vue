@@ -16,9 +16,13 @@
       <span class="w-1 h-2 bg-brand rounded-full animate-bounce" style="animation-delay: 0.3s" />
     </div>
 
-    <div class="font-medium text-sm text-ink dark:text-neutral-100 leading-snug pr-8">
+    <NuxtLink
+      :to="`/station/${station.id}`"
+      class="font-medium text-sm text-ink dark:text-neutral-100 leading-snug pr-8 block
+             hover:text-brand transition-colors duration-200"
+    >
       {{ station.name }}
-    </div>
+    </NuxtLink>
 
     <div class="mt-1 text-xs text-ink-muted dark:text-neutral-500 tracking-wide uppercase">
       {{ station.country }}

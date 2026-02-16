@@ -30,9 +30,9 @@ describe('favorites store', () => {
 
   it('allFavorites includes system favorites', () => {
     const store = useFavoritesStore()
-    expect(store.allFavorites.length).toBeGreaterThanOrEqual(3)
-    expect(store.allFavorites.some(s => s.name === 'Deep Electronic Vibes')).toBe(true)
-    expect(store.allFavorites.some(s => s.name === 'Bossa Jazz Brasil')).toBe(true)
+    expect(store.allFavorites.length).toBeGreaterThanOrEqual(2)
+    expect(store.allFavorites.some(s => s.name === '1.FM - Deep House Radio')).toBe(true)
+    expect(store.allFavorites.some(s => s.name === '70s 80s Disco Funk ModernSoul Boogie')).toBe(true)
   })
 
   it('toggleFavorite adds a station', () => {
@@ -67,7 +67,7 @@ describe('favorites store', () => {
 
   it('isSystemFavorite returns true for system stations', () => {
     const store = useFavoritesStore()
-    expect(store.isSystemFavorite('system-radio-8150')).toBe(true)
+    expect(store.isSystemFavorite('962a748b-0601-11e8-ae97-52543be04c81')).toBe(true)
     expect(store.isSystemFavorite('user-1')).toBe(false)
   })
 
@@ -86,7 +86,7 @@ describe('favorites store', () => {
     const store = useFavoritesStore()
     store.toggleFavorite(makeStation('user-1'))
 
-    expect(store.allFavorites.length).toBe(4) // 3 system + 1 user
+    expect(store.allFavorites.length).toBe(3) // 2 system + 1 user
     expect(store.allFavorites[store.allFavorites.length - 1].id).toBe('user-1')
   })
 })

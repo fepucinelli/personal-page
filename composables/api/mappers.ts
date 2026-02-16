@@ -13,6 +13,15 @@ export function mapStation(s: RawStation): Station {
     codec: s.codec,
     popularity: s.clickcount,
     isPlayable: true,
+    homepage: s.homepage || null,
+    language: s.language || null,
+    votes: s.votes ?? 0,
+    clickTrend: s.clicktrend ?? 0,
+    isHls: s.hls === 1,
+    lastCheckOk: s.lastcheckok === 1,
+    geoLat: s.geo_lat ?? null,
+    geoLong: s.geo_long ?? null,
+    state: s.state || null,
   }
 }
 
