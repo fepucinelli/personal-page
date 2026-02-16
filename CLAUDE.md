@@ -12,7 +12,7 @@ Three-layer data flow: `radioFetch()` → Raw API types → Mappers → App type
 
 - **Types**: `types/radio.ts` — Station, Country, Genre + Raw* API interfaces
 - **API**: `composables/api/client.ts` (radioFetch), `composables/api/mappers.ts`
-- **Composables**: Data fetching (useStations, useCountries, useGenres), UI logic (useInfiniteScroll, useSeoPage, useStationActions, useToast)
+- **Composables**: Data fetching (useStations, useStation, useCountries, useGenres), UI logic (useInfiniteScroll, useSeoPage, useStationActions, useShareStation, useToast)
 - **Stores** (Pinia, Composition API): player.ts, favorites.ts, recentlyPlayed.ts, theme.ts
 
 ## Critical Patterns
@@ -25,9 +25,23 @@ Three-layer data flow: `radioFetch()` → Raw API types → Mappers → App type
 
 ## Component Design
 
-- StationCard is fully presentational (props + emits only, no logic)
+- StationCard is fully presentational (props + emits only, no logic); station name links to `/station/[id]`
 - Container components use `useStationActions()` to coordinate player + favorites stores
 - Pass `hideFavorite` flag when rendering system stations (can't be unfavorited)
+
+## Station Detail Pages
+
+- Route: `pages/station/[id].vue` — fetches station by UUID via `useStation(id)`
+- Related stations via `useRelatedStations(station)` — same tag + country, fallback to tag only
+- Share via `useShareStation()` — Web Share API with clipboard fallback + toast
+- Station pages are **not prerendered** (`/station/**` has `prerender: false` in nuxt.config.ts)
+- 404 handling uses `showError(createError(...))` (not `throw`) for client-side navigation
+
+## Navigation
+
+- "Listen" dropdown groups stations, countries, and genres in header nav
+- Dropdown uses click-outside handler and closes on route navigation
+- System favorites use real Radio Browser API UUIDs (not synthetic IDs) so detail pages work
 
 ## Styling
 
@@ -54,6 +68,17 @@ Three-layer data flow: `radioFetch()` → Raw API types → Mappers → App type
 - Page-level: inline error message + retry button
 - Player: auto-skip to random station on stream failure via onError callback
 
+## Accessibility
+
+- All interactive elements MUST have accessible names (`aria-label`, visible text, or `aria-labelledby`)
+- Dropdowns/popups MUST use `aria-haspopup`, `:aria-expanded`, and `aria-controls` linking to the panel's `id`
+- Menu panels MUST use `role="menu"` with `role="menuitem"` on each item
+- Toggle buttons MUST use `role="switch"` with `:aria-checked`
+- Images MUST have `alt` text (or `alt=""` for decorative images)
+- Touch targets MUST meet 44px minimum (use invisible padding technique)
+- Use semantic HTML elements (`<nav>`, `<main>`, `<header>`, `<button>`) over generic `<div>`/`<span>`
+- Links that open in a new tab MUST include `rel="noopener noreferrer"`
+
 ## Don'ts
 
 - Don't use Options API — this project uses Composition API exclusively
@@ -61,3 +86,4 @@ Three-layer data flow: `radioFetch()` → Raw API types → Mappers → App type
 - Don't add CSS-in-JS or scoped styles — use Tailwind utility classes
 - Don't create stores for ephemeral UI state — use composables (see useToast pattern)
 - Don't call store init() methods — stores self-initialize at creation time
+- Don't create interactive elements without proper ARIA attributes — see Accessibility section

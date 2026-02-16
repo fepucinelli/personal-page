@@ -11,6 +11,9 @@ Personal site and internet radio discovery app built by [Felipe Pucinelli](https
 - **About Page** — Personal bio with avatar, centered header with decorative lines
 - **Random Radio Discovery** — Start listening to a random station with one click, shuffle to discover new ones
 - **Auto-Skip on Failure** — Broken streams are detected automatically and the player skips to the next available station
+- **Station Detail Pages** — Dedicated page per station with full metadata, genre tags, play/save/share actions, and related stations
+- **Share Stations** — Share a station via native share sheet (mobile) or copy link to clipboard (desktop)
+- **Related Stations** — Discover similar stations based on genre and country on each station detail page
 - **Curated System Stations** — Handpicked stations pinned to favorites that can't be removed or unfavorited
 - **Now Playing Toast** — Toast notification appears when switching between stations
 - **Typewriter Hero** — Name and roles animate with a typing effect on the landing page, respects `prefers-reduced-motion`
@@ -28,7 +31,8 @@ Personal site and internet radio discovery app built by [Felipe Pucinelli](https
 - **Google Analytics 4** — GA4 tracking via `@nuxt/scripts`, deferred with idle timeout to protect Core Web Vitals
 - **Performance Optimized** — Non-blocking font loading, compositor-hinted animations, cache headers for static assets, CWV-safe analytics loading
 - **Mobile-Friendly Touch Targets** — Interactive buttons meet the 44px minimum tap target guideline
-- **Accessible** — All interactive elements have accessible names (aria-labels), semantic HTML
+- **Accessible** — ARIA attributes on all interactive elements (menus, toggles, buttons), semantic HTML, proper roles and states
+- **Listen Dropdown Nav** — Stations, countries, and genres grouped under an accessible dropdown menu
 
 ---
 
@@ -67,6 +71,7 @@ All external data flows through `radioFetch()` and gets mapped into typed interf
 ```
 composables/
   useStations.ts        # Station fetching with useAsyncData + direct fetch variant
+  useStation.ts         # Single station by UUID + related stations discovery
   useCountries.ts       # Country listing
   useGenres.ts          # Genre listing
   useRadioStats.ts      # Total station/country counts from API stats endpoint
@@ -74,6 +79,7 @@ composables/
   useToast.ts           # Singleton toast notification state and show()
   useSeoPage.ts         # Shared SEO setup (title suffix, og:url prefix)
   useStationActions.ts  # Unified play/favorite actions for components
+  useShareStation.ts    # Web Share API with clipboard fallback
   useTypewriter.ts      # Typewriter text animation with configurable speed and phases
 ```
 
@@ -125,7 +131,8 @@ components/
 │   ├── countries.vue          # Country listing
 │   ├── country/[code].vue     # Stations filtered by country
 │   ├── genres.vue             # Genre listing
-│   └── genre/[slug].vue       # Stations filtered by genre
+│   ├── genre/[slug].vue       # Stations filtered by genre
+│   └── station/[id].vue       # Station detail page (metadata, actions, related)
 ├── components/
 │   ├── station/StationCard.vue
 │   ├── player/PlayerBar.vue
@@ -138,6 +145,8 @@ components/
 │   │   ├── client.ts
 │   │   └── mappers.ts
 │   ├── useStations.ts
+│   ├── useStation.ts
+│   ├── useShareStation.ts
 │   ├── useCountries.ts
 │   ├── useGenres.ts
 │   ├── useRadioStats.ts
