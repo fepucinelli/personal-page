@@ -12,7 +12,7 @@
           <img
             src="/avatar.jpg"
             alt="Felipe Pucinelli"
-            class="w-28 h-28 rounded-full object-cover"
+            class="w-[168px] h-[168px] rounded-full object-cover"
           />
         </div>
       </div>
