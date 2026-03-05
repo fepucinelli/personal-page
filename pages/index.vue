@@ -72,7 +72,7 @@
       <div class="flex items-center gap-2 justify-center mb-6">
         <div class="h-px flex-1 max-w-[60px] bg-ink/10 dark:bg-white/10" />
         <span class="text-xs tracking-widest uppercase text-ink-muted dark:text-neutral-500 font-medium">
-          Now playing
+          Random Station
         </span>
         <div class="h-px flex-1 max-w-[60px] bg-ink/10 dark:bg-white/10" />
       </div>

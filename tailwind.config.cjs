@@ -10,31 +10,36 @@ module.exports = {
     extend: {
       colors: {
         brand: {
-          DEFAULT: '#c493ff',
-          dark: '#845ec2',
-          light: '#b39cd0',
-          subtle: '#fbeaff',
+          DEFAULT: '#00C9B4',
+          dark: '#009E8F',
+          light: '#4DDFCF',
+          subtle: 'rgba(0, 201, 180, 0.12)',
+        },
+        volt: {
+          DEFAULT: '#C8F53A',
+          dark: '#A0CC1E',
+          subtle: 'rgba(200, 245, 58, 0.1)',
         },
         surface: {
-          light: '#FAF7F2',
-          DEFAULT: '#F2EDE5',
-          dark: '#E8E0D4',
+          light: '#F0FAF9',
+          DEFAULT: '#E2F5F3',
+          dark: '#C4E8E4',
         },
         ink: {
-          DEFAULT: '#1A1714',
-          secondary: '#6B6560',
-          muted: '#9C958D',
+          DEFAULT: '#2D1B3D',
+          secondary: '#4A3558',
+          muted: '#7A6590',
         },
         night: {
-          DEFAULT: '#141210',
-          surface: '#1E1B18',
-          elevated: '#282420',
-          border: '#3A3530',
+          DEFAULT: '#071E2A',
+          surface: '#0B2D3E',
+          elevated: '#0D4A59',
+          border: '#1A3A47',
         },
       },
       fontFamily: {
-        display: ['"Instrument Serif"', 'Georgia', 'serif'],
-        body: ['Satoshi', 'system-ui', 'sans-serif'],
+        display: ['"Syne"', 'system-ui', 'sans-serif'],
+        body: ['"Chakra Petch"', 'system-ui', 'sans-serif'],
       },
       borderRadius: {
         '2xl': '1rem',

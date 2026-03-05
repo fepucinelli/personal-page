@@ -73,8 +73,8 @@
         :style="{
           background: `linear-gradient(
             to right,
-            #c493ff ${volumePercent}%,
-            rgba(58, 53, 48, 0.2) ${volumePercent}%
+            #00C9B4 ${volumePercent}%,
+            rgba(26, 58, 71, 0.4) ${volumePercent}%
           )`
         }"
       />
