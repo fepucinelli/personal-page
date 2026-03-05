@@ -12,7 +12,7 @@ useSeoPage({
       <img
         src="/avatar.jpg"
         alt="Felipe Pucinelli"
-        class="w-20 h-20 rounded-full object-cover mb-4"
+        class="w-[400px] h-[400px] rounded-full object-cover mb-4"
       />
       <div class="flex items-center gap-3 w-full">
         <div class="h-px flex-1 bg-ink/5 dark:bg-white/5" />
