@@ -153,6 +153,7 @@
   height: 10rem;
   border-radius: 100%;
   contain: layout style;
+  overflow: hidden;
 }
 
 .avatar-blob {
