@@ -159,13 +159,13 @@
   width: 2px;
   height: 1em;
   margin-left: 1px;
-  background: #00C9B4;
+  background: #C8F53A;
   vertical-align: text-bottom;
   animation: blink-cursor 1.06s step-end infinite;
 }
 
 .typewriter-cursor--gradient {
-  background: linear-gradient(180deg, #C8F53A, #00C9B4);
+  background: #C8F53A;
 }
 
 .typewriter-cursor--typing {

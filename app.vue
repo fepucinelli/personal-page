@@ -48,11 +48,15 @@ useHead({
 
 <template>
   <div
-    class="grain min-h-screen font-body
+    class="grain isolate min-h-screen font-body
            bg-surface-light text-ink
            dark:bg-night dark:text-neutral-100
            transition-colors duration-500"
   >
+    <ClientOnly>
+      <ParticleBackground />
+    </ClientOnly>
+
     <!-- Top loading bar -->
     <div
       v-if="loading"
