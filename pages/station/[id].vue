@@ -3,7 +3,7 @@
     <Loader v-if="pending" />
 
     <div v-else-if="error" class="text-center py-16">
-      <p class="text-ink-muted dark:text-neutral-500 text-sm">Failed to load station.</p>
+      <p class="text-ink-muted dark:text-neutral-400 text-sm">Failed to load station.</p>
       <button @click="refresh" class="mt-4 text-sm text-brand hover:text-brand-dark transition-colors">
         Try again
       </button>
@@ -14,7 +14,7 @@
       <NuxtLink
         to="/stations"
         class="inline-flex items-center gap-1 text-xs tracking-widest uppercase
-               text-ink-muted dark:text-neutral-500 hover:text-brand transition-colors mb-8"
+               text-ink-muted dark:text-neutral-400 hover:text-brand transition-colors mb-8"
       >
         &larr; All stations
       </NuxtLink>
@@ -36,14 +36,14 @@
             class="w-full h-full object-cover"
             @error="faviconError = true"
           />
-          <i v-else class="pi pi-headphones text-2xl text-ink-muted dark:text-neutral-500" />
+          <i v-else class="pi pi-headphones text-2xl text-ink-muted dark:text-neutral-400" />
         </div>
 
         <div class="min-w-0">
           <h1 class="font-display text-3xl italic text-ink dark:text-neutral-50 leading-tight">
             {{ station.name }}
           </h1>
-          <p class="mt-1 text-sm text-ink-muted dark:text-neutral-500">
+          <p class="mt-1 text-sm text-ink-muted dark:text-neutral-400">
             <NuxtLink
               v-if="station.countryCode"
               :to="`/country/${station.countryCode.toLowerCase()}`"
@@ -107,27 +107,27 @@
                border border-ink/5 dark:border-white/5 mb-8"
       >
         <div v-if="station.bitrate" class="p-4 bg-white dark:bg-night-elevated">
-          <div class="text-xs text-ink-muted dark:text-neutral-500 uppercase tracking-wide">Bitrate</div>
+          <div class="text-xs text-ink-muted dark:text-neutral-400 uppercase tracking-wide">Bitrate</div>
           <div class="mt-1 text-sm font-medium text-ink dark:text-neutral-100">{{ station.bitrate }} kbps</div>
         </div>
         <div v-if="station.codec" class="p-4 bg-white dark:bg-night-elevated">
-          <div class="text-xs text-ink-muted dark:text-neutral-500 uppercase tracking-wide">Codec</div>
+          <div class="text-xs text-ink-muted dark:text-neutral-400 uppercase tracking-wide">Codec</div>
           <div class="mt-1 text-sm font-medium text-ink dark:text-neutral-100">{{ station.codec }}</div>
         </div>
         <div v-if="station.votes" class="p-4 bg-white dark:bg-night-elevated">
-          <div class="text-xs text-ink-muted dark:text-neutral-500 uppercase tracking-wide">Votes</div>
+          <div class="text-xs text-ink-muted dark:text-neutral-400 uppercase tracking-wide">Votes</div>
           <div class="mt-1 text-sm font-medium text-ink dark:text-neutral-100">{{ station.votes.toLocaleString() }}</div>
         </div>
         <div v-if="station.popularity" class="p-4 bg-white dark:bg-night-elevated">
-          <div class="text-xs text-ink-muted dark:text-neutral-500 uppercase tracking-wide">Listeners</div>
+          <div class="text-xs text-ink-muted dark:text-neutral-400 uppercase tracking-wide">Listeners</div>
           <div class="mt-1 text-sm font-medium text-ink dark:text-neutral-100">{{ station.popularity.toLocaleString() }}</div>
         </div>
         <div v-if="station.language" class="p-4 bg-white dark:bg-night-elevated">
-          <div class="text-xs text-ink-muted dark:text-neutral-500 uppercase tracking-wide">Language</div>
+          <div class="text-xs text-ink-muted dark:text-neutral-400 uppercase tracking-wide">Language</div>
           <div class="mt-1 text-sm font-medium text-ink dark:text-neutral-100 capitalize">{{ station.language }}</div>
         </div>
         <div v-if="station.homepage" class="p-4 bg-white dark:bg-night-elevated">
-          <div class="text-xs text-ink-muted dark:text-neutral-500 uppercase tracking-wide">Website</div>
+          <div class="text-xs text-ink-muted dark:text-neutral-400 uppercase tracking-wide">Website</div>
           <a
             :href="station.homepage"
             target="_blank"
@@ -159,7 +159,7 @@
       <div v-if="relatedStations?.length" class="mt-12">
         <div class="flex items-center gap-4 mb-6">
           <div class="flex-1 h-px bg-ink/5 dark:bg-white/5" />
-          <h2 class="text-xs tracking-widest uppercase text-ink-muted dark:text-neutral-500">
+          <h2 class="text-xs tracking-widest uppercase text-ink-muted dark:text-neutral-400">
             Related Stations
           </h2>
           <div class="flex-1 h-px bg-ink/5 dark:bg-white/5" />
@@ -199,6 +199,26 @@ const shareStation = useShareStation()
 const faviconError = ref(false)
 
 const { data: relatedStations } = await useRelatedStations(station)
+
+useHead({
+  script: [{
+    type: 'application/ld+json',
+    innerHTML: computed(() => {
+      const s = station.value
+      if (!s) return '{}'
+      return JSON.stringify({
+        '@context': 'https://schema.org',
+        '@type': 'BroadcastService',
+        name: s.name,
+        url: `https://pucinelli.me/station/${id}`,
+        ...(s.homepage ? { sameAs: s.homepage } : {}),
+        ...(s.country ? { areaServed: { '@type': 'Country', name: s.country } } : {}),
+        ...(s.language ? { inLanguage: s.language } : {}),
+        ...(s.tags.length ? { genre: s.tags.slice(0, 5) } : {}),
+      })
+    }),
+  }],
+})
 
 useSeoPage({
   title: () => station.value?.name ?? 'Station',

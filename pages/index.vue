@@ -48,7 +48,7 @@
     <p
       aria-hidden="true"
       class="animate-fade-up delay-3 mt-3 text-sm tracking-widest uppercase
-             text-ink-muted dark:text-neutral-500 font-medium"
+             text-ink-muted dark:text-neutral-400 font-medium"
       style="min-height: 1.5em"
     >
       <template v-if="!typewriter.isReady">Senior Front-End Engineer &middot; Lead Developer &middot; DJ</template>
@@ -77,7 +77,7 @@
     <div class="animate-fade-up delay-6 mt-4 w-full max-w-lg">
       <div class="flex items-center gap-2 justify-center mb-6">
         <div class="h-px flex-1 max-w-[60px] bg-ink/10 dark:bg-white/10" />
-        <span class="text-xs tracking-widest uppercase text-ink-muted dark:text-neutral-500 font-medium">
+        <span class="text-xs tracking-widest uppercase text-ink-muted dark:text-neutral-400 font-medium">
           Random Station
         </span>
         <div class="h-px flex-1 max-w-[60px] bg-ink/10 dark:bg-white/10" />
@@ -87,7 +87,7 @@
       <p v-if="currentStation" class="font-display text-xl italic text-ink dark:text-neutral-200 mb-1">
         {{ currentStation.name }}
       </p>
-      <p v-if="currentStation" class="text-xs text-ink-muted dark:text-neutral-500 mb-8 tracking-wide uppercase">
+      <p v-if="currentStation" class="text-xs text-ink-muted dark:text-neutral-400 mb-8 tracking-wide uppercase">
         {{ currentStation.country }}
       </p>
 
@@ -209,7 +209,7 @@
     <div class="mt-10 flex flex-col items-center gap-2">
       <NuxtLink
         to="/stations"
-        class="text-xs tracking-widest uppercase text-ink-muted dark:text-neutral-500
+        class="text-xs tracking-widest uppercase text-ink-muted dark:text-neutral-400
                hover:text-brand transition-colors duration-300"
       >
         Browse all stations &rarr;
@@ -220,7 +220,7 @@
         class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full
                text-[11px] tracking-wide
                bg-brand/5 dark:bg-brand/10
-               text-ink-muted dark:text-neutral-500
+               text-ink-muted dark:text-neutral-400
                border border-brand/10"
       >
         <i class="pi pi-wifi text-brand text-[10px]"></i>
@@ -238,6 +238,7 @@ import type { Station } from '~/types/radio'
 
 useHead({
   title: 'Senior Front-End Engineer, Lead Developer & DJ',
+  link: [{ rel: 'canonical', href: 'https://pucinelli.me/' }],
   script: [
     {
       type: 'application/ld+json',

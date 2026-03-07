@@ -23,7 +23,7 @@
         aria-hidden="true"
         class="pi text-lg"
         :class="{
-          'pi-spin pi-spinner text-ink-muted dark:text-neutral-500': player.isLoading,
+          'pi-spin pi-spinner text-ink-muted dark:text-neutral-400': player.isLoading,
           'pi-pause': !player.isLoading && player.isPlaying,
           'pi-play': !player.isLoading && !player.isPlaying
         }"
@@ -38,7 +38,7 @@
       >
         {{ player.currentStation.name }}
       </div>
-      <div class="text-xs text-ink-muted dark:text-neutral-500 tracking-wide uppercase mt-0.5">
+      <div class="text-xs text-ink-muted dark:text-neutral-400 tracking-wide uppercase mt-0.5">
         {{ player.currentStation.country }}
       </div>
     </div>
@@ -62,7 +62,7 @@
 
     <!-- Volume -->
     <div class="hidden sm:flex items-center gap-3 flex-shrink-0">
-      <i class="pi pi-volume-down text-xs text-ink-muted dark:text-neutral-500" aria-hidden="true"></i>
+      <i class="pi pi-volume-down text-xs text-ink-muted dark:text-neutral-400" aria-hidden="true"></i>
       <input
         type="range"
         min="0"
@@ -80,7 +80,7 @@
           )`
         }"
       />
-      <i class="pi pi-volume-up text-xs text-ink-muted dark:text-neutral-500" aria-hidden="true"></i>
+      <i class="pi pi-volume-up text-xs text-ink-muted dark:text-neutral-400" aria-hidden="true"></i>
     </div>
   </div>
 </template>

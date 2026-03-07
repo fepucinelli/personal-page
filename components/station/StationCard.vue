@@ -25,7 +25,7 @@
       {{ station.name }}
     </NuxtLink>
 
-    <div class="mt-1 text-xs text-ink-muted dark:text-neutral-500 tracking-wide uppercase">
+    <div class="mt-1 text-xs text-ink-muted dark:text-neutral-400 tracking-wide uppercase">
       {{ station.country }}
     </div>
 
@@ -39,7 +39,7 @@
       >
         <template v-if="isPlaying">
           <i class="pi pi-pause-circle text-brand"></i>
-          <span class="text-brand">Playing</span>
+          <span>Playing</span>
         </template>
         <template v-else>
           <i class="pi pi-play-circle"></i>
@@ -59,7 +59,7 @@
           :class="
             isFavorite
               ? 'pi-bookmark-fill text-brand'
-              : 'pi-bookmark text-ink-muted dark:text-neutral-500 hover:text-brand'
+              : 'pi-bookmark text-ink-muted dark:text-neutral-400 hover:text-brand'
           "
         ></i>
       </button>

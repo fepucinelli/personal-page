@@ -4,7 +4,7 @@
       <h1 class="font-display text-3xl italic text-ink dark:text-neutral-50">
         All Stations
       </h1>
-      <p class="mt-2 text-sm text-ink-muted dark:text-neutral-500">
+      <p class="mt-2 text-sm text-ink-muted dark:text-neutral-400">
         Discover radio stations from around the world
       </p>
     </div>
@@ -12,7 +12,7 @@
     <Loader v-if="pending" />
 
     <div v-else-if="error" class="text-center py-16">
-      <p class="text-ink-muted dark:text-neutral-500 text-sm">Failed to load stations.</p>
+      <p class="text-ink-muted dark:text-neutral-400 text-sm">Failed to load stations.</p>
       <button @click="refresh" class="mt-4 text-sm text-brand hover:text-brand-dark transition-colors">
         Try again
       </button>
@@ -44,6 +44,10 @@ useSeoPage({
   title: 'All Stations',
   description: 'Discover radio stations from around the world. Browse and listen to a curated collection of internet radio.',
   path: '/stations',
+  breadcrumbs: [
+    { name: 'Home', url: '/' },
+    { name: 'All Stations', url: '/stations' },
+  ],
 })
 
 const LIMIT = 50

@@ -8,11 +8,11 @@
       target="_blank"
       rel="noopener noreferrer"
       class="p-3 rounded-full
-             text-ink-muted dark:text-neutral-500
+             text-ink-muted dark:text-neutral-400
              hover:text-brand hover:bg-brand/5
              transition-all duration-300"
     >
-      <i class="pi text-base" :class="item.icon"></i>
+      <i class="pi text-base" :class="item.icon" aria-hidden="true"></i>
     </a>
   </div>
 </template>

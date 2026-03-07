@@ -1,5 +1,15 @@
 <template>
   <div class="min-h-screen flex flex-col">
+    <!-- Skip link -->
+    <a
+      href="#main-content"
+      class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100]
+             focus:px-4 focus:py-2 focus:rounded-lg focus:outline-none
+             focus:bg-brand focus:text-white focus:text-sm focus:font-medium focus:shadow-lg"
+    >
+      Skip to main content
+    </a>
+
     <!-- Header -->
     <header
       class="fixed top-0 left-0 right-0 z-50
@@ -8,11 +18,16 @@
              bg-surface-light/80 dark:bg-night/80
              border-b border-ink/5 dark:border-white/5"
     >
-      <NuxtLink to="/" class="font-display text-xl italic text-ink dark:text-neutral-100 hover:text-brand transition-colors">
+      <NuxtLink
+        to="/"
+        :aria-current="route.path === '/' ? 'page' : undefined"
+        aria-label="Felipe Pucinelli, home"
+        class="font-display text-xl italic text-ink dark:text-neutral-100 hover:text-brand transition-colors"
+      >
         fp
       </NuxtLink>
 
-      <nav class="flex items-center gap-1">
+      <nav aria-label="Main" class="flex items-center gap-1">
         <div class="relative" ref="listenMenuRef">
           <button
             ref="listenTriggerRef"
@@ -53,6 +68,7 @@
                 :key="item.to"
                 :to="item.to"
                 role="menuitem"
+                :aria-current="route.path === item.to ? 'page' : undefined"
                 @click="listenOpen = false"
                 class="block px-4 py-2 text-sm text-ink-secondary dark:text-neutral-400
                        hover:text-ink dark:hover:text-neutral-100
@@ -67,6 +83,7 @@
 
         <NuxtLink
           to="/about"
+          :aria-current="route.path === '/about' ? 'page' : undefined"
           class="px-3 py-1.5 text-sm text-ink-secondary dark:text-neutral-400
                  hover:text-ink dark:hover:text-neutral-100
                  rounded-lg hover:bg-ink/5 dark:hover:bg-white/5
@@ -78,6 +95,7 @@
         <NuxtLink
           to="/favorites"
           aria-label="Favorites"
+          :aria-current="route.path === '/favorites' ? 'page' : undefined"
           class="ml-1 p-2 rounded-lg text-ink-secondary dark:text-neutral-400
                  hover:text-brand hover:bg-brand/5
                  transition-all duration-200"
@@ -101,7 +119,7 @@
     </header>
 
     <!-- Page -->
-    <main class="flex-1 pt-14 pb-24">
+    <main id="main-content" tabindex="-1" class="flex-1 pt-14 pb-24">
       <slot />
     </main>
 
@@ -118,6 +136,7 @@ import { useThemeStore } from '~/stores/theme'
 import { usePlayerStore } from '~/stores/player'
 import { useRecentlyPlayedStore } from '~/stores/recentlyPlayed'
 
+const route = useRoute()
 const theme = useThemeStore()
 const player = usePlayerStore()
 const recentlyPlayed = useRecentlyPlayedStore()

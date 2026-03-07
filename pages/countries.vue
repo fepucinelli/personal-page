@@ -4,7 +4,7 @@
       <h1 class="font-display text-3xl italic text-ink dark:text-neutral-50">
         Countries
       </h1>
-      <p class="mt-2 text-sm text-ink-muted dark:text-neutral-500">
+      <p class="mt-2 text-sm text-ink-muted dark:text-neutral-400">
         Explore radio stations by country
       </p>
     </div>
@@ -12,7 +12,7 @@
     <Loader v-if="pending" />
 
     <div v-else-if="error" class="text-center py-16">
-      <p class="text-ink-muted dark:text-neutral-500 text-sm">Failed to load countries.</p>
+      <p class="text-ink-muted dark:text-neutral-400 text-sm">Failed to load countries.</p>
       <button @click="refresh" class="mt-4 text-sm text-brand hover:text-brand-dark transition-colors">
         Try again
       </button>
@@ -33,7 +33,7 @@
           <span class="text-sm font-medium text-ink dark:text-neutral-200 group-hover:text-brand transition-colors">
             {{ c.name }}
           </span>
-          <span class="block mt-1 text-xs text-ink-muted dark:text-neutral-500">
+          <span class="block mt-1 text-xs text-ink-muted dark:text-neutral-400">
             {{ c.count }} stations
           </span>
         </NuxtLink>
@@ -49,6 +49,10 @@ useSeoPage({
   title: 'Countries',
   description: 'Explore radio stations by country. Find internet radio from every corner of the world.',
   path: '/countries',
+  breadcrumbs: [
+    { name: 'Home', url: '/' },
+    { name: 'Countries', url: '/countries' },
+  ],
 })
 
 const CHUNK = 40

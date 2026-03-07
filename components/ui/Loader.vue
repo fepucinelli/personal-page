@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-col items-center justify-center py-16 gap-4">
+  <div class="flex flex-col items-center justify-center py-16 gap-4" role="status" aria-label="Loading">
     <div class="relative w-10 h-10">
       <div
         class="absolute inset-0 rounded-full border-2
@@ -10,7 +10,7 @@
                border-t-brand animate-spin-slow"
       />
     </div>
-    <span class="text-xs tracking-widest uppercase text-ink-muted dark:text-neutral-500">
+    <span class="text-xs tracking-widest uppercase text-ink-muted dark:text-neutral-400">
       Loading
     </span>
   </div>

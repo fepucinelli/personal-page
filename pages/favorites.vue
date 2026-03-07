@@ -19,13 +19,13 @@ const favorites = useFavoritesStore()
       <h1 class="font-display text-3xl italic text-ink dark:text-neutral-50">
         Favorites
       </h1>
-      <p class="mt-2 text-sm text-ink-muted dark:text-neutral-500">
+      <p class="mt-2 text-sm text-ink-muted dark:text-neutral-400">
         Your saved radio stations
       </p>
     </div>
 
     <div v-if="favorites.allFavorites.length === 0" class="text-center py-16">
-      <p class="text-ink-muted dark:text-neutral-500 text-sm">
+      <p class="text-ink-muted dark:text-neutral-400 text-sm">
         No favorites yet. Start exploring and save stations you love.
       </p>
     </div>

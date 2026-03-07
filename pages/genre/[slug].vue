@@ -4,7 +4,7 @@
       <NuxtLink
         to="/genres"
         class="inline-flex items-center gap-1 text-xs tracking-widest uppercase
-               text-ink-muted dark:text-neutral-500 hover:text-brand transition-colors mb-4"
+               text-ink-muted dark:text-neutral-400 hover:text-brand transition-colors mb-4"
       >
         &larr; All genres
       </NuxtLink>
@@ -16,7 +16,7 @@
     <Loader v-if="pending" />
 
     <div v-else-if="error" class="text-center py-16">
-      <p class="text-ink-muted dark:text-neutral-500 text-sm">Failed to load stations.</p>
+      <p class="text-ink-muted dark:text-neutral-400 text-sm">Failed to load stations.</p>
       <button @click="refresh" class="mt-4 text-sm text-brand hover:text-brand-dark transition-colors">
         Try again
       </button>
@@ -42,6 +42,21 @@ const actions = useStationActions()
 const genreName = computed(() =>
   String(route.params.slug).replace(/\b\w/g, c => c.toUpperCase())
 )
+
+useHead({
+  script: [{
+    type: 'application/ld+json',
+    innerHTML: computed(() => JSON.stringify({
+      '@context': 'https://schema.org',
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://pucinelli.me/' },
+        { '@type': 'ListItem', position: 2, name: 'Genres', item: 'https://pucinelli.me/genres' },
+        { '@type': 'ListItem', position: 3, name: `${genreName.value} Radio Stations`, item: `https://pucinelli.me/genre/${route.params.slug}` },
+      ],
+    })),
+  }],
+})
 
 useSeoPage({
   title: () => `${genreName.value} Radio Stations`,

@@ -4,7 +4,7 @@
       <h1 class="font-display text-3xl italic text-ink dark:text-neutral-50">
         Genres
       </h1>
-      <p class="mt-2 text-sm text-ink-muted dark:text-neutral-500">
+      <p class="mt-2 text-sm text-ink-muted dark:text-neutral-400">
         Browse stations by music genre
       </p>
     </div>
@@ -12,7 +12,7 @@
     <Loader v-if="pending" />
 
     <div v-else-if="error" class="text-center py-16">
-      <p class="text-ink-muted dark:text-neutral-500 text-sm">Failed to load genres.</p>
+      <p class="text-ink-muted dark:text-neutral-400 text-sm">Failed to load genres.</p>
       <button @click="refresh" class="mt-4 text-sm text-brand hover:text-brand-dark transition-colors">
         Try again
       </button>
@@ -33,7 +33,7 @@
           <span class="text-sm font-medium text-ink dark:text-neutral-200 group-hover:text-brand transition-colors">
             {{ g.slug }}
           </span>
-          <span class="block mt-1 text-xs text-ink-muted dark:text-neutral-500">
+          <span class="block mt-1 text-xs text-ink-muted dark:text-neutral-400">
             {{ g.count }} stations
           </span>
         </NuxtLink>
@@ -49,6 +49,10 @@ useSeoPage({
   title: 'Genres',
   description: 'Browse radio stations by music genre. Find your favorite style of music from jazz to electronic, rock, pop, and more.',
   path: '/genres',
+  breadcrumbs: [
+    { name: 'Home', url: '/' },
+    { name: 'Genres', url: '/genres' },
+  ],
 })
 
 const CHUNK = 40

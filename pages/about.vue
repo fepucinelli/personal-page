@@ -1,8 +1,12 @@
 <script setup lang="ts">
 useSeoPage({
   title: 'About',
-  description: 'Senior Front-End Engineer and Technical Lead with 12+ years of experience building complex web products.',
+  description: 'Felipe Pucinelli — Senior Front-End Engineer and Technical Lead with 12+ years of experience building complex, high-performance web products. Lead Developer and DJ.',
   path: '/about',
+  breadcrumbs: [
+    { name: 'Home', url: '/' },
+    { name: 'About', url: '/about' },
+  ],
 })
 </script>
 

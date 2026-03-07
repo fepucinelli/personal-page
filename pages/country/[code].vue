@@ -4,7 +4,7 @@
       <NuxtLink
         to="/countries"
         class="inline-flex items-center gap-1 text-xs tracking-widest uppercase
-               text-ink-muted dark:text-neutral-500 hover:text-brand transition-colors mb-4"
+               text-ink-muted dark:text-neutral-400 hover:text-brand transition-colors mb-4"
       >
         &larr; All countries
       </NuxtLink>
@@ -16,7 +16,7 @@
     <Loader v-if="pending" />
 
     <div v-else-if="error" class="text-center py-16">
-      <p class="text-ink-muted dark:text-neutral-500 text-sm">Failed to load stations.</p>
+      <p class="text-ink-muted dark:text-neutral-400 text-sm">Failed to load stations.</p>
       <button @click="refresh" class="mt-4 text-sm text-brand hover:text-brand-dark transition-colors">
         Try again
       </button>
@@ -42,6 +42,21 @@ const actions = useStationActions()
 const { data: stations, pending, error, refresh } = await useStations({ country: String(route.params.code) })
 
 const countryName = computed(() => stations.value?.[0]?.country || String(route.params.code).toUpperCase())
+
+useHead({
+  script: [{
+    type: 'application/ld+json',
+    innerHTML: computed(() => JSON.stringify({
+      '@context': 'https://schema.org',
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://pucinelli.me/' },
+        { '@type': 'ListItem', position: 2, name: 'Countries', item: 'https://pucinelli.me/countries' },
+        { '@type': 'ListItem', position: 3, name: `${countryName.value} Radio Stations`, item: `https://pucinelli.me/country/${route.params.code}` },
+      ],
+    })),
+  }],
+})
 
 useSeoPage({
   title: () => `${countryName.value} Radio Stations`,
