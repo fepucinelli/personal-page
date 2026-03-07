@@ -21,6 +21,11 @@ export function useSeoPage(options: SeoPageOptions) {
     ogUrl: typeof options.path === 'function'
       ? () => `https://pucinelli.me${(options.path as () => string)()}`
       : `https://pucinelli.me${options.path}`,
+    twitterCard: 'summary_large_image',
+    twitterTitle: typeof options.title === 'function'
+      ? () => `${(options.title as () => string)()} | Felipe Pucinelli`
+      : `${options.title} | Felipe Pucinelli`,
+    twitterDescription: resolve(options.description),
     ...(options.robots ? { robots: options.robots } : {}),
   })
 }

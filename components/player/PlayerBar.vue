@@ -20,6 +20,7 @@
       }"
     >
       <i
+        aria-hidden="true"
         class="pi text-lg"
         :class="{
           'pi-spin pi-spinner text-ink-muted dark:text-neutral-500': player.isLoading,
@@ -61,12 +62,13 @@
 
     <!-- Volume -->
     <div class="hidden sm:flex items-center gap-3 flex-shrink-0">
-      <i class="pi pi-volume-down text-xs text-ink-muted dark:text-neutral-500"></i>
+      <i class="pi pi-volume-down text-xs text-ink-muted dark:text-neutral-500" aria-hidden="true"></i>
       <input
         type="range"
         min="0"
         max="1"
         step="0.01"
+        aria-label="Volume"
         class="range-slider w-24"
         :value="player.volume"
         @input="onVolume"
@@ -78,7 +80,7 @@
           )`
         }"
       />
-      <i class="pi pi-volume-up text-xs text-ink-muted dark:text-neutral-500"></i>
+      <i class="pi pi-volume-up text-xs text-ink-muted dark:text-neutral-500" aria-hidden="true"></i>
     </div>
   </div>
 </template>

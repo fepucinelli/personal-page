@@ -2,6 +2,9 @@
   <Transition name="toast">
     <div
       v-if="toast.visible.value"
+      role="status"
+      aria-live="polite"
+      aria-atomic="true"
       class="fixed bottom-20 left-0 right-0 z-[55] flex justify-center pointer-events-none"
     >
       <div
@@ -12,7 +15,7 @@
                shadow-lg shadow-brand/10
                text-sm text-ink dark:text-neutral-200"
       >
-        <i class="pi pi-volume-up text-brand text-xs"></i>
+        <i class="pi pi-volume-up text-brand text-xs" aria-hidden="true"></i>
         <span>{{ toast.message.value }}</span>
       </div>
     </div>

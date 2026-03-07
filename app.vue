@@ -18,6 +18,7 @@ useScriptGoogleAnalytics({
 // -----------------------------
 const loading = ref(false)
 const router = useRouter()
+const route = useRoute()
 
 router.beforeEach(() => {
   loading.value = true
@@ -54,15 +55,19 @@ useHead({
            transition-colors duration-500"
   >
     <ClientOnly>
-      <ParticleBackground />
+      <ParticleBackground v-if="route.path === '/'" />
     </ClientOnly>
 
     <!-- Top loading bar -->
     <div
       v-if="loading"
-      class="fixed top-0 left-0 right-0 h-0.5 z-[60]"
+      role="progressbar"
+      aria-label="Page loading"
+      aria-valuemin="0"
+      aria-valuemax="100"
+      class="fixed top-0 left-0 right-0 h-0.5 z-[60] overflow-hidden"
     >
-      <div class="h-full bg-brand animate-pulse rounded-r-full" style="width: 60%" />
+      <div class="h-full bg-brand rounded-full animate-loading-bar" />
     </div>
 
     <NuxtLayout>

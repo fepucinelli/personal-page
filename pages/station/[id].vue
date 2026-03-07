@@ -29,6 +29,10 @@
             v-if="station.favicon && !faviconError"
             :src="station.favicon"
             :alt="station.name"
+            width="80"
+            height="80"
+            loading="lazy"
+            decoding="async"
             class="w-full h-full object-cover"
             @error="faviconError = true"
           />

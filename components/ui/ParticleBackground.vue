@@ -9,8 +9,6 @@ const theme = useThemeStore()
 const canvasRef = ref<HTMLCanvasElement | null>(null)
 
 // --- Theme colors ---
-const DARK_BG = '#071E2A'
-const LIGHT_BG = '#F0FAF9'
 const DARK_PALETTE = ['#00C9B4', '#4DDFCF', '#009E8F', '#C8F53A', '#A0CC1E']
 const LIGHT_PALETTE = ['#009E8F', '#00C9B4', '#A0CC1E', '#4A3558', '#007A6E']
 
@@ -19,6 +17,7 @@ let canvas: HTMLCanvasElement
 let ctx: CanvasRenderingContext2D
 let rafId: number
 let frameCount = 0
+let resizeTimer: ReturnType<typeof setTimeout>
 let autoDrift = true
 let mouseX: number | null = null
 let mouseY: number | null = null
@@ -32,10 +31,6 @@ const ripples: Ripple[] = []
 
 function getPalette(): string[] {
   return isDark ? DARK_PALETTE : LIGHT_PALETTE
-}
-
-function getBg(): string {
-  return isDark ? DARK_BG : LIGHT_BG
 }
 
 function randomColor(): string {
@@ -199,12 +194,12 @@ function resizeCanvas() {
   createParticles()
 }
 
-// --- Draw ---
-
-function drawBackground() {
-  ctx.fillStyle = getBg()
-  ctx.fillRect(0, 0, canvas.width, canvas.height)
+function scheduleResize() {
+  clearTimeout(resizeTimer)
+  resizeTimer = setTimeout(resizeCanvas, 150)
 }
+
+// --- Draw ---
 
 function connectParticles() {
   const gridSize = 120
@@ -216,10 +211,14 @@ function connectParticles() {
     grid.get(key)!.push(p)
   }
 
+  // Batch connections per particle: one beginPath+stroke per particle instead
+  // of one per connection — reduces GPU state flushes from ~400 to ~80 per frame
   ctx.lineWidth = 1
   for (const p of particles) {
     const gx = Math.floor(p.x / gridSize)
     const gy = Math.floor(p.y / gridSize)
+    ctx.beginPath()
+    ctx.strokeStyle = hexAlpha(p.color, 0.07)
     for (let dx = -1; dx <= 1; dx++) {
       for (let dy = -1; dy <= 1; dy++) {
         const neighbors = grid.get(`${gx + dx},${gy + dy}`)
@@ -228,23 +227,19 @@ function connectParticles() {
           if (n === p) continue
           const diffX = n.x - p.x
           const diffY = n.y - p.y
-          const dist = diffX * diffX + diffY * diffY
-          if (dist < 10000) {
-            const opacity = (1 - Math.sqrt(dist) / 100) * 0.12
-            ctx.strokeStyle = hexAlpha(p.color, opacity)
-            ctx.beginPath()
+          if (diffX * diffX + diffY * diffY < 10000) {
             ctx.moveTo(p.x, p.y)
             ctx.lineTo(n.x, n.y)
-            ctx.stroke()
           }
         }
       }
     }
+    ctx.stroke()
   }
 }
 
 function animate() {
-  drawBackground()
+  ctx.clearRect(0, 0, canvas.width, canvas.height)
 
   for (let i = particles.length - 1; i >= 0; i--) {
     particles[i].update(); particles[i].draw()
@@ -335,6 +330,8 @@ watch(() => theme.theme, (newTheme) => {
 })
 
 onMounted(() => {
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
+
   canvas = canvasRef.value!
   ctx = canvas.getContext('2d')!
   resizeCanvas()
@@ -346,17 +343,19 @@ onMounted(() => {
   window.addEventListener('touchstart', onTouchStart, { passive: true })
   window.addEventListener('touchmove', onTouchMove, { passive: true })
   window.addEventListener('touchend', onTouchEnd)
-  window.addEventListener('resize', resizeCanvas)
+  window.addEventListener('resize', scheduleResize)
 })
 
 onUnmounted(() => {
+  if (!canvas) return
   cancelAnimationFrame(rafId)
+  clearTimeout(resizeTimer)
   window.removeEventListener('mousemove', onMouseMove)
   document.removeEventListener('mouseleave', onMouseLeave)
   window.removeEventListener('click', onClick)
   window.removeEventListener('touchstart', onTouchStart)
   window.removeEventListener('touchmove', onTouchMove)
   window.removeEventListener('touchend', onTouchEnd)
-  window.removeEventListener('resize', resizeCanvas)
+  window.removeEventListener('resize', scheduleResize)
 })
 </script>

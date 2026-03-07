@@ -3,17 +3,23 @@
     class="min-h-screen flex flex-col items-center justify-center
            text-center px-6 py-16"
   >
-    <!-- Avatar -->
-    <div class="animate-fade-up delay-1">
+    <!-- Avatar — no entrance animation so it renders immediately as LCP candidate -->
+    <div>
       <div class="avatar-blob-wrap" :class="{ 'is-playing': player.isPlaying }">
         <div class="avatar-blob blob1"></div>
         <div class="avatar-blob blob2"></div>
         <div class="avatar-blob-inner">
-          <img
-            src="/avatar.jpg"
-            alt="Felipe Pucinelli"
-            class="w-[168px] h-[168px] rounded-full object-cover"
-          />
+          <picture>
+            <source type="image/webp" srcset="/avatar-sm.webp 336w, /avatar.webp 490w" sizes="168px" />
+            <img
+              src="/avatar.jpg"
+              alt="Felipe Pucinelli"
+              width="168"
+              height="168"
+              fetchpriority="high"
+              class="w-[168px] h-[168px] rounded-full object-cover"
+            />
+          </picture>
         </div>
       </div>
     </div>

@@ -6,11 +6,9 @@
            transition-colors duration-500"
   >
     <div class="text-center px-6">
-      <p class="text-6xl font-display italic text-brand">
-        {{ error?.statusCode || 500 }}
-      </p>
-      <h1 class="mt-4 font-display text-2xl italic text-ink dark:text-neutral-50">
-        {{ error?.message || 'Something went wrong' }}
+      <h1 class="font-display italic">
+        <span class="block text-6xl text-brand">{{ error?.statusCode || 500 }}</span>
+        <span class="block mt-4 text-2xl text-ink dark:text-neutral-50">{{ error?.message || 'Something went wrong' }}</span>
       </h1>
       <p class="mt-2 text-sm text-ink-muted dark:text-neutral-500">
         The page you're looking for doesn't exist or an error occurred.

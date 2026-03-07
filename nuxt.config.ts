@@ -34,12 +34,10 @@ export default defineNuxtConfig({
         { rel: 'icon', type: 'image/png', sizes: '32x32', href: '/favicon-32x32.png' },
         { rel: 'icon', type: 'image/png', sizes: '16x16', href: '/favicon-16x16.png' },
         { rel: 'apple-touch-icon', sizes: '180x180', href: '/apple-touch-icon.png' },
-        { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
-        { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossorigin: '' },
-        { rel: 'preload', as: 'style', href: 'https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Chakra+Petch:ital,wght@0,400;0,600;0,700;1,400&display=swap', onload: "this.onload=null;this.rel='stylesheet'" },
-      ],
-      noscript: [
-        { innerHTML: '<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Chakra+Petch:ital,wght@0,400;0,600;0,700;1,400&display=swap">' },
+        { rel: 'preconnect', href: 'https://de1.api.radio-browser.info' },
+        { rel: 'preload', as: 'font', type: 'font/woff2', href: '/fonts/syne-latin.woff2', crossorigin: 'anonymous' } as any,
+        { rel: 'preload', as: 'font', type: 'font/woff2', href: '/fonts/chakra-petch-400-latin.woff2', crossorigin: 'anonymous' } as any,
+        { rel: 'preload', as: 'image', type: 'image/webp', href: '/avatar-sm.webp', fetchpriority: 'high' } as any,
       ],
       meta: [
         { name: 'description', content: 'Felipe Pucinelli — Senior Front-End Engineer, Lead Developer & DJ. Explore my curated collection of internet radio stations from around the world.' },

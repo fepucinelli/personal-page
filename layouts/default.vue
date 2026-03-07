@@ -15,8 +15,10 @@
       <nav class="flex items-center gap-1">
         <div class="relative" ref="listenMenuRef">
           <button
+            ref="listenTriggerRef"
             @click="listenOpen = !listenOpen"
-            aria-haspopup="true"
+            @keydown="onTriggerKeydown"
+            aria-haspopup="menu"
             :aria-expanded="listenOpen"
             aria-controls="listen-menu"
             class="px-3 py-1.5 text-sm text-ink-secondary dark:text-neutral-400
@@ -40,6 +42,7 @@
               v-if="listenOpen"
               id="listen-menu"
               role="menu"
+              @keydown="onMenuKeydown"
               class="absolute right-0 top-full mt-1 w-40 py-1
                      rounded-xl border border-ink/5 dark:border-white/5
                      bg-white dark:bg-night-elevated
@@ -122,15 +125,46 @@ const toast = useToast()
 
 const listenOpen = ref(false)
 const listenMenuRef = ref<HTMLElement | null>(null)
+const listenTriggerRef = ref<HTMLButtonElement | null>(null)
 const listenItems = [
   { to: '/stations', label: 'stations' },
   { to: '/countries', label: 'countries' },
   { to: '/genres', label: 'genres' },
 ]
 
+function getMenuItems(): HTMLElement[] {
+  return Array.from(listenMenuRef.value?.querySelectorAll('[role="menuitem"]') ?? []) as HTMLElement[]
+}
+
+function onTriggerKeydown(e: KeyboardEvent) {
+  if (e.key === 'Escape') {
+    listenOpen.value = false
+  } else if (e.key === 'ArrowDown') {
+    e.preventDefault()
+    listenOpen.value = true
+    nextTick(() => getMenuItems()[0]?.focus())
+  }
+}
+
+function onMenuKeydown(e: KeyboardEvent) {
+  const items = getMenuItems()
+  const idx = items.indexOf(document.activeElement as HTMLElement)
+  if (e.key === 'ArrowDown') {
+    e.preventDefault()
+    items[(idx + 1) % items.length]?.focus()
+  } else if (e.key === 'ArrowUp') {
+    e.preventDefault()
+    items[(idx - 1 + items.length) % items.length]?.focus()
+  } else if (e.key === 'Escape') {
+    listenOpen.value = false
+    listenTriggerRef.value?.focus()
+  }
+}
+
 function onClickOutside(e: Event) {
   if (listenMenuRef.value && !listenMenuRef.value.contains(e.target as Node)) {
     listenOpen.value = false
+    listenTriggerRef.value?.focus()
   }
 }
 

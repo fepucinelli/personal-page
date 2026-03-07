@@ -9,6 +9,7 @@
     <!-- Playing indicator -->
     <div
       v-if="isPlaying"
+      aria-hidden="true"
       class="absolute top-4 right-4 flex items-center gap-1"
     >
       <span class="w-1 h-3 bg-brand rounded-full animate-bounce" style="animation-delay: 0s" />
@@ -31,6 +32,7 @@
     <div class="flex items-center justify-between mt-4 pt-3 border-t border-ink/5 dark:border-white/5">
       <button
         @click="$emit('play', station)"
+        :aria-label="isPlaying ? 'Pause' : 'Play'"
         class="flex items-center gap-2 py-2 -my-2 -ml-2 pl-2 pr-4 text-xs font-medium tracking-wide uppercase
                text-ink-secondary dark:text-neutral-400
                hover:text-brand transition-colors duration-200"
