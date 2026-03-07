@@ -11,8 +11,12 @@ export function useShareStation() {
         if (e instanceof Error && e.name === 'AbortError') return
       }
     } else {
-      await navigator.clipboard.writeText(url)
-      toast.show('Link copied to clipboard')
+      try {
+        await navigator.clipboard.writeText(url)
+        toast.show('Link copied to clipboard')
+      } catch {
+        toast.show('Could not copy link')
+      }
     }
   }
 

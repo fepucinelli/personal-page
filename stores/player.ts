@@ -79,7 +79,7 @@ export const usePlayerStore = defineStore('player', () => {
   function toggle() {
     if (!audio) return
     if (audio.paused) {
-      audio.play()
+      audio.play().catch(() => {})
     } else {
       audio.pause()
     }

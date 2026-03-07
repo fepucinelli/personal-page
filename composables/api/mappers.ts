@@ -8,7 +8,7 @@ export function mapStation(s: RawStation): Station {
     favicon: s.favicon || null,
     country: s.country,
     countryCode: s.countrycode,
-    tags: s.tags ? s.tags.split(',') : [],
+    tags: s.tags ? s.tags.split(',').map(t => t.trim()).filter(Boolean) : [],
     bitrate: s.bitrate,
     codec: s.codec,
     popularity: s.clickcount,
