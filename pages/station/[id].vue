@@ -116,11 +116,11 @@
         </div>
         <div v-if="station.votes" class="p-4 bg-white dark:bg-night-elevated">
           <div class="text-xs text-ink-muted dark:text-neutral-400 uppercase tracking-wide">Votes</div>
-          <div class="mt-1 text-sm font-medium text-ink dark:text-neutral-100">{{ station.votes.toLocaleString() }}</div>
+          <div class="mt-1 text-sm font-medium text-ink dark:text-neutral-100">{{ station.votes.toLocaleString('en-US') }}</div>
         </div>
         <div v-if="station.popularity" class="p-4 bg-white dark:bg-night-elevated">
           <div class="text-xs text-ink-muted dark:text-neutral-400 uppercase tracking-wide">Listeners</div>
-          <div class="mt-1 text-sm font-medium text-ink dark:text-neutral-100">{{ station.popularity.toLocaleString() }}</div>
+          <div class="mt-1 text-sm font-medium text-ink dark:text-neutral-100">{{ station.popularity.toLocaleString('en-US') }}</div>
         </div>
         <div v-if="station.language" class="p-4 bg-white dark:bg-night-elevated">
           <div class="text-xs text-ink-muted dark:text-neutral-400 uppercase tracking-wide">Language</div>

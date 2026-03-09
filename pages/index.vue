@@ -109,7 +109,7 @@
         <button
           @click="playCurrent"
           class="px-6 py-2.5 rounded-full
-                 bg-brand text-white text-sm font-medium
+                 bg-brand text-ink text-sm font-medium
                  hover:bg-brand-dark
                  shadow-lg shadow-brand/20 hover:shadow-brand/30
                  transition-all duration-300"
@@ -224,7 +224,7 @@
                border border-brand/10"
       >
         <i class="pi pi-wifi text-brand text-[10px]"></i>
-        {{ stats.stations.toLocaleString() }} stations &middot; {{ stats.countries }} countries
+        {{ stats.stations.toLocaleString('en-US') }} stations &middot; {{ stats.countries }} countries
       </span>
     </div>
   </div>
