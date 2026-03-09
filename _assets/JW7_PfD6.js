@@ -1,1 +1,0 @@
-import{z as s,g as u,e as c}from"./CrAUGuAO.js";function f(o){const e=c(null);let n=null;function r(){n&&(n.disconnect(),n=null)}return s(e,t=>{r(),t&&(n=new IntersectionObserver(i=>{i[0]?.isIntersecting&&o()},{rootMargin:"200px"}),n.observe(t))}),u(r),{sentinelRef:e}}export{f as u};
