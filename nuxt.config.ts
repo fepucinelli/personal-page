@@ -1,6 +1,19 @@
 export default defineNuxtConfig({
   css: ['~/assets/css/main.css'],
   modules: ['@pinia/nuxt', '@nuxt/scripts'],
+  vite: {
+    plugins: [
+      {
+        name: 'primeicons-font-display',
+        enforce: 'pre' as const,
+        transform(code: string, id: string) {
+          if (id.includes('primeicons.css')) {
+            return { code: code.replace('font-display: block', 'font-display: swap'), map: null }
+          }
+        },
+      },
+    ],
+  },
   components: {
     dirs: [
       { path: '~/components', pathPrefix: false },
@@ -16,6 +29,16 @@ export default defineNuxtConfig({
     routeRules: {
       '/_assets/**': { headers: { 'cache-control': 'public, max-age=31536000, immutable' } },
       '/station/**': { prerender: false },
+    },
+    hooks: {
+      'prerender:generate'(route: { contents?: string }) {
+        if (route.contents) {
+          route.contents = route.contents.replace(
+            'font-display:block;font-family:primeicons',
+            'font-display:swap;font-family:primeicons',
+          )
+        }
+      },
     },
   },
   app: {
