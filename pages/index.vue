@@ -40,7 +40,7 @@
     <p
       aria-hidden="true"
       class="animate-fade-up delay-3 mt-3 text-sm tracking-widest uppercase
-             text-ink-muted dark:text-neutral-400 font-medium overflow-hidden whitespace-nowrap px-1"
+             text-ink-muted dark:text-brand/70 font-mono overflow-hidden whitespace-nowrap px-1"
       :class="{ 'opacity-0': !scramble.roleVisible }"
       style="min-height: 1.5em"
     >{{ scramble.roleText }}</p>
@@ -93,8 +93,8 @@
         <button
           @click="playCurrent"
           class="px-6 py-2.5 rounded-full
-                 bg-brand text-ink text-sm font-medium
-                 hover:bg-brand-dark
+                 bg-brand dark:bg-[#146E28] text-white text-sm font-medium
+                 hover:bg-brand-dark dark:hover:bg-[#0F5A1A]
                  shadow-lg shadow-brand/20 hover:shadow-brand/30
                  transition-all duration-300"
         >

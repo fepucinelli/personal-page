@@ -4,8 +4,8 @@
     <a
       href="#main-content"
       class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100]
-             focus:px-4 focus:py-2 focus:rounded-lg focus:outline-none
-             focus:bg-brand focus:text-white focus:text-sm focus:font-medium focus:shadow-lg"
+             focus:px-4 focus:py-2 focus:rounded focus:outline-none
+             focus:bg-brand focus:text-night focus:text-sm focus:font-mono focus:shadow-lg"
     >
       Skip to main content
     </a>
@@ -15,19 +15,22 @@
       class="fixed top-0 left-0 right-0 z-50
              h-14 px-6 flex items-center justify-between
              backdrop-blur-xl
-             bg-surface-light/80 dark:bg-night/80
-             border-b border-ink/5 dark:border-white/5"
+             bg-surface-light/90 dark:bg-night/90
+             border-b border-ink/8 dark:border-brand/15"
     >
+      <!-- Logo -->
       <NuxtLink
         to="/"
         :aria-current="route.path === '/' ? 'page' : undefined"
         aria-label="Felipe Pucinelli, home"
-        class="font-display text-xl italic text-ink dark:text-neutral-100 hover:text-brand transition-colors"
+        class="flex items-baseline gap-1 group"
       >
-        fp
+        <span class="font-mono text-xs text-brand group-hover:text-brand transition-colors select-none">~/</span>
+        <span class="font-display text-xl italic text-ink dark:text-neutral-100 group-hover:text-brand dark:group-hover:text-brand transition-colors">fp</span>
       </NuxtLink>
 
       <nav aria-label="Main" class="flex items-center gap-1">
+        <!-- Listen dropdown -->
         <div class="relative" ref="listenMenuRef">
           <button
             ref="listenTriggerRef"
@@ -36,12 +39,13 @@
             aria-haspopup="menu"
             :aria-expanded="listenOpen"
             aria-controls="listen-menu"
-            class="px-3 py-1.5 text-sm text-ink-secondary dark:text-neutral-400
-                   hover:text-ink dark:hover:text-neutral-100
-                   rounded-lg hover:bg-ink/5 dark:hover:bg-white/5
-                   transition-all duration-200 flex items-center gap-1"
+            :class="isListenActive
+              ? 'bg-brand/10 dark:bg-brand/15 text-brand border-brand/25 dark:border-brand/30'
+              : 'text-ink-secondary dark:text-neutral-400 hover:text-brand dark:hover:text-brand border-transparent hover:bg-brand/5 dark:hover:bg-brand/5'"
+            class="px-3 py-1.5 text-sm font-mono border rounded
+                   transition-all duration-200 flex items-center gap-1.5"
           >
-            listen
+            ./listen
             <i class="pi pi-chevron-down text-[10px] transition-transform duration-200" :class="{ 'rotate-180': listenOpen }" />
           </button>
 
@@ -58,10 +62,10 @@
               id="listen-menu"
               role="menu"
               @keydown="onMenuKeydown"
-              class="absolute right-0 top-full mt-1 w-40 py-1
-                     rounded-xl border border-ink/5 dark:border-white/5
+              class="absolute right-0 top-full mt-1 w-44 py-1
+                     rounded border border-ink/8 dark:border-brand/15
                      bg-white dark:bg-night-elevated
-                     shadow-lg shadow-ink/5 dark:shadow-black/20"
+                     shadow-lg shadow-ink/5 dark:shadow-black/40"
             >
               <NuxtLink
                 v-for="item in listenItems"
@@ -70,39 +74,43 @@
                 role="menuitem"
                 :aria-current="route.path === item.to ? 'page' : undefined"
                 @click="listenOpen = false"
-                class="block px-4 py-2 text-sm text-ink-secondary dark:text-neutral-400
-                       hover:text-ink dark:hover:text-neutral-100
-                       hover:bg-ink/5 dark:hover:bg-white/5
-                       transition-colors duration-150"
+                :class="route.path === item.to
+                  ? 'text-brand bg-brand/8 dark:bg-brand/10'
+                  : 'text-ink-secondary dark:text-neutral-400 hover:text-brand dark:hover:text-brand hover:bg-brand/5 dark:hover:bg-brand/5'"
+                class="block px-4 py-2 text-sm font-mono transition-colors duration-150"
               >
-                {{ item.label }}
+                ./{{ item.label }}
               </NuxtLink>
             </div>
           </Transition>
         </div>
 
+        <!-- About -->
         <NuxtLink
           to="/about"
           :aria-current="route.path === '/about' ? 'page' : undefined"
-          class="px-3 py-1.5 text-sm text-ink-secondary dark:text-neutral-400
-                 hover:text-ink dark:hover:text-neutral-100
-                 rounded-lg hover:bg-ink/5 dark:hover:bg-white/5
-                 transition-all duration-200"
+          :class="route.path === '/about'
+            ? 'bg-brand/10 dark:bg-brand/15 text-brand border-brand/25 dark:border-brand/30'
+            : 'text-ink-secondary dark:text-neutral-400 hover:text-brand dark:hover:text-brand border-transparent hover:bg-brand/5 dark:hover:bg-brand/5'"
+          class="px-3 py-1.5 text-sm font-mono border rounded transition-all duration-200"
         >
-          about
+          ./about
         </NuxtLink>
 
+        <!-- Favorites -->
         <NuxtLink
           to="/favorites"
           aria-label="Favorites"
           :aria-current="route.path === '/favorites' ? 'page' : undefined"
-          class="ml-1 p-2 rounded-lg text-ink-secondary dark:text-neutral-400
-                 hover:text-brand hover:bg-brand/5
-                 transition-all duration-200"
+          :class="route.path === '/favorites'
+            ? 'text-brand bg-brand/10 dark:bg-brand/15 border-brand/25 dark:border-brand/30'
+            : 'text-ink-secondary dark:text-neutral-400 hover:text-brand border-transparent hover:bg-brand/5 dark:hover:bg-brand/5'"
+          class="ml-1 p-2 rounded border transition-all duration-200"
         >
-          <i class="pi pi-bookmark-fill text-sm"></i>
+          <i class="pi pi-bookmark-fill text-sm" aria-hidden="true"></i>
         </NuxtLink>
 
+        <!-- Theme toggle -->
         <button
           @click="theme.toggle()"
           role="switch"
@@ -150,6 +158,10 @@ const listenItems = [
   { to: '/countries', label: 'countries' },
   { to: '/genres', label: 'genres' },
 ]
+
+const isListenActive = computed(() =>
+  listenItems.some(item => route.path === item.to),
+)
 
 function getMenuItems(): HTMLElement[] {
   return Array.from(listenMenuRef.value?.querySelectorAll('[role="menuitem"]') ?? []) as HTMLElement[]

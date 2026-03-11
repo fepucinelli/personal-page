@@ -24,7 +24,7 @@
           v-for="c in visibleCountries"
           :key="c.code"
           :to="`/country/${c.code}`"
-          class="group p-4 rounded-2xl
+          class="group p-4 rounded
                  bg-white dark:bg-night-elevated
                  border border-ink/5 dark:border-white/5
                  hover:border-brand/20 dark:hover:border-brand/20

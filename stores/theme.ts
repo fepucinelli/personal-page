@@ -3,13 +3,12 @@ import { defineStore, skipHydrate } from 'pinia'
 type Theme = 'light' | 'dark'
 
 function getInitialTheme(): Theme {
-  if (!import.meta.client) return 'light'
+  if (!import.meta.client) return 'dark'
 
   const saved = localStorage.getItem('theme') as Theme | null
   if (saved) return saved
 
-  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches
-  return prefersDark ? 'dark' : 'light'
+  return 'dark'
 }
 
 function applyTheme(theme: Theme) {

@@ -22,7 +22,7 @@
       <!-- Hero -->
       <div class="flex items-start gap-5 mb-6">
         <div
-          class="w-20 h-20 rounded-2xl overflow-hidden flex-shrink-0
+          class="w-20 h-20 rounded overflow-hidden flex-shrink-0
                  bg-surface dark:bg-night-surface flex items-center justify-center"
         >
           <img
@@ -103,7 +103,7 @@
       <!-- Metadata grid -->
       <div
         v-if="station.bitrate || station.codec || station.votes || station.popularity || station.language || station.homepage"
-        class="grid grid-cols-2 sm:grid-cols-3 gap-px rounded-2xl overflow-hidden
+        class="grid grid-cols-2 sm:grid-cols-3 gap-px rounded overflow-hidden
                border border-ink/5 dark:border-white/5 mb-8"
       >
         <div v-if="station.bitrate" class="p-4 bg-white dark:bg-night-elevated">

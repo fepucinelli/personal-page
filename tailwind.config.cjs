@@ -10,10 +10,10 @@ module.exports = {
     extend: {
       colors: {
         brand: {
-          DEFAULT: '#00C9B4',
-          dark: '#009E8F',
-          light: '#4DDFCF',
-          subtle: 'rgba(0, 201, 180, 0.12)',
+          DEFAULT: 'rgb(var(--brand) / <alpha-value>)',
+          dark: 'rgb(var(--brand-dark) / <alpha-value>)',
+          light: '#66FF88',
+          subtle: 'rgba(0, 255, 65, 0.1)',
         },
         volt: {
           DEFAULT: '#C8F53A',
@@ -21,20 +21,20 @@ module.exports = {
           subtle: 'rgba(200, 245, 58, 0.1)',
         },
         surface: {
-          light: '#F0FAF9',
-          DEFAULT: '#E2F5F3',
-          dark: '#C4E8E4',
+          light: '#FFFFFF',
+          DEFAULT: '#F5F5F5',
+          dark: '#E5E5E5',
         },
         ink: {
-          DEFAULT: '#2D1B3D',
-          secondary: '#4A3558',
-          muted: '#7A6590',
+          DEFAULT: '#111111',
+          secondary: '#444444',
+          muted: '#777777',
         },
         night: {
-          DEFAULT: '#071E2A',
-          surface: '#0B2D3E',
-          elevated: '#0D4A59',
-          border: '#1A3A47',
+          DEFAULT: '#050805',
+          surface: '#080C08',
+          elevated: '#0D160D',
+          border: '#1A2A1A',
         },
       },
       fontFamily: {

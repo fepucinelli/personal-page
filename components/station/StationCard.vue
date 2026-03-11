@@ -1,6 +1,6 @@
 <template>
   <div
-    class="group relative p-5 rounded-2xl transition-all duration-300
+    class="group relative p-5 rounded transition-all duration-300
            bg-white dark:bg-night-elevated
            border border-ink/5 dark:border-white/5
            hover:border-brand/20 dark:hover:border-brand/20

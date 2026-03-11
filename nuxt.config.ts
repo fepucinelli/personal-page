@@ -49,7 +49,7 @@ export default defineNuxtConfig({
       titleTemplate: '%s | Felipe Pucinelli',
       script: [
         {
-          innerHTML: "(function(){try{var t=localStorage.getItem('theme');if(t==='dark'||(!t&&window.matchMedia('(prefers-color-scheme:dark)').matches)){document.documentElement.classList.add('dark')}}catch(e){}})()",
+          innerHTML: "(function(){try{var t=localStorage.getItem('theme');if(t==='light'){document.documentElement.classList.remove('dark')}else{document.documentElement.classList.add('dark')}}catch(e){document.documentElement.classList.add('dark')}})()",
           tagPosition: 'head',
         },
       ],
@@ -65,7 +65,7 @@ export default defineNuxtConfig({
       meta: [
         { name: 'description', content: 'Felipe Pucinelli — Senior Front-End Engineer, Lead Developer & DJ. Explore my curated collection of internet radio stations from around the world.' },
         { name: 'author', content: 'Felipe Pucinelli' },
-        { name: 'theme-color', content: '#2D1B3D' },
+        { name: 'theme-color', content: '#050805' },
         { name: 'referrer', content: 'strict-origin-when-cross-origin' },
         { name: 'format-detection', content: 'telephone=no' },
         { property: 'og:site_name', content: 'Felipe Pucinelli' },
