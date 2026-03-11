@@ -284,16 +284,17 @@ const { data: stats } = await useRadioStats()
 // Current station
 const currentStation = ref<Station | null>(null)
 
-// Pick random station
+// Pick random station from curated list
 const pickRandomStation = () => {
-  if (!stations.value?.length) return
-  const index = Math.floor(Math.random() * stations.value.length)
-  currentStation.value = stations.value[index]
+  const pool = favorites.systemFavorites
+  if (!pool.length) return
+  const index = Math.floor(Math.random() * pool.length)
+  currentStation.value = pool[index]
 }
 
 // Pick on client only to avoid SSR/client mismatch (Math.random differs)
 onMounted(() => {
-  if (!currentStation.value && stations.value?.length) {
+  if (!currentStation.value) {
     pickRandomStation()
   }
 })

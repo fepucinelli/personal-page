@@ -88,7 +88,6 @@
 <script setup lang="ts">
 import { usePlayerStore } from '~/stores/player'
 import { useFavoritesStore } from '~/stores/favorites'
-import { fetchStations } from '~/composables/useStations'
 
 const player = usePlayerStore()
 const favorites = useFavoritesStore()
@@ -104,7 +103,7 @@ const onVolume = (e: Event) => {
 
 const volumePercent = computed(() => player.volume * 100)
 
-// Auto-skip to a random station when the current one fails
+// Auto-skip to a random curated station when the current one fails
 let skipping = false
 
 player.onError(async () => {
@@ -112,10 +111,10 @@ player.onError(async () => {
   skipping = true
 
   try {
-    const randomOffset = Math.floor(Math.random() * 500)
-    const stations = await fetchStations({ offset: randomOffset, limit: 10 })
-    const next = stations.find(s => s.id !== player.currentStation?.id)
-    if (next) await player.play(next)
+    const pool = favorites.systemFavorites.filter(s => s.id !== player.currentStation?.id)
+    if (!pool.length) return
+    const next = pool[Math.floor(Math.random() * pool.length)]
+    await player.play(next)
   } finally {
     skipping = false
   }
