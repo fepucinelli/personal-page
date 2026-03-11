@@ -31,35 +31,19 @@
     <h1
       aria-hidden="true"
       class="animate-fade-up delay-2 mt-8 font-display text-4xl md:text-5xl italic
-             text-ink dark:text-neutral-50 tracking-tight"
+             text-ink dark:text-neutral-50 tracking-tight overflow-hidden whitespace-nowrap px-1"
+      :class="{ 'opacity-0': !scramble.nameVisible }"
       style="min-height: 1.2em"
-    >
-      <template v-if="!typewriter.isReady">Felipe Pucinelli</template>
-      <template v-else>
-        {{ typewriter.nameText }}<span
-          v-show="typewriter.cursorOnName"
-          class="typewriter-cursor"
-          :class="{ 'typewriter-cursor--typing': typewriter.phase === 'typing-name' }"
-        ></span>
-      </template>
-    </h1>
+    >{{ scramble.nameText }}</h1>
 
     <!-- Role -->
     <p
       aria-hidden="true"
       class="animate-fade-up delay-3 mt-3 text-sm tracking-widest uppercase
-             text-ink-muted dark:text-neutral-400 font-medium"
+             text-ink-muted dark:text-neutral-400 font-medium overflow-hidden whitespace-nowrap px-1"
+      :class="{ 'opacity-0': !scramble.roleVisible }"
       style="min-height: 1.5em"
-    >
-      <template v-if="!typewriter.isReady">Senior Front-End Engineer &middot; Lead Developer &middot; DJ</template>
-      <template v-else>
-        {{ typewriter.roleText }}<span
-          v-show="typewriter.cursorOnRole"
-          class="typewriter-cursor typewriter-cursor--gradient"
-          :class="{ 'typewriter-cursor--typing': typewriter.phase === 'typing-role' || typewriter.phase === 'deleting-role' }"
-        ></span>
-      </template>
-    </p>
+    >{{ scramble.roleText }}</p>
 
     <!-- Bio -->
     <p class="animate-fade-up delay-4 mt-6 max-w-md text-sm leading-relaxed
@@ -272,9 +256,9 @@ const player = usePlayerStore()
 const recentlyPlayed = useRecentlyPlayedStore()
 const actions = useStationActions()
 
-const typewriter = useTypewriter({
+const scramble = useScramble({
   name: 'Felipe Pucinelli',
-  roles: ['Senior Front-End Engineer', 'Lead Developer', 'DJ'],
+  roles: ['Senior Front-End Engineer', 'Lead Engineer', 'Web Performance Enthusiast', 'Eletronic Music DJ'],
 })
 
 // Fetch stations & stats
@@ -284,9 +268,9 @@ const { data: stats } = await useRadioStats()
 // Current station
 const currentStation = ref<Station | null>(null)
 
-// Pick random station from curated list
+// Pick random station from curated list, avoiding the current one
 const pickRandomStation = () => {
-  const pool = favorites.systemFavorites
+  const pool = favorites.systemFavorites.filter(s => s.id !== currentStation.value?.id)
   if (!pool.length) return
   const index = Math.floor(Math.random() * pool.length)
   currentStation.value = pool[index]
