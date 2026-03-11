@@ -1,0 +1,1 @@
+import{X as t,e as o}from"./C-vissj2.js";const a=o(""),e=o(!1);let s=null;function r(){function u(l,i=3e3){s&&clearTimeout(s),a.value=l,e.value=!0,s=setTimeout(()=>{e.value=!1},i)}return{message:t(a),visible:t(e),show:u}}export{r as u};
