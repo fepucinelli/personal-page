@@ -1,0 +1,1 @@
+import{x as s,f as u,h as c}from"./Cei4KBuo.js";function l(o){const e=c(null);let n=null;function r(){n&&(n.disconnect(),n=null)}return s(e,t=>{r(),t&&(n=new IntersectionObserver(i=>{i[0]?.isIntersecting&&o()},{rootMargin:"200px"}),n.observe(t))}),u(r),{sentinelRef:e}}export{l as u};
