@@ -394,7 +394,6 @@
   top: 50%;
   transform: translate(-50%, -50%);
   z-index: 10;
-  box-shadow: 0 0 14px 4px rgba(0, 255, 65, 0.2);
 }
 
 /* ---------- Toast transitions ---------- */

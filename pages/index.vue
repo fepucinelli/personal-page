@@ -1,7 +1,7 @@
 <template>
   <div
     class="min-h-screen flex flex-col items-center justify-center
-           text-center px-6 py-16"
+           text-center px-6 py-16 overflow-x-hidden"
   >
     <!-- Avatar — no entrance animation so it renders immediately as LCP candidate -->
     <div>
