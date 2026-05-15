@@ -11,8 +11,8 @@ const MOUSE_RADIUS = 200
 
 // Dark mode: bright terminal green at low opacity
 // Light mode: dark green at higher opacity so it's visible on white
-const RGB_DARK = '0,255,65'
-const RGB_LIGHT = '0,100,40'
+const RGB_DARK = '170,255,46'
+const RGB_LIGHT = '63,102,0'
 
 interface Column {
   baseX: number

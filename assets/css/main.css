@@ -92,17 +92,17 @@
 
 /* ---------- CSS Variables ---------- */
 :root {
-  /* Light mode: dark accessible green (contrast ~7:1 on white) */
-  --brand: 20 110 40;
-  --brand-dark: 10 80 25;
-  --color-brand: #146E28;
+  /* Light mode: dark acid lime (contrast ~7:1 on white) */
+  --brand: 63 102 0;
+  --brand-dark: 45 74 0;
+  --color-brand: #3F6600;
 }
 
 .dark {
-  /* Dark mode: neon terminal green */
-  --brand: 0 255 65;
-  --brand-dark: 0 204 51;
-  --color-brand: #00FF41;
+  /* Dark mode: acid lime */
+  --brand: 170 255 46;
+  --brand-dark: 136 204 36;
+  --color-brand: #AAFF2E;
 }
 
 /* ---------- Base ---------- */
@@ -145,22 +145,22 @@
   appearance: none;
   width: 14px;
   height: 14px;
-  background: #00FF41;
+  background: #AAFF2E;
   border-radius: 50%;
   cursor: pointer;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
-  box-shadow: 0 0 0 3px rgba(0, 255, 65, 0.2);
+  box-shadow: 0 0 0 3px rgba(170, 255, 46, 0.2);
 }
 
 .range-slider::-webkit-slider-thumb:hover {
   transform: scale(1.2);
-  box-shadow: 0 0 0 5px rgba(0, 255, 65, 0.3);
+  box-shadow: 0 0 0 5px rgba(170, 255, 46, 0.3);
 }
 
 .range-slider::-moz-range-thumb {
   width: 14px;
   height: 14px;
-  background: #00FF41;
+  background: #AAFF2E;
   border-radius: 50%;
   border: none;
   cursor: pointer;
@@ -180,10 +180,10 @@
 
 @keyframes pulse-glow {
   0%, 100% {
-    box-shadow: 0 0 0 0 rgba(0, 255, 65, 0.4);
+    box-shadow: 0 0 0 0 rgba(170, 255, 46, 0.4);
   }
   50% {
-    box-shadow: 0 0 24px 6px rgba(0, 255, 65, 0.18);
+    box-shadow: 0 0 24px 6px rgba(170, 255, 46, 0.18);
   }
 }
 
@@ -245,34 +245,34 @@
 }
 
 .avatar-blob.blob1 {
-  background: #00FF41;
+  background: #AAFF2E;
   animation: blob-rotate 4s linear infinite, blob-morph 6s linear infinite;
 }
 
 .avatar-blob.blob1::before {
   left: 0;
-  background: rgba(0, 255, 65, 0.7);
+  background: rgba(170, 255, 46, 0.7);
   animation: blob-morph 6s 0.5s linear infinite;
 }
 
 .avatar-blob.blob1::after {
-  background: #00CC33;
+  background: #88CC24;
   animation: blob-morph 6s 1s linear infinite;
 }
 
 .avatar-blob.blob2 {
-  background: #00CC33;
+  background: #88CC24;
   animation: blob-rotate 3.5s linear infinite, blob-morph 5.5s linear infinite;
 }
 
 .avatar-blob.blob2::before {
   left: 0;
-  background: #66FF88;
+  background: #CCFF88;
   animation: blob-morph 5.5s 0.5s linear infinite;
 }
 
 .avatar-blob.blob2::after {
-  background: #009922;
+  background: #669900;
   animation: blob-morph 5.5s 1s linear infinite;
 }
 
@@ -307,13 +307,13 @@
   transform: translate(-50%, -50%);
   width: 69%;
   height: 69%;
-  background: rgba(0, 255, 65, 0);
+  background: rgba(170, 255, 46, 0);
   border-radius: 100%;
   transition: background 0.8s ease;
 }
 
 .avatar-blob-wrap.is-playing .avatar-blob-inner {
-  background: rgba(0, 255, 65, 0.2);
+  background: rgba(170, 255, 46, 0.2);
 }
 
 .avatar-blob-inner::before,
@@ -323,7 +323,7 @@
   top: -1%;
   width: 105%;
   height: 105%;
-  background: rgba(0, 255, 65, 0);
+  background: rgba(170, 255, 46, 0);
   border-radius: 100%;
   content: "";
   transition: background 0.8s ease;
@@ -332,7 +332,7 @@
 
 .avatar-blob-wrap.is-playing .avatar-blob-inner::before,
 .avatar-blob-wrap.is-playing .avatar-blob-inner::after {
-  background: rgba(0, 255, 65, 0.3);
+  background: rgba(170, 255, 46, 0.3);
 }
 
 .avatar-blob-inner::before {
@@ -401,12 +401,12 @@
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgba(0, 255, 65, 0.25);
+  background: rgba(170, 255, 46, 0.25);
   border-radius: 3px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(0, 255, 65, 0.5);
+  background: rgba(170, 255, 46, 0.5);
 }
 
 /* ---------- Theme toggle ---------- */
@@ -453,7 +453,7 @@
 }
 
 .dark .theme-toggle__icon {
-  color: #00FF41;
+  color: #AAFF2E;
 }
 
 .theme-toggle__icon--light {
@@ -481,7 +481,7 @@
 
 /* ---------- Selection ---------- */
 ::selection {
-  background: rgba(0, 255, 65, 0.25);
+  background: rgba(170, 255, 46, 0.25);
   color: inherit;
 }
 
@@ -498,11 +498,11 @@
 
 /* ---------- Terminal phosphor glow ---------- */
 .dark .text-glow {
-  text-shadow: 0 0 10px rgba(0, 255, 65, 0.6), 0 0 28px rgba(0, 255, 65, 0.25);
+  text-shadow: 0 0 10px rgba(170, 255, 46, 0.6), 0 0 28px rgba(170, 255, 46, 0.25);
 }
 
 .dark .text-glow-subtle {
-  text-shadow: 0 0 20px rgba(0, 255, 65, 0.25);
+  text-shadow: 0 0 20px rgba(170, 255, 46, 0.25);
 }
 
 /* ---------- Reduced motion ---------- */

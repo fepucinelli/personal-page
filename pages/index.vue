@@ -93,9 +93,8 @@
         <button
           @click="playCurrent"
           class="px-6 py-2.5 rounded-full
-                 bg-brand dark:bg-[#146E28] text-white text-sm font-medium
-                 hover:bg-brand-dark dark:hover:bg-[#0F5A1A]
-                 shadow-lg shadow-brand/20 hover:shadow-brand/30
+                 bg-brand dark:bg-[#3F6600] text-white text-sm font-medium
+                 hover:bg-brand-dark dark:hover:bg-[#2D4A00]
                  transition-all duration-300"
         >
           <i class="pi pi-play-circle mr-1.5"></i>
