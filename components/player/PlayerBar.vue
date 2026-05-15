@@ -6,7 +6,7 @@
            flex items-center
            backdrop-blur-xl
            bg-white/90 dark:bg-night-surface/90
-           border-t border-ink/5 dark:border-white/5"
+           border-t border-ink/5 dark:border-brand/15"
   >
     <!-- Play / Pause -->
     <button
@@ -75,8 +75,8 @@
         :style="{
           background: `linear-gradient(
             to right,
-            #00C9B4 ${volumePercent}%,
-            rgba(26, 58, 71, 0.4) ${volumePercent}%
+            var(--color-brand) ${volumePercent}%,
+            rgb(var(--brand) / 0.15) ${volumePercent}%
           )`
         }"
       />

@@ -2,26 +2,12 @@ import { defineStore, skipHydrate } from 'pinia'
 import type { Station } from '~/types/radio'
 
 const SYSTEM_FAVORITE_IDS = new Set([
-  '962a748b-0601-11e8-ae97-52543be04c81', // 1.FM - Deep House Radio
   'bafbd6cc-65e0-4af7-907b-dd1c425e8917', // 70s 80s Disco Funk ModernSoul Boogie
   'c4eb7648-e867-4545-bdda-71b1368db779', // Atmospheric dnb s0urce
   '96136fe5-0601-11e8-ae97-52543be04c81', // Jazz Radio
 ])
 
 const SYSTEM_FAVORITES: Station[] = [
-  {
-    id: '962a748b-0601-11e8-ae97-52543be04c81',
-    name: '1.FM - Deep House Radio',
-    streamUrl: 'http://strm112.1.fm/deephouse_mobile_mp3',
-    country: 'Switzerland',
-    countryCode: 'CH',
-    tags: ['deep house', 'techno'],
-    bitrate: 192,
-    codec: 'MP3',
-    popularity: 60,
-    isPlayable: true,
-    favicon: '',
-  },
   {
     id: 'bafbd6cc-65e0-4af7-907b-dd1c425e8917',
     name: '70s 80s Disco Funk ModernSoul Boogie',

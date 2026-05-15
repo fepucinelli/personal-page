@@ -96,9 +96,6 @@
   --brand: 20 110 40;
   --brand-dark: 10 80 25;
   --color-brand: #146E28;
-  --color-volt: #C8F53A;
-  --color-track-light: rgba(0, 80, 20, 0.2);
-  --color-track-dark: rgba(0, 40, 10, 0.5);
 }
 
 .dark {
@@ -126,55 +123,13 @@
   }
 }
 
-/* ---------- Grain overlay ---------- */
-.grain::before {
-  content: '';
-  position: fixed;
-  inset: 0;
-  z-index: 9999;
-  pointer-events: none;
-  opacity: 0.025;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
-  background-repeat: repeat;
-  background-size: 128px 128px;
-}
-
-.dark .grain::before {
-  opacity: 0.07;
-}
-
-/* ---------- Terminal grid + scanline overlay (dark mode) ---------- */
-.grain::after {
-  content: '';
-  position: fixed;
-  inset: 0;
-  z-index: 9998;
-  pointer-events: none;
-  opacity: 0;
-  transition: opacity 0.4s ease;
-}
-
-.dark .grain::after {
-  opacity: 1;
-  background-image:
-    linear-gradient(rgba(0, 255, 65, 0.015) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(0, 255, 65, 0.015) 1px, transparent 1px),
-    repeating-linear-gradient(
-      to bottom,
-      transparent 0px,
-      transparent 3px,
-      rgba(0, 0, 0, 0.055) 3px,
-      rgba(0, 0, 0, 0.055) 4px
-    );
-  background-size: 40px 40px, 40px 40px, 100% 4px;
-}
 
 /* ---------- Range Slider ---------- */
 .range-slider {
   -webkit-appearance: none;
   appearance: none;
   height: 3px;
-  background: #1A2A1A;
+  background: rgb(var(--brand) / 0.15);
   border-radius: 2px;
   outline: none;
   cursor: pointer;

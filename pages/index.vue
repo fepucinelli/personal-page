@@ -60,11 +60,11 @@
     <!-- Radio section -->
     <div class="animate-fade-up delay-6 mt-4 w-full max-w-lg">
       <div class="flex items-center gap-2 justify-center mb-6">
-        <div class="h-px flex-1 max-w-[60px] bg-ink/10 dark:bg-white/10" />
+        <div class="h-px flex-1 max-w-[60px] bg-ink/8 dark:bg-white/8" />
         <span class="text-xs tracking-widest uppercase text-ink-muted dark:text-neutral-400 font-medium">
           Random Station
         </span>
-        <div class="h-px flex-1 max-w-[60px] bg-ink/10 dark:bg-white/10" />
+        <div class="h-px flex-1 max-w-[60px] bg-ink/8 dark:bg-white/8" />
       </div>
 
       <!-- Current station -->
@@ -137,11 +137,11 @@
         class="mt-20 w-full max-w-5xl"
       >
         <div class="flex items-center gap-3 mb-6">
-          <div class="h-px flex-1 bg-ink/5 dark:bg-white/5" />
+          <div class="h-px flex-1 bg-ink/8 dark:bg-white/8" />
           <h2 class="font-display text-lg italic text-ink dark:text-neutral-200 whitespace-nowrap">
             Favorite Stations
           </h2>
-          <div class="h-px flex-1 bg-ink/5 dark:bg-white/5" />
+          <div class="h-px flex-1 bg-ink/8 dark:bg-white/8" />
         </div>
 
         <Loader v-if="pending" />
@@ -168,11 +168,11 @@
         class="mt-20 w-full max-w-5xl"
       >
         <div class="flex items-center gap-3 mb-6">
-          <div class="h-px flex-1 bg-ink/5 dark:bg-white/5" />
+          <div class="h-px flex-1 bg-ink/8 dark:bg-white/8" />
           <h2 class="font-display text-lg italic text-ink dark:text-neutral-200 whitespace-nowrap">
             Recently Played
           </h2>
-          <div class="h-px flex-1 bg-ink/5 dark:bg-white/5" />
+          <div class="h-px flex-1 bg-ink/8 dark:bg-white/8" />
         </div>
 
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">

@@ -49,13 +49,13 @@ useHead({
 
 <template>
   <div
-    class="grain isolate min-h-screen font-body
+    class="isolate min-h-screen font-body
            bg-surface-light text-ink
            dark:bg-night dark:text-neutral-100
            transition-colors duration-500"
   >
     <ClientOnly>
-      <ParticleBackground v-if="route.path === '/'" />
+      <ParticleBackground />
     </ClientOnly>
 
     <!-- Top loading bar -->

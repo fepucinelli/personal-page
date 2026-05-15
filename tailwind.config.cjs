@@ -15,11 +15,6 @@ module.exports = {
           light: '#66FF88',
           subtle: 'rgba(0, 255, 65, 0.1)',
         },
-        volt: {
-          DEFAULT: '#C8F53A',
-          dark: '#A0CC1E',
-          subtle: 'rgba(200, 245, 58, 0.1)',
-        },
         surface: {
           light: '#FFFFFF',
           DEFAULT: '#F5F5F5',
