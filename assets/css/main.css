@@ -505,11 +505,63 @@
   text-shadow: 0 0 20px rgba(170, 255, 46, 0.25);
 }
 
+/* ---------- Clients marquee ---------- */
+/* Two identical lists side by side; shifting the track by -50% loops seamlessly.
+   Transform-only animation runs on the compositor, so it never blocks the main thread. */
+.marquee {
+  overflow: hidden;
+  mask-image: linear-gradient(to right, transparent, #000 12%, #000 88%, transparent);
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 12%, #000 88%, transparent);
+}
+
+.marquee__track {
+  display: flex;
+  width: max-content;
+  animation: marquee 40s linear infinite;
+}
+
+.marquee__list {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.marquee:hover .marquee__track,
+.marquee:focus-within .marquee__track {
+  animation-play-state: paused;
+}
+
+@keyframes marquee {
+  to { transform: translate3d(-50%, 0, 0); }
+}
+
 /* ---------- Reduced motion ---------- */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
+  }
+
+  /* Static, wrapped logo grid instead of a frozen half-scrolled track */
+  .marquee {
+    mask-image: none;
+    -webkit-mask-image: none;
+  }
+
+  .marquee__track {
+    width: auto;
+    animation: none;
+  }
+
+  .marquee__list {
+    flex-wrap: wrap;
+    justify-content: center;
+    row-gap: 1rem;
+    flex-shrink: 1;
+  }
+
+  .marquee__list[aria-hidden='true'] {
+    display: none;
   }
 }

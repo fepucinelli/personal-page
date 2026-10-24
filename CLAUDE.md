@@ -39,9 +39,16 @@ Three-layer data flow: `radioFetch()` → Raw API types → Mappers → App type
 
 ## Navigation
 
-- "Listen" dropdown groups stations, countries, and genres in header nav
-- Dropdown uses click-outside handler and closes on route navigation
+- Home (`/`) is portfolio-only: avatar, bio, social links, `ClientsMarquee`, and a link to `/listen` — no radio API calls
+- `./listen` in the header is a plain link to the radio hub `pages/listen.vue` (random station, browse shortcuts, favorites, recently played); it stays active on `/stations`, `/countries`, `/genres`, `/country/*`, `/genre/*`, `/station/*`
+- Radio URLs (`/stations`, `/countries`, `/genres`, detail pages) are kept as-is for SEO — GitHub Pages can't 301, so don't move them under `/listen/*`
 - System favorites use real Radio Browser API UUIDs (not synthetic IDs) so detail pages work
+
+## Clients Marquee
+
+- `components/ui/ClientsMarquee.vue` renders the list twice in `.marquee__track`; CSS in `assets/css/main.css` shifts it by -50% for a seamless loop
+- CSS-only (transform animation, no JS): pauses on `:hover` / `:focus-within`; under `prefers-reduced-motion` it becomes a static wrapped grid and hides the duplicate list
+- Logos live in `public/clients/*.webp`: 480×192, black on transparent, displayed at 160×64 with `dark:invert`. Keep new logos in the same format
 
 ## Styling
 

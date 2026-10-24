@@ -57,167 +57,21 @@
       <SocialLinks />
     </div>
 
-    <!-- Radio section -->
-    <div class="animate-fade-up delay-6 mt-4 w-full max-w-lg">
-      <div class="flex items-center gap-2 justify-center mb-6">
-        <div class="h-px flex-1 max-w-[60px] bg-ink/8 dark:bg-white/8" />
-        <span class="text-xs tracking-widest uppercase text-ink-muted dark:text-neutral-400 font-medium">
-          Random Station
-        </span>
-        <div class="h-px flex-1 max-w-[60px] bg-ink/8 dark:bg-white/8" />
-      </div>
+    <!-- Clients -->
+    <ClientsMarquee class="animate-fade-up delay-6 mt-16" />
 
-      <!-- Current station -->
-      <p v-if="currentStation" class="font-display text-xl italic text-ink dark:text-neutral-200 mb-1">
-        {{ currentStation.name }}
-      </p>
-      <p v-if="currentStation" class="text-xs text-ink-muted dark:text-neutral-400 mb-8 tracking-wide uppercase">
-        {{ currentStation.country }}
-      </p>
-
-      <!-- Controls -->
-      <div v-if="currentStation" class="flex items-center justify-center gap-3">
-        <button
-          @click="shuffle"
-          class="w-10 h-10 rounded-full flex items-center justify-center
-                 border border-ink/10 dark:border-white/10
-                 text-ink-secondary dark:text-neutral-400
-                 hover:border-brand/30 hover:text-brand
-                 transition-all duration-300"
-          title="Shuffle station"
-          aria-label="Shuffle station"
-        >
-          <i class="pi pi-sync text-sm"></i>
-        </button>
-
-        <button
-          @click="playCurrent"
-          class="px-6 py-2.5 rounded-full
-                 bg-brand dark:bg-[#3F6600] text-white text-sm font-medium
-                 hover:bg-brand-dark dark:hover:bg-[#2D4A00]
-                 transition-all duration-300"
-        >
-          <i class="pi pi-play-circle mr-1.5"></i>
-          Start listening
-        </button>
-
-        <button
-          @click="actions.toggleFavorite(currentStation)"
-          class="w-10 h-10 rounded-full flex items-center justify-center
-                 border border-ink/10 dark:border-white/10
-                 text-ink-secondary dark:text-neutral-400
-                 hover:border-brand/30 hover:text-brand
-                 transition-all duration-300"
-          :title="
-            actions.isFavorite(currentStation)
-              ? 'Remove from favorites'
-              : 'Add to favorites'
-          "
-          :aria-label="
-            actions.isFavorite(currentStation)
-              ? 'Remove from favorites'
-              : 'Add to favorites'
-          "
-        >
-          <i
-            class="pi text-sm"
-            :class="actions.isFavorite(currentStation)
-              ? 'pi-star-fill text-brand'
-              : 'pi-star'"
-          ></i>
-        </button>
-      </div>
-    </div>
-
-    <!-- Favorites section (client-only: user favorites come from localStorage) -->
-    <ClientOnly>
-      <section
-        v-if="favorites.allFavorites.length > 0"
-        class="mt-20 w-full max-w-5xl"
-      >
-        <div class="flex items-center gap-3 mb-6">
-          <div class="h-px flex-1 bg-ink/8 dark:bg-white/8" />
-          <h2 class="font-display text-lg italic text-ink dark:text-neutral-200 whitespace-nowrap">
-            Favorite Stations
-          </h2>
-          <div class="h-px flex-1 bg-ink/8 dark:bg-white/8" />
-        </div>
-
-        <Loader v-if="pending" />
-
-        <div v-else class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-          <StationCard
-            v-for="station in favorites.allFavorites"
-            :key="station.id"
-            :station="station"
-            :is-playing="actions.isPlaying(station)"
-            :is-favorite="actions.isFavorite(station)"
-            :hide-favorite="favorites.isSystemFavorite(station.id)"
-            @play="actions.playStation"
-            @toggle-favorite="actions.toggleFavorite"
-          />
-        </div>
-      </section>
-    </ClientOnly>
-
-    <!-- Recently Played section (client-only: data comes from localStorage) -->
-    <ClientOnly>
-      <section
-        v-if="recentlyPlayed.stations.length > 0"
-        class="mt-20 w-full max-w-5xl"
-      >
-        <div class="flex items-center gap-3 mb-6">
-          <div class="h-px flex-1 bg-ink/8 dark:bg-white/8" />
-          <h2 class="font-display text-lg italic text-ink dark:text-neutral-200 whitespace-nowrap">
-            Recently Played
-          </h2>
-          <div class="h-px flex-1 bg-ink/8 dark:bg-white/8" />
-        </div>
-
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-          <StationCard
-            v-for="station in recentlyPlayed.stations"
-            :key="station.id"
-            :station="station"
-            :is-playing="actions.isPlaying(station)"
-            :is-favorite="actions.isFavorite(station)"
-            :hide-favorite="favorites.isSystemFavorite(station.id)"
-            @play="actions.playStation"
-            @toggle-favorite="actions.toggleFavorite"
-          />
-        </div>
-      </section>
-    </ClientOnly>
-
-    <div class="mt-10 flex flex-col items-center gap-2">
-      <NuxtLink
-        to="/stations"
-        class="text-xs tracking-widest uppercase text-ink-muted dark:text-neutral-400
-               hover:text-brand transition-colors duration-300"
-      >
-        Browse all stations &rarr;
-      </NuxtLink>
-
-      <span
-        v-if="stats?.stations"
-        class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full
-               text-[11px] tracking-wide
-               bg-brand/5 dark:bg-brand/10
-               text-ink-muted dark:text-neutral-400
-               border border-brand/10"
-      >
-        <i class="pi pi-wifi text-brand text-[10px]"></i>
-        {{ stats.stations.toLocaleString('en-US') }} stations &middot; {{ stats.countries }} countries
-      </span>
-    </div>
+    <NuxtLink
+      to="/listen"
+      class="animate-fade-up delay-6 mt-12 py-2 -my-2 text-xs tracking-widest uppercase
+             text-ink-muted dark:text-neutral-400 hover:text-brand transition-colors duration-300"
+    >
+      Tune in to the radio &rarr;
+    </NuxtLink>
   </div>
 </template>
 
 <script setup lang="ts">
 import { usePlayerStore } from '~/stores/player'
-import { useFavoritesStore } from '~/stores/favorites'
-import { useRecentlyPlayedStore } from '~/stores/recentlyPlayed'
-import type { Station } from '~/types/radio'
 
 useHead({
   title: 'Senior Front-End Engineer, Lead Developer & DJ',
@@ -244,54 +98,16 @@ useHead({
 })
 
 useSeoMeta({
-  description: 'Felipe Pucinelli — Senior Front-End Engineer, Lead Developer & DJ. Explore my curated collection of internet radio stations from around the world.',
+  description: 'Felipe Pucinelli — Senior Front-End Engineer, Lead Developer & DJ with 12+ years building products for companies like Itaú, Qualcomm, Natura and Siemens.',
   ogTitle: 'Felipe Pucinelli — Senior Front-End Engineer, Lead Developer & DJ',
-  ogDescription: 'Senior Front-End Engineer, Lead Developer & DJ. Explore internet radio stations from around the world.',
+  ogDescription: 'Senior Front-End Engineer, Lead Developer & DJ with 12+ years building products that feel good to use.',
   ogUrl: 'https://pucinelli.me',
 })
 
-const favorites = useFavoritesStore()
 const player = usePlayerStore()
-const recentlyPlayed = useRecentlyPlayedStore()
-const actions = useStationActions()
 
 const scramble = useScramble({
   name: 'Felipe Pucinelli',
   roles: ['Senior Front-End Engineer', 'Lead Engineer', 'Web Performance Enthusiast', 'Eletronic Music DJ'],
 })
-
-// Fetch stations & stats
-const { data: stations, pending } = await useStations()
-const { data: stats } = await useRadioStats()
-
-// Current station
-const currentStation = ref<Station | null>(null)
-
-// Pick random station from curated list, avoiding the current one
-const pickRandomStation = () => {
-  const pool = favorites.systemFavorites.filter(s => s.id !== currentStation.value?.id)
-  if (!pool.length) return
-  const index = Math.floor(Math.random() * pool.length)
-  currentStation.value = pool[index]
-}
-
-// Pick on client only to avoid SSR/client mismatch (Math.random differs)
-onMounted(() => {
-  if (!currentStation.value) {
-    pickRandomStation()
-  }
-})
-
-const playCurrent = () => {
-  if (currentStation.value) {
-    player.play(currentStation.value)
-  }
-}
-
-const shuffle = () => {
-  pickRandomStation()
-  if (currentStation.value) {
-    player.play(currentStation.value)
-  }
-}
 </script>

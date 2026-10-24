@@ -1,5 +1,6 @@
 <template>
   <div class="px-6 py-8 max-w-6xl mx-auto">
+    <BackLink to="/listen" label="Listen" />
     <div class="mb-8">
       <h1 class="font-display text-3xl italic text-ink dark:text-neutral-50">
         Countries
@@ -51,6 +52,7 @@ useSeoPage({
   path: '/countries',
   breadcrumbs: [
     { name: 'Home', url: '/' },
+    { name: 'Listen', url: '/listen' },
     { name: 'Countries', url: '/countries' },
   ],
 })
