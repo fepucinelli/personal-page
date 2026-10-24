@@ -2,7 +2,7 @@
   <section aria-labelledby="clients-heading" class="w-full max-w-3xl">
     <div class="flex items-center gap-2 justify-center mb-6">
       <div class="h-px flex-1 max-w-[60px] bg-ink/8 dark:bg-white/8" />
-      <h2 id="clients-heading" class="text-xs tracking-widest uppercase text-ink-muted dark:text-neutral-400 font-mono">
+      <h2 id="clients-heading" class="text-xs tracking-widest uppercase text-ink-muted dark:text-neutral-400 font-medium">
         Companies I've worked with
       </h2>
       <div class="h-px flex-1 max-w-[60px] bg-ink/8 dark:bg-white/8" />

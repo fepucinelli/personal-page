@@ -1,7 +1,6 @@
 <template>
   <div class="mb-8">
-    <h1 class="flex items-baseline gap-2 font-body text-2xl sm:text-3xl font-semibold uppercase tracking-wide text-ink dark:text-neutral-50 dark:text-glow">
-      <span class="text-brand" aria-hidden="true">&gt;</span>
+    <h1 class="font-display text-3xl italic text-ink dark:text-neutral-50">
       {{ title }}
     </h1>
     <p v-if="subtitle" class="mt-2 text-sm text-ink-muted dark:text-neutral-400">

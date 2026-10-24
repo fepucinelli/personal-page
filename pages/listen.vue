@@ -6,7 +6,7 @@
     <section aria-labelledby="random-station-heading" class="text-center">
       <div class="flex items-center gap-2 justify-center mb-6">
         <div class="h-px flex-1 max-w-[60px] bg-ink/8 dark:bg-white/8" />
-        <h2 id="random-station-heading" class="text-xs tracking-widest uppercase text-ink-muted dark:text-neutral-400 font-mono">
+        <h2 id="random-station-heading" class="text-xs tracking-widest uppercase text-ink-muted dark:text-neutral-400 font-medium">
           Random Station
         </h2>
         <div class="h-px flex-1 max-w-[60px] bg-ink/8 dark:bg-white/8" />
@@ -15,7 +15,7 @@
       <!-- Reserve height so the client-only pick doesn't shift the layout -->
       <div class="min-h-[132px]">
         <template v-if="currentStation">
-          <p class="font-mono text-lg font-semibold uppercase tracking-wide text-ink dark:text-neutral-200 dark:text-glow-subtle mb-1">
+          <p class="font-display text-xl italic text-ink dark:text-neutral-200 mb-1">
             {{ currentStation.name }}
           </p>
           <p class="text-xs text-ink-muted dark:text-neutral-400 mb-8 tracking-wide uppercase">
@@ -25,7 +25,11 @@
           <div class="flex items-center justify-center gap-3">
             <button
               @click="shuffle"
-              class="hud-btn hud-btn--ghost hud-btn--icon w-10 h-10 flex items-center justify-center"
+              class="w-10 h-10 rounded-full flex items-center justify-center
+                     border border-ink/10 dark:border-white/10
+                     text-ink-secondary dark:text-neutral-400
+                     hover:border-brand/30 hover:text-brand
+                     transition-all duration-300"
               title="Shuffle station"
               aria-label="Shuffle station"
             >
@@ -34,7 +38,10 @@
 
             <button
               @click="playCurrent"
-              class="hud-btn hud-btn--solid"
+              class="px-6 py-2.5 rounded-full
+                     bg-brand dark:bg-[#3F6600] text-white text-sm font-medium
+                     hover:bg-brand-dark dark:hover:bg-[#2D4A00]
+                     transition-all duration-300"
             >
               <i class="pi pi-play-circle mr-1.5" aria-hidden="true"></i>
               Start listening
@@ -42,7 +49,11 @@
 
             <button
               @click="actions.toggleFavorite(currentStation)"
-              class="hud-btn hud-btn--ghost hud-btn--icon w-10 h-10 flex items-center justify-center"
+              class="w-10 h-10 rounded-full flex items-center justify-center
+                     border border-ink/10 dark:border-white/10
+                     text-ink-secondary dark:text-neutral-400
+                     hover:border-brand/30 hover:text-brand
+                     transition-all duration-300"
               :title="favoriteLabel"
               :aria-label="favoriteLabel"
             >
@@ -65,11 +76,15 @@
         v-for="item in browseItems"
         :key="item.to"
         :to="item.to"
-        class="hud-panel group p-5 transition-shadow duration-300"
+        class="group p-5 rounded
+               bg-white dark:bg-night-elevated
+               border border-ink/5 dark:border-white/5
+               hover:border-brand/20 dark:hover:border-brand/20
+               transition-all duration-300"
       >
-        <span class="flex items-center gap-2 text-sm font-mono uppercase tracking-widest text-ink dark:text-neutral-200 group-hover:text-brand transition-colors">
+        <span class="flex items-center gap-2 font-display text-lg italic text-ink dark:text-neutral-200 group-hover:text-brand transition-colors">
           <i class="pi text-brand text-xs" :class="item.icon" aria-hidden="true"></i>
-          ./{{ item.label }}
+          {{ item.label }}
         </span>
         <span class="block mt-2 text-xs text-ink-muted dark:text-neutral-400">
           {{ item.description }}
@@ -86,7 +101,7 @@
       >
         <div class="flex items-center gap-3 mb-6">
           <div class="h-px flex-1 bg-ink/8 dark:bg-white/8" />
-          <h2 id="favorites-heading" class="font-mono text-sm uppercase tracking-widest text-ink dark:text-neutral-200 dark:text-glow-subtle whitespace-nowrap">
+          <h2 id="favorites-heading" class="font-display text-lg italic text-ink dark:text-neutral-200 whitespace-nowrap">
             Favorite Stations
           </h2>
           <div class="h-px flex-1 bg-ink/8 dark:bg-white/8" />
@@ -116,7 +131,7 @@
       >
         <div class="flex items-center gap-3 mb-6">
           <div class="h-px flex-1 bg-ink/8 dark:bg-white/8" />
-          <h2 id="recent-heading" class="font-mono text-sm uppercase tracking-widest text-ink dark:text-neutral-200 dark:text-glow-subtle whitespace-nowrap">
+          <h2 id="recent-heading" class="font-display text-lg italic text-ink dark:text-neutral-200 whitespace-nowrap">
             Recently Played
           </h2>
           <div class="h-px flex-1 bg-ink/8 dark:bg-white/8" />
@@ -139,8 +154,8 @@
 
     <div v-if="stats?.stations" class="mt-12 flex justify-center">
       <span
-        class="inline-flex items-center gap-1.5 px-3 py-1
-               text-[11px] font-mono uppercase tracking-wide
+        class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full
+               text-[11px] tracking-wide
                bg-brand/5 dark:bg-brand/10
                text-ink-muted dark:text-neutral-400
                border border-brand/10"
@@ -178,7 +193,7 @@ const { data: stats } = await useRadioStats()
 const browseItems = computed(() => [
   {
     to: '/stations',
-    label: 'stations',
+    label: 'Stations',
     icon: 'pi-wifi',
     description: stats.value?.stations
       ? `${stats.value.stations.toLocaleString('en-US')} stations streaming now`
@@ -186,7 +201,7 @@ const browseItems = computed(() => [
   },
   {
     to: '/countries',
-    label: 'countries',
+    label: 'Countries',
     icon: 'pi-globe',
     description: stats.value?.countries
       ? `Radio from ${stats.value.countries} countries`
@@ -194,7 +209,7 @@ const browseItems = computed(() => [
   },
   {
     to: '/genres',
-    label: 'genres',
+    label: 'Genres',
     icon: 'pi-tags',
     description: 'From jazz to drum & bass',
   },
