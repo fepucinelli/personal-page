@@ -17,7 +17,7 @@
           class="marquee__list"
           :aria-hidden="copy === 2 ? 'true' : undefined"
         >
-          <li v-for="client in clients" :key="client.name" class="px-5 sm:px-6">
+          <li v-for="client in clients" :key="client.name" class="px-2 sm:px-6">
             <img
               :src="client.src"
               :alt="copy === 1 ? client.name : ''"
