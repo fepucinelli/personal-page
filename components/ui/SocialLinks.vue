@@ -1,5 +1,5 @@
 <template>
-  <div class="flex gap-1 justify-center mb-6">
+  <div class="flex gap-1">
     <a
       v-for="item in links"
       :key="item.icon"

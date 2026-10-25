@@ -13,17 +13,17 @@ useSeoPage({
 <template>
   <div class="px-6 py-8 max-w-3xl mx-auto">
     <div class="mb-8 flex flex-col items-center">
-      <picture>
-        <source type="image/webp" srcset="/avatar.webp" />
-        <img
-          src="/avatar.jpg"
-          alt="Felipe Pucinelli"
-          fetchpriority="high"
-          width="490"
-          height="482"
-          class="w-full max-w-[400px] aspect-square rounded-full object-cover mb-4"
-        />
-      </picture>
+      <!-- Same cut-out portrait as the home page; its soft edges blend into the page ground -->
+      <img
+        src="/portrait-800.webp"
+        srcset="/portrait-480.webp 480w, /portrait-800.webp 800w"
+        sizes="min(82vw, 420px)"
+        alt="Felipe Pucinelli wearing DJ headphones"
+        fetchpriority="high"
+        width="800"
+        height="731"
+        class="w-[82%] max-w-[420px] h-auto mb-4"
+      />
       <div class="flex items-center gap-3 w-full">
         <div class="h-px flex-1 bg-ink/5 dark:bg-white/5" />
         <h1 class="font-display text-3xl text-ink dark:text-neutral-100 whitespace-nowrap">about me</h1>

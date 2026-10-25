@@ -196,6 +196,23 @@
   animation: fade-up 0.5s ease both;
 }
 
+/* Same entrance for the LCP image. It starts at 0.001, not 0: Chrome skips elements painted at
+   opacity 0 as LCP candidates, which would push LCP to a later, smaller element */
+@keyframes fade-up-lcp {
+  from {
+    opacity: 0.001;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-up-lcp {
+  animation: fade-up-lcp 0.5s ease both;
+}
+
 .animate-pulse-glow {
   animation: pulse-glow 2.5s ease-in-out infinite;
 }
@@ -206,12 +223,18 @@
 
 
 /* ---------- Avatar blob animation ---------- */
-.avatar-blob-wrap {
-  position: relative;
-  width: 15rem;
-  height: 15rem;
-  border-radius: 100%;
+/* Lime aura that morphs behind the home portrait's head while a station plays */
+.portrait {
   contain: layout style;
+}
+
+/* Larger than the head and centred on it, so the lime only shows as a halo around the hair */
+.portrait .avatar-blob {
+  width: 84%;
+  height: auto;
+  aspect-ratio: 1;
+  left: 12%;
+  top: -6%;
 }
 
 .avatar-blob {
@@ -276,9 +299,10 @@
   animation: blob-morph 5.5s 1s linear infinite;
 }
 
-/* Only visible when playing */
-.avatar-blob-wrap.is-playing .avatar-blob {
-  opacity: 0.65;
+/* Only visible when playing: a soft, blurred halo rather than a solid disk */
+.portrait.is-playing .avatar-blob {
+  opacity: 0.22;
+  filter: blur(48px);
 }
 
 @keyframes blob-rotate {
@@ -298,57 +322,6 @@
   80%  { border-radius: 76% 92% 90% 77%; }
   90%  { border-radius: 83% 77% 99% 88%; }
   100% { border-radius: 100%; }
-}
-
-.avatar-blob-inner {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  width: 69%;
-  height: 69%;
-  background: rgb(var(--brand) / 0);
-  border-radius: 100%;
-  transition: background 0.8s ease;
-}
-
-.avatar-blob-wrap.is-playing .avatar-blob-inner {
-  background: rgb(var(--brand) / 0.2);
-}
-
-.avatar-blob-inner::before,
-.avatar-blob-inner::after {
-  position: absolute;
-  left: -1%;
-  top: -1%;
-  width: 105%;
-  height: 105%;
-  background: rgb(var(--brand) / 0);
-  border-radius: 100%;
-  content: "";
-  transition: background 0.8s ease;
-  will-change: border-radius;
-}
-
-.avatar-blob-wrap.is-playing .avatar-blob-inner::before,
-.avatar-blob-wrap.is-playing .avatar-blob-inner::after {
-  background: rgb(var(--brand) / 0.3);
-}
-
-.avatar-blob-inner::before {
-  animation: blob-rotate 4s linear infinite, blob-morph 6s linear infinite;
-}
-
-.avatar-blob-inner::after {
-  animation: blob-rotate 3s linear infinite, blob-morph 5s linear infinite;
-}
-
-.avatar-blob-inner img {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 10;
 }
 
 /* ---------- Toast transitions ---------- */

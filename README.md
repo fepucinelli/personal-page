@@ -173,7 +173,7 @@ components/
 │   └── main.css
 └── public/
     ├── avatar.jpg
-    ├── og-image.png
+    ├── og-image-v2.png
     ├── sitemap.xml
     └── robots.txt
 ```

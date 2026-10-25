@@ -5,8 +5,7 @@
            h-[72px] px-6 gap-5
            flex items-center
            backdrop-blur-xl
-           bg-white/90 dark:bg-night-surface/90
-           border-t border-ink/5 dark:border-brand/15"
+           bg-white/90 dark:bg-night-surface/90"
   >
     <!-- Play / Pause -->
     <button
