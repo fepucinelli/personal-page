@@ -39,8 +39,8 @@
             <button
               @click="playCurrent"
               class="px-6 py-2.5 rounded-full
-                     bg-brand dark:bg-[#3F6600] text-white text-sm font-medium
-                     hover:bg-brand-dark dark:hover:bg-[#2D4A00]
+                     bg-brand text-white dark:text-night text-sm font-medium
+                     hover:opacity-90
                      transition-all duration-300"
             >
               <i class="pi pi-play-circle mr-1.5" aria-hidden="true"></i>

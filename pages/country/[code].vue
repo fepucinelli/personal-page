@@ -8,7 +8,7 @@
       >
         &larr; All countries
       </NuxtLink>
-      <h1 class="font-display text-3xl italic text-ink dark:text-neutral-50">
+      <h1 class="font-display text-3xl text-ink dark:text-neutral-50">
         {{ countryName }} Stations
       </h1>
     </div>

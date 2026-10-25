@@ -16,7 +16,7 @@
              h-14 px-6 flex items-center justify-between
              backdrop-blur-xl
              bg-surface-light/90 dark:bg-night/90
-             border-b border-ink/8 dark:border-brand/15"
+             border-b border-ink/8 dark:border-transparent"
     >
       <!-- Logo -->
       <NuxtLink
@@ -52,19 +52,6 @@
           class="px-3 py-1.5 text-sm font-mono border rounded transition-all duration-200"
         >
           ./about
-        </NuxtLink>
-
-        <!-- Favorites -->
-        <NuxtLink
-          to="/favorites"
-          aria-label="Favorites"
-          :aria-current="route.path === '/favorites' ? 'page' : undefined"
-          :class="route.path === '/favorites'
-            ? 'text-brand bg-brand/10 dark:bg-brand/15 border-brand/25 dark:border-brand/30'
-            : 'text-ink-secondary dark:text-neutral-400 hover:text-brand border-transparent hover:bg-brand/5 dark:hover:bg-brand/5'"
-          class="ml-1 p-2 rounded border transition-all duration-200"
-        >
-          <i class="pi pi-bookmark-fill text-sm" aria-hidden="true"></i>
         </NuxtLink>
 
         <!-- Theme toggle -->

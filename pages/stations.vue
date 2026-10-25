@@ -2,7 +2,7 @@
   <div class="px-6 py-8 max-w-6xl mx-auto">
     <BackLink to="/listen" label="Listen" />
     <div class="mb-8">
-      <h1 class="font-display text-3xl italic text-ink dark:text-neutral-50">
+      <h1 class="font-display text-3xl text-ink dark:text-neutral-50">
         All Stations
       </h1>
       <p class="mt-2 text-sm text-ink-muted dark:text-neutral-400">

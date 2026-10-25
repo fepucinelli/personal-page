@@ -65,7 +65,7 @@ export default defineNuxtConfig({
       meta: [
         { name: 'description', content: 'Felipe Pucinelli — Senior Front-End Engineer, Lead Developer & DJ. Explore my curated collection of internet radio stations from around the world.' },
         { name: 'author', content: 'Felipe Pucinelli' },
-        { name: 'theme-color', content: '#050805' },
+        { name: 'theme-color', content: '#0B0B0B' },
         { name: 'referrer', content: 'strict-origin-when-cross-origin' },
         { name: 'format-detection', content: 'telephone=no' },
         { property: 'og:site_name', content: 'Felipe Pucinelli' },

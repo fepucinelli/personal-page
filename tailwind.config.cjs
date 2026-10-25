@@ -12,11 +12,9 @@ module.exports = {
         brand: {
           DEFAULT: 'rgb(var(--brand) / <alpha-value>)',
           dark: 'rgb(var(--brand-dark) / <alpha-value>)',
-          light: '#66FF88',
-          subtle: 'rgba(0, 255, 65, 0.1)',
         },
         surface: {
-          light: '#FFFFFF',
+          light: '#FAFAFA',
           DEFAULT: '#F5F5F5',
           dark: '#E5E5E5',
         },
@@ -26,10 +24,11 @@ module.exports = {
           muted: '#777777',
         },
         night: {
-          DEFAULT: '#050805',
-          surface: '#080C08',
-          elevated: '#0D160D',
-          border: '#1A2A1A',
+          // Neutral graphite: the lime brand is the only colour on the page
+          DEFAULT: '#0B0B0B',
+          surface: '#0E0E0E',
+          elevated: '#151515',
+          border: '#232323',
         },
       },
       fontFamily: {

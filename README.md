@@ -124,10 +124,10 @@ components/
 ├── layouts/
 │   └── default.vue            # Header, nav, theme toggle, persistent PlayerBar
 ├── pages/
-│   ├── index.vue              # Landing page with random station + favorites
+│   ├── index.vue              # Landing page: bio, social links, clients marquee
 │   ├── about.vue              # About page with bio and avatar
+│   ├── listen.vue             # Radio hub: random station, favorites, recently played
 │   ├── stations.vue           # All stations with infinite scroll
-│   ├── favorites.vue          # User's favorite stations
 │   ├── countries.vue          # Country listing
 │   ├── country/[code].vue     # Stations filtered by country
 │   ├── genres.vue             # Genre listing

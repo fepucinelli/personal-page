@@ -40,7 +40,7 @@
         </div>
 
         <div class="min-w-0">
-          <h1 class="font-display text-3xl italic text-ink dark:text-neutral-50 leading-tight">
+          <h1 class="font-display text-3xl text-ink dark:text-neutral-50 leading-tight">
             {{ station.name }}
           </h1>
           <p class="mt-1 text-sm text-ink-muted dark:text-neutral-400">

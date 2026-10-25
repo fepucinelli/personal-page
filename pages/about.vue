@@ -26,7 +26,7 @@ useSeoPage({
       </picture>
       <div class="flex items-center gap-3 w-full">
         <div class="h-px flex-1 bg-ink/5 dark:bg-white/5" />
-        <h1 class="font-display text-3xl italic text-ink dark:text-neutral-100 whitespace-nowrap">about me</h1>
+        <h1 class="font-display text-3xl text-ink dark:text-neutral-100 whitespace-nowrap">about me</h1>
         <div class="h-px flex-1 bg-ink/5 dark:bg-white/5" />
       </div>
     </div>

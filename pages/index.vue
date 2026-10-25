@@ -30,7 +30,7 @@
     <!-- Name -->
     <h1
       aria-hidden="true"
-      class="animate-fade-up delay-2 mt-8 font-display text-4xl md:text-5xl italic
+      class="animate-fade-up delay-2 mt-8 font-display text-4xl md:text-5xl
              text-ink dark:text-neutral-50 tracking-tight overflow-hidden whitespace-nowrap px-1"
       :class="{ 'opacity-0': !scramble.nameVisible }"
       style="min-height: 1.2em"
@@ -40,7 +40,7 @@
     <p
       aria-hidden="true"
       class="animate-fade-up delay-3 mt-3 text-sm tracking-widest uppercase
-             text-ink-muted dark:text-brand/70 font-mono overflow-hidden whitespace-nowrap px-1"
+             text-ink-muted dark:text-brand font-mono overflow-hidden whitespace-nowrap px-1"
       :class="{ 'opacity-0': !scramble.roleVisible }"
       style="min-height: 1.5em"
     >{{ scramble.roleText }}</p>

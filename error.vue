@@ -6,7 +6,7 @@
            transition-colors duration-500"
   >
     <div class="text-center px-6">
-      <h1 class="font-display italic">
+      <h1 class="font-display">
         <span class="block text-6xl text-brand-dark dark:text-brand">{{ error?.statusCode || 500 }}</span>
         <span class="block mt-4 text-2xl text-ink dark:text-neutral-50">{{ error?.message || 'Something went wrong' }}</span>
       </h1>

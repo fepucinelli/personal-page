@@ -8,7 +8,7 @@
       >
         &larr; All genres
       </NuxtLink>
-      <h1 class="font-display text-3xl italic text-ink dark:text-neutral-50 capitalize">
+      <h1 class="font-display text-3xl text-ink dark:text-neutral-50 capitalize">
         {{ route.params.slug }}
       </h1>
     </div>

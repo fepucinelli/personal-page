@@ -54,8 +54,8 @@ Three-layer data flow: `radioFetch()` → Raw API types → Mappers → App type
 
 - Touch targets use invisible padding + negative margins (e.g. `py-2 -my-2`) to meet 44px minimum without shifting layout
 - TailwindCSS with `class` strategy for dark mode (`dark:` prefix)
-- Custom palette in tailwind.config.cjs: brand (#c493ff), surface, ink, night
-- Custom fonts: Instrument Serif (display), Satoshi (body)
+- Palette ("graphite + lime") in tailwind.config.cjs: one accent, `brand` = the lime of the `~/fp` logo via `--brand` in main.css (#AAFF2E dark, #3F6600 light); `night` (dark grounds) and `surface`/`ink` are neutral graphite/greys with no green tint. Don't add other greens — use `brand` with opacity for tints
+- Custom fonts: Syne (display), Chakra Petch (body), self-hosted in `public/fonts`
 - Animations defined in `assets/css/main.css`
 
 ## SEO
