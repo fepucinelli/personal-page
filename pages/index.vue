@@ -7,14 +7,14 @@
     <!-- grid-cols-1 = minmax(0, 1fr): the scrambling nowrap name/role can't widen the track and resize the photo -->
     <section class="w-full max-w-6xl grid grid-cols-1 lg:grid-cols-2 items-center gap-2 lg:gap-14 lg:text-left">
       <!-- Portrait — cut-out with soft edges; enters with the text, one step ahead of the name -->
-      <div class="portrait animate-fade-up-lcp delay-1 relative w-full max-w-[420px] mx-auto lg:max-w-[520px] lg:mr-0" :class="{ 'is-playing': player.isPlaying }">
+      <div class="portrait animate-fade-up-lcp delay-1 relative w-[85%] max-w-[380px] mx-auto lg:w-full lg:max-w-[520px] lg:mr-0" :class="{ 'is-playing': player.isPlaying }">
         <!-- Lime aura behind the head while a station plays -->
         <div class="avatar-blob blob1" aria-hidden="true"></div>
         <div class="avatar-blob blob2" aria-hidden="true"></div>
         <img
           src="/portrait-800.webp"
           srcset="/portrait-480.webp 480w, /portrait-800.webp 800w"
-          sizes="(min-width: 1024px) 520px, min(100vw - 48px, 420px)"
+          sizes="(min-width: 1024px) 520px, min(85vw - 41px, 380px)"
           alt="Felipe Pucinelli wearing DJ headphones"
           width="800"
           height="731"
@@ -80,7 +80,7 @@ useHead({
   link: [
     { rel: 'canonical', href: 'https://pucinelli.me/' },
     // Hero portrait is the LCP element: fetch the size the browser will pick, before CSS/JS
-    { rel: 'preload', as: 'image', type: 'image/webp', href: '/portrait-800.webp', imagesrcset: '/portrait-480.webp 480w, /portrait-800.webp 800w', imagesizes: '(min-width: 1024px) 520px, min(100vw - 48px, 420px)', fetchpriority: 'high' },
+    { rel: 'preload', as: 'image', type: 'image/webp', href: '/portrait-800.webp', imagesrcset: '/portrait-480.webp 480w, /portrait-800.webp 800w', imagesizes: '(min-width: 1024px) 520px, min(85vw - 41px, 380px)', fetchpriority: 'high' },
   ],
   script: [
     {
