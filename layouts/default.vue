@@ -35,8 +35,8 @@
           to="/listen"
           :aria-current="route.path === '/listen' ? 'page' : undefined"
           :class="isListenActive
-            ? 'bg-brand/10 dark:bg-brand/15 text-brand border-brand/25 dark:border-brand/30'
-            : 'text-ink-secondary dark:text-neutral-400 hover:text-brand dark:hover:text-brand border-transparent hover:bg-brand/5 dark:hover:bg-brand/5'"
+            ? 'text-brand border-transparent'
+            : 'text-ink-secondary dark:text-neutral-400 hover:text-brand dark:hover:text-brand border-transparent'"
           class="px-3 py-1.5 text-sm font-mono border rounded transition-all duration-200"
         >
           ./listen
@@ -47,8 +47,8 @@
           to="/about"
           :aria-current="route.path === '/about' ? 'page' : undefined"
           :class="route.path === '/about'
-            ? 'bg-brand/10 dark:bg-brand/15 text-brand border-brand/25 dark:border-brand/30'
-            : 'text-ink-secondary dark:text-neutral-400 hover:text-brand dark:hover:text-brand border-transparent hover:bg-brand/5 dark:hover:bg-brand/5'"
+            ? 'text-brand border-transparent'
+            : 'text-ink-secondary dark:text-neutral-400 hover:text-brand dark:hover:text-brand border-transparent'"
           class="px-3 py-1.5 text-sm font-mono border rounded transition-all duration-200"
         >
           ./about

@@ -235,6 +235,9 @@
   aspect-ratio: 1;
   left: 12%;
   top: -6%;
+  /* On stop, keep the blur until the 0.8s fade-out has finished, so the exit mirrors the entrance
+     (removing the filter instantly would show the sharp blob shapes while they fade) */
+  transition: opacity 0.8s ease, filter 0s linear 0.8s;
 }
 
 .avatar-blob {
@@ -303,6 +306,8 @@
 .portrait.is-playing .avatar-blob {
   opacity: 0.22;
   filter: blur(48px);
+  /* On play, apply the blur immediately, before the fade-in starts */
+  transition: opacity 0.8s ease, filter 0s;
 }
 
 @keyframes blob-rotate {
