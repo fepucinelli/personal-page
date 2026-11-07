@@ -1,6 +1,6 @@
 # pucinelli.me
 
-Personal site and internet radio discovery app built by [Felipe Pucinelli](https://pucinelli.me) — Senior Front-End Engineer, Lead Developer & DJ.
+Personal site and portfolio of [Felipe Pucinelli](https://pucinelli.me) — Senior Front-End Engineer, Lead Software Engineer & DJ.
 
 **[pucinelli.me](https://pucinelli.me)**
 
@@ -8,31 +8,16 @@ Personal site and internet radio discovery app built by [Felipe Pucinelli](https
 
 ## Features
 
-- **About Page** — Personal bio with avatar, centered header with decorative lines
-- **Random Radio Discovery** — Start listening to a random station with one click, shuffle to discover new ones
-- **Auto-Skip on Failure** — Broken streams are detected automatically and the player skips to the next available station
-- **Station Detail Pages** — Dedicated page per station with full metadata, genre tags, play/save/share actions, and related stations
-- **Share Stations** — Share a station via native share sheet (mobile) or copy link to clipboard (desktop)
-- **Related Stations** — Discover similar stations based on genre and country on each station detail page
-- **Curated System Stations** — Handpicked stations pinned to favorites that can't be removed or unfavorited
-- **Now Playing Toast** — Toast notification appears when switching between stations
-- **Typewriter Hero** — Name and roles animate with a typing effect on the landing page, respects `prefers-reduced-motion`
-- **Avatar Pulse Animation** — Breathing ring animation on the avatar while music is playing
-- **Recently Played** — Tracks last 10 played stations, persisted in localStorage, shown on the landing page
-- **Station Count Badge** — Displays total available stations and countries from the Radio Browser API
-- **Favorites** — Save and manage favorite stations, persisted in localStorage
-- **Browse by Country** — Explore stations filtered by country with dedicated pages
-- **Browse by Genre** — Explore stations filtered by music genre with dedicated pages
-- **Infinite Scroll** — Stations, countries, and genres load progressively as you scroll
-- **Persistent Player** — Audio keeps playing across page navigation with play/pause, volume control, and inline favorite toggle
-- **Persistent Volume** — Volume level saved to localStorage and restored across sessions
-- **Dark Mode** — Light/dark theme toggle, preference persisted in localStorage
-- **SEO Optimized** — SSR pre-rendering, meta tags, Open Graph, structured data (JSON-LD), sitemap, and robots.txt
-- **Google Analytics 4** — GA4 tracking via `@nuxt/scripts`, deferred with idle timeout to protect Core Web Vitals
-- **Performance Optimized** — Non-blocking font loading, compositor-hinted animations, cache headers for static assets, CWV-safe analytics loading
-- **Mobile-Friendly Touch Targets** — Interactive buttons meet the 44px minimum tap target guideline
-- **Accessible** — ARIA attributes on all interactive elements (menus, toggles, buttons), semantic HTML, proper roles and states
-- **Listen Dropdown Nav** — Stations, countries, and genres grouped under an accessible dropdown menu
+- **Split Hero** — Cut-out portrait facing the intro on desktop, stacked and centred on phones and tablets
+- **Scramble Animation** — Name and rotating roles decode with a glitch-scramble effect, respects `prefers-reduced-motion`
+- **Clients Marquee** — CSS-only infinite logo carousel that pauses on hover/focus and becomes a static grid under reduced motion
+- **About Page** — Bio with the same cut-out portrait
+- **Dark Mode** — Light/dark theme toggle, preference persisted in localStorage; one lime accent on graphite
+- **Particle Background** — Subtle animated character rain in the brand colour
+- **SEO Optimized** — Static pre-rendering, meta tags, Open Graph image, structured data (JSON-LD), sitemap, and robots.txt
+- **Google Analytics 4** — GA4 via `@nuxt/scripts`, deferred with an idle timeout to protect Core Web Vitals
+- **Performance Optimized** — Preloaded responsive LCP portrait, non-blocking self-hosted fonts, compositor-only animations, no layout shift
+- **Accessible** — Semantic HTML, ARIA on interactive elements, 44px touch targets, reduced-motion fallbacks
 
 ---
 
@@ -43,136 +28,40 @@ Personal site and internet radio discovery app built by [Felipe Pucinelli](https
 | Framework | **Nuxt 3** (static generation via `github-pages` preset) |
 | UI | **Vue 3** Composition API with `<script setup>` |
 | Styling | **Tailwind CSS** with dark mode (class strategy) |
-| State | **Pinia** (Composition API stores) |
-| Typography | Instrument Serif + Satoshi (Fontshare) |
+| State | **Pinia** (theme store) |
+| Typography | Syne (display) + Chakra Petch (body), self-hosted |
 | Icons | PrimeIcons |
-| Audio | HTML5 Audio API |
 | Analytics | **@nuxt/scripts** + Google Analytics 4 (idle-deferred) |
-| Data | [Radio Browser API](https://www.radio-browser.info/) |
-| Testing | **Vitest** + Vue Test Utils + happy-dom |
 | Deploy | **GitHub Pages** via `gh-pages` |
-
----
-
-## Architecture
-
-### API Layer
-
-```
-composables/api/
-  client.ts      # radioFetch() — thin wrapper around $fetch with base URL
-  mappers.ts     # mapStation/Country/Genre — transform raw API responses to typed models
-```
-
-All external data flows through `radioFetch()` and gets mapped into typed interfaces defined in `types/radio.ts`. Raw API response shapes (`RawStation`, `RawCountry`, `RawGenre`) are separated from the app-facing types (`Station`, `Country`, `Genre`).
-
-### Composables
-
-```
-composables/
-  useStations.ts        # Station fetching with useAsyncData + direct fetch variant
-  useStation.ts         # Single station by UUID + related stations discovery
-  useCountries.ts       # Country listing
-  useGenres.ts          # Genre listing
-  useRadioStats.ts      # Total station/country counts from API stats endpoint
-  useInfiniteScroll.ts  # Reusable infinite scroll with IntersectionObserver
-  useToast.ts           # Singleton toast notification state and show()
-  useSeoPage.ts         # Shared SEO setup (title suffix, og:url prefix)
-  useStationActions.ts  # Unified play/favorite actions for components
-  useShareStation.ts    # Web Share API with clipboard fallback
-  useTypewriter.ts      # Typewriter text animation with configurable speed and phases
-```
-
-Composables are auto-imported by Nuxt. Store imports (`usePlayerStore`, etc.) are **not** auto-imported and require explicit imports.
-
-### Stores
-
-All stores use Pinia's Composition API style and are self-initializing (no `init()` calls needed).
-
-| Store | Responsibility |
-|-------|---------------|
-| `player.ts` | Audio playback state, lazy `HTMLAudioElement` via `ensureAudio()`, persistent volume (`skipHydrate`), error callback for auto-skip |
-| `favorites.ts` | User favorites + system-curated stations, localStorage persistence |
-| `recentlyPlayed.ts` | Last 10 played stations (deduplicated), localStorage persistence |
-| `theme.ts` | Dark/light mode toggle, reads system preference at creation |
-
-### Components
-
-```
-components/
-  station/StationCard.vue   # Presentational — props: station, isPlaying, isFavorite, hideFavorite; emits: play, toggleFavorite
-  player/PlayerBar.vue      # Global persistent player bar with favorite toggle, auto-skip fallback on stream errors
-  ui/Loader.vue             # Shared loading spinner
-  ui/SocialLinks.vue        # Social media links
-```
-
-`StationCard` is fully presentational — all logic is handled by the parent via `useStationActions()`.
-
-### Error Handling
-
-- **`error.vue`** — Catches unhandled errors at the app level
-- **Inline error + retry** — Data pages show contextual error messages with a retry button
-- **Player auto-skip** — When a stream fails, the `PlayerBar` fetches a random station from the API and plays it automatically
 
 ---
 
 ## Project Structure
 
 ```
-├── app.vue
-├── error.vue
+├── app.vue                     # Shell, particle background, GA4, WebSite JSON-LD
+├── error.vue                   # 404 / 500 page
 ├── layouts/
-│   └── default.vue            # Header, nav, theme toggle, persistent PlayerBar
+│   └── default.vue             # Header, nav, theme toggle
 ├── pages/
-│   ├── index.vue              # Landing page: bio, social links, clients marquee
-│   ├── about.vue              # About page with bio and avatar
-│   ├── listen.vue             # Radio hub: random station, favorites, recently played
-│   ├── stations.vue           # All stations with infinite scroll
-│   ├── countries.vue          # Country listing
-│   ├── country/[code].vue     # Stations filtered by country
-│   ├── genres.vue             # Genre listing
-│   ├── genre/[slug].vue       # Stations filtered by genre
-│   └── station/[id].vue       # Station detail page (metadata, actions, related)
-├── components/
-│   ├── station/StationCard.vue
-│   ├── player/PlayerBar.vue
-│   └── ui/
-│       ├── Loader.vue
-│       ├── SocialLinks.vue
-│       └── Toast.vue
+│   ├── index.vue               # Hero (portrait, name, roles, bio, social links) + clients marquee
+│   └── about.vue               # About page
+├── components/ui/
+│   ├── ClientsMarquee.vue      # CSS-only logo carousel
+│   ├── ParticleBackground.vue  # Animated character rain
+│   └── SocialLinks.vue         # Social media links
 ├── composables/
-│   ├── api/
-│   │   ├── client.ts
-│   │   └── mappers.ts
-│   ├── useStations.ts
-│   ├── useStation.ts
-│   ├── useShareStation.ts
-│   ├── useCountries.ts
-│   ├── useGenres.ts
-│   ├── useRadioStats.ts
-│   ├── useInfiniteScroll.ts
-│   ├── useToast.ts
-│   ├── useSeoPage.ts
-│   ├── useStationActions.ts
-│   └── useTypewriter.ts
+│   ├── useScramble.ts          # Glitch-scramble text animation for the hero
+│   └── useSeoPage.ts           # Shared SEO setup (title suffix, og:url prefix)
 ├── stores/
-│   ├── player.ts
-│   ├── favorites.ts
-│   ├── recentlyPlayed.ts
-│   └── theme.ts
-├── tests/
-│   ├── setup.ts                  # Vue auto-import globals for test env
-│   ├── unit/mappers.test.ts
-│   ├── stores/favorites.test.ts
-│   ├── stores/recentlyPlayed.test.ts
-│   ├── composables/useToast.test.ts
-│   └── components/StationCard.test.ts
-├── types/
-│   └── radio.ts
+│   └── theme.ts                # Dark/light mode, reads preference at creation
 ├── assets/css/
-│   └── main.css
+│   └── main.css                # Tokens, animations, marquee, theme toggle
 └── public/
-    ├── avatar.jpg
+    ├── portrait-480.webp       # Responsive hero portrait
+    ├── portrait-800.webp
+    ├── clients/                # Client logos (480×192, black on transparent)
+    ├── fonts/
     ├── og-image-v2.png
     ├── sitemap.xml
     └── robots.txt
@@ -198,14 +87,6 @@ npm install
 ```bash
 npm run dev
 ```
-
-### Test
-
-```bash
-npm run test:run
-```
-
-Runs unit and component tests with Vitest (API mappers, Pinia stores, composables, components).
 
 ### Build
 

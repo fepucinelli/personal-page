@@ -23,12 +23,11 @@ export default defineNuxtConfig({
     preset: 'github-pages',
     prerender: {
       crawlLinks: true,
-      routes: ['/', '/listen', '/stations'],
+      routes: ['/'],
       failOnError: false,
     },
     routeRules: {
       '/_assets/**': { headers: { 'cache-control': 'public, max-age=31536000, immutable' } },
-      '/station/**': { prerender: false },
     },
     hooks: {
       'prerender:generate'(route: { contents?: string }) {
@@ -57,12 +56,11 @@ export default defineNuxtConfig({
         { rel: 'icon', type: 'image/png', sizes: '32x32', href: '/favicon-32x32.png' },
         { rel: 'icon', type: 'image/png', sizes: '16x16', href: '/favicon-16x16.png' },
         { rel: 'apple-touch-icon', sizes: '180x180', href: '/apple-touch-icon.png' },
-        { rel: 'preconnect', href: 'https://de1.api.radio-browser.info' },
         { rel: 'preload', as: 'font', type: 'font/woff2', href: '/fonts/syne-latin.woff2', crossorigin: 'anonymous' } as any,
         { rel: 'preload', as: 'font', type: 'font/woff2', href: '/fonts/chakra-petch-400-latin.woff2', crossorigin: 'anonymous' } as any,
       ],
       meta: [
-        { name: 'description', content: 'Felipe Pucinelli — Senior Front-End Engineer, Lead Developer & DJ. Explore my curated collection of internet radio stations from around the world.' },
+        { name: 'description', content: 'Felipe Pucinelli — Senior Front-End Engineer, Lead Software Engineer & DJ with 12+ years building products that feel good to use.' },
         { name: 'author', content: 'Felipe Pucinelli' },
         { name: 'theme-color', content: '#0B0B0B' },
         { name: 'referrer', content: 'strict-origin-when-cross-origin' },

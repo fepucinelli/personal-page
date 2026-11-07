@@ -1,54 +1,43 @@
-# Radio Discovery App & Personal Website — Nuxt 3 Static Site
+# Personal Website — Nuxt 3 Static Site
 
 ## Commands
 - Dev: `npm run dev`
 - Build (static): `npm run build` (runs `nuxt generate`)
 - Deploy: `npm run deploy` (build + push to GitHub Pages)
 - No test suite configured
+- Never run `npm run build` while the dev server is running: both write `.nuxt/` and the dev server breaks
 
 ## Architecture
 
-Three-layer data flow: `radioFetch()` → Raw API types → Mappers → App types
+Two pages: `pages/index.vue` (home) and `pages/about.vue`. No external data or API calls.
 
-- **Types**: `types/radio.ts` — Station, Country, Genre + Raw* API interfaces
-- **API**: `composables/api/client.ts` (radioFetch), `composables/api/mappers.ts`
-- **Composables**: Data fetching (useStations, useStation, useCountries, useGenres), UI logic (useInfiniteScroll, useSeoPage, useStationActions, useShareStation, useToast)
-- **Stores** (Pinia, Composition API): player.ts, favorites.ts, recentlyPlayed.ts, theme.ts
+- **Composables**: `useScramble` (hero name/role animation), `useSeoPage` (page SEO)
+- **Stores** (Pinia, Composition API): `theme.ts` only
+- **Components** (`components/ui/`): `ClientsMarquee`, `SocialLinks`, `ParticleBackground`
 
 ## Critical Patterns
 
 - Nuxt auto-imports composables, components, and Vue APIs — do NOT add explicit imports for these
-- Store imports (usePlayerStore, etc.) are NOT auto-imported — always use explicit imports from `~/stores/*`
+- Store imports (`useThemeStore`) are NOT auto-imported — always use explicit imports from `~/stores/*`
 - Use `import.meta.client` instead of `process.client` in Composition API stores
 - Use `skipHydrate()` for values read from localStorage or that differ between server/client
-- Wrap client-only sections (favorites, recently played) in `<ClientOnly>`
 
-## Component Design
+## Home
 
-- StationCard is fully presentational (props + emits only, no logic); station name links to `/station/[id]`
-- Container components use `useStationActions()` to coordinate player + favorites stores
-- Pass `hideFavorite` flag when rendering system stations (can't be unfavorited)
-
-## Station Detail Pages
-
-- Route: `pages/station/[id].vue` — fetches station by UUID via `useStation(id)`
-- Related stations via `useRelatedStations(station)` — same tag + country, fallback to tag only
-- Share via `useShareStation()` — Web Share API with clipboard fallback + toast
-- Station pages are **not prerendered** (`/station/**` has `prerender: false` in nuxt.config.ts)
-- 404 handling uses `showError(createError(...))` (not `throw`) for client-side navigation
-
-## Navigation
-
-- Home (`/`) is portfolio-only: avatar, bio, social links, `ClientsMarquee`, and a link to `/listen` — no radio API calls
-- `./listen` in the header is a plain link to the radio hub `pages/listen.vue` (random station, browse shortcuts, favorites, recently played); it stays active on `/stations`, `/countries`, `/genres`, `/country/*`, `/genre/*`, `/station/*`
-- Radio URLs (`/stations`, `/countries`, `/genres`, detail pages) are kept as-is for SEO — GitHub Pages can't 301, so don't move them under `/listen/*`
-- System favorites use real Radio Browser API UUIDs (not synthetic IDs) so detail pages work
+- Hero is a 1-column grid (`grid-cols-1` = `minmax(0, 1fr)`) below `lg` and 2 columns from `lg`: portrait left, text right. Keep the explicit `grid-cols-1` — an implicit `auto` track lets the scrambling, `nowrap` name widen the column and resize the photo on mobile
+- The portrait is the LCP element: preloaded in `useHead` with `imagesrcset`/`imagesizes` matching the `<img>`; its entrance uses `animate-fade-up-lcp` (starts at opacity 0.001 so Chrome still counts it as LCP)
+- Portrait assets: `public/portrait-480.webp`, `public/portrait-800.webp` (cut-out with transparent background)
 
 ## Clients Marquee
 
 - `components/ui/ClientsMarquee.vue` renders the list twice in `.marquee__track`; CSS in `assets/css/main.css` shifts it by -50% for a seamless loop
 - CSS-only (transform animation, no JS): pauses on `:hover` / `:focus-within`; under `prefers-reduced-motion` it becomes a static wrapped grid and hides the duplicate list
-- Logos live in `public/clients/*.webp`: 480×192, black on transparent, displayed at 160×64 with `dark:invert`. Keep new logos in the same format
+- Logos live in `public/clients/*.webp`: 480×192, black on transparent, displayed at 160×64 with `dark:invert`. Keep new logos in the same format; marks whose ink reads small (short lowercase, tiny text, taglines) get an optical size boost inside the canvas
+
+## Navigation
+
+- Header: `~/fp` wordmark (home), `./about`, theme toggle
+- Nav links are text-only: hover and the current page only turn the text `brand` (no background or border)
 
 ## Styling
 
@@ -60,8 +49,10 @@ Three-layer data flow: `radioFetch()` → Raw API types → Mappers → App type
 
 ## SEO
 
-- Use `useSeoPage()` in every page — it adds title suffix and og:url prefix automatically
-- Structured data (JSON-LD) in app.vue and index.vue
+- Use `useSeoPage()` in every page except home — it adds title suffix and og:url prefix automatically (home sets its own `useHead`/`useSeoMeta`)
+- Structured data (JSON-LD) in app.vue (WebSite) and index.vue (Person)
+- OG image: `public/og-image-v2.png` — when it changes, give it a new file name so social platforms don't serve their cached copy
+- `public/sitemap.xml` lists `/` and `/about`
 
 ## Analytics
 
@@ -71,9 +62,7 @@ Three-layer data flow: `radioFetch()` → Raw API types → Mappers → App type
 
 ## Error Handling
 
-- Global: `error.vue` (404/500 templates)
-- Page-level: inline error message + retry button
-- Player: auto-skip to random station on stream failure via onError callback
+- Global: `error.vue` (404/500 templates, link back home)
 
 ## Accessibility
 
@@ -91,6 +80,6 @@ Three-layer data flow: `radioFetch()` → Raw API types → Mappers → App type
 - Don't use Options API — this project uses Composition API exclusively
 - Don't use Vuex — we use Pinia
 - Don't add CSS-in-JS or scoped styles — use Tailwind utility classes
-- Don't create stores for ephemeral UI state — use composables (see useToast pattern)
+- Don't create stores for ephemeral UI state — use composables
 - Don't call store init() methods — stores self-initialize at creation time
 - Don't create interactive elements without proper ARIA attributes — see Accessibility section

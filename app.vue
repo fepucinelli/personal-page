@@ -40,7 +40,7 @@ useHead({
         '@type': 'WebSite',
         name: 'Felipe Pucinelli',
         url: 'https://pucinelli.me',
-        description: 'Senior Front-End Engineer, Lead Developer & DJ. Explore internet radio stations from around the world.',
+        description: 'Portfolio of Felipe Pucinelli — Senior Front-End Engineer, Lead Software Engineer & DJ.',
       }),
     },
   ],

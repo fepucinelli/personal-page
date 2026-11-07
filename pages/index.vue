@@ -1,16 +1,13 @@
 <template>
   <div
-    class="min-h-screen flex flex-col items-center justify-center
-           text-center px-6 py-16 overflow-x-hidden"
+    class="min-h-screen flex flex-col items-center justify-start
+           text-center px-6 pt-[42px] lg:pt-16 pb-16 overflow-x-hidden"
   >
     <!-- Hero: stacked and centred on phones/tablets; from lg the photo on the left looks into the text on the right -->
     <!-- grid-cols-1 = minmax(0, 1fr): the scrambling nowrap name/role can't widen the track and resize the photo -->
     <section class="w-full max-w-6xl grid grid-cols-1 lg:grid-cols-2 items-center gap-2 lg:gap-14 lg:text-left">
       <!-- Portrait — cut-out with soft edges; enters with the text, one step ahead of the name -->
-      <div class="portrait animate-fade-up-lcp delay-1 relative w-[85%] max-w-[380px] mx-auto lg:w-full lg:max-w-[520px] lg:mr-0" :class="{ 'is-playing': player.isPlaying }">
-        <!-- Lime aura behind the head while a station plays -->
-        <div class="avatar-blob blob1" aria-hidden="true"></div>
-        <div class="avatar-blob blob2" aria-hidden="true"></div>
+      <div class="animate-fade-up-lcp delay-1 w-[85%] max-w-[380px] mx-auto lg:w-full lg:max-w-[520px] lg:mr-0">
         <img
           src="/portrait-800.webp"
           srcset="/portrait-480.webp 480w, /portrait-800.webp 800w"
@@ -19,13 +16,13 @@
           width="800"
           height="731"
           fetchpriority="high"
-          class="relative z-10 block w-full h-auto"
+          class="block w-full h-auto"
         />
       </div>
 
       <div>
         <!-- Name + Role (accessible text for screen readers) -->
-        <span class="sr-only">Felipe Pucinelli. Senior Front-End Engineer, Lead Developer, DJ.</span>
+        <span class="sr-only">Felipe Pucinelli. Senior Front-End Engineer, Lead Software Engineer, DJ.</span>
 
         <!-- Name -->
         <h1
@@ -60,23 +57,14 @@
     </section>
 
     <!-- Clients -->
-    <ClientsMarquee class="animate-fade-up delay-6 mt-16" />
-
-    <NuxtLink
-      to="/listen"
-      class="animate-fade-up delay-6 mt-12 py-2 -my-2 text-xs tracking-widest uppercase
-             text-ink-muted dark:text-neutral-400 hover:text-brand transition-colors duration-300"
-    >
-      Tune in to the radio &rarr;
-    </NuxtLink>
+    <!-- On phones the gap below the social icons visually matches the gap above them (bio → icons) -->
+    <ClientsMarquee class="animate-fade-up delay-6 mt-[33px] sm:mt-16" />
   </div>
 </template>
 
 <script setup lang="ts">
-import { usePlayerStore } from '~/stores/player'
-
 useHead({
-  title: 'Senior Front-End Engineer, Lead Developer & DJ',
+  title: 'Senior Front-End Engineer, Lead Software Engineer & DJ',
   link: [
     { rel: 'canonical', href: 'https://pucinelli.me/' },
     // Hero portrait is the LCP element: fetch the size the browser will pick, before CSS/JS
@@ -92,7 +80,7 @@ useHead({
         jobTitle: 'Senior Front-End Engineer',
         url: 'https://pucinelli.me',
         image: 'https://pucinelli.me/portrait-800.webp',
-        description: 'Senior Front-End Engineer, Lead Developer & DJ with 12+ years of experience building products that feel good to use.',
+        description: 'Senior Front-End Engineer, Lead Software Engineer & DJ with 12+ years of experience building products that feel good to use.',
         sameAs: [
           'https://www.instagram.com/felipepucinelli',
           'https://www.linkedin.com/in/felipepucinelli',
@@ -104,16 +92,14 @@ useHead({
 })
 
 useSeoMeta({
-  description: 'Felipe Pucinelli — Senior Front-End Engineer, Lead Developer & DJ with 12+ years building products for companies like Itaú, Qualcomm, Natura and Siemens.',
-  ogTitle: 'Felipe Pucinelli — Senior Front-End Engineer, Lead Developer & DJ',
-  ogDescription: 'Senior Front-End Engineer, Lead Developer & DJ with 12+ years building products that feel good to use.',
+  description: 'Felipe Pucinelli — Senior Front-End Engineer, Lead Software Engineer & DJ with 12+ years building products for companies like Itaú, Qualcomm, Natura and Siemens.',
+  ogTitle: 'Felipe Pucinelli — Senior Front-End Engineer, Lead Software Engineer & DJ',
+  ogDescription: 'Senior Front-End Engineer, Lead Software Engineer & DJ with 12+ years building products that feel good to use.',
   ogUrl: 'https://pucinelli.me',
 })
 
-const player = usePlayerStore()
-
 const scramble = useScramble({
   name: 'Felipe Pucinelli',
-  roles: ['Senior Front-End Engineer', 'Lead Engineer', 'Web Performance Specialist', 'Eletronic Music DJ'],
+  roles: ['Senior Front-End Engineer', 'Lead Software Engineer', 'Web Performance Specialist', 'Eletronic Music DJ'],
 })
 </script>

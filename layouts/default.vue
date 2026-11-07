@@ -30,18 +30,6 @@
       </NuxtLink>
 
       <nav aria-label="Main" class="flex items-center gap-1">
-        <!-- Listen (radio hub; active across all radio routes) -->
-        <NuxtLink
-          to="/listen"
-          :aria-current="route.path === '/listen' ? 'page' : undefined"
-          :class="isListenActive
-            ? 'text-brand border-transparent'
-            : 'text-ink-secondary dark:text-neutral-400 hover:text-brand dark:hover:text-brand border-transparent'"
-          class="px-3 py-1.5 text-sm font-mono border rounded transition-all duration-200"
-        >
-          ./listen
-        </NuxtLink>
-
         <!-- About -->
         <NuxtLink
           to="/about"
@@ -71,44 +59,15 @@
     </header>
 
     <!-- Page -->
-    <main id="main-content" tabindex="-1" class="flex-1 pt-14 pb-24">
+    <main id="main-content" tabindex="-1" class="flex-1 pt-14 pb-12">
       <slot />
     </main>
-
-    <!-- Persistent Player -->
-    <PlayerBar />
-
-    <!-- Toast notification -->
-    <Toast />
   </div>
 </template>
 
 <script setup lang="ts">
 import { useThemeStore } from '~/stores/theme'
-import { usePlayerStore } from '~/stores/player'
-import { useRecentlyPlayedStore } from '~/stores/recentlyPlayed'
 
 const route = useRoute()
 const theme = useThemeStore()
-const player = usePlayerStore()
-const recentlyPlayed = useRecentlyPlayedStore()
-const toast = useToast()
-
-const LISTEN_ROUTES = ['/listen', '/stations', '/countries', '/genres']
-const LISTEN_PREFIXES = ['/country/', '/genre/', '/station/']
-
-const isListenActive = computed(() =>
-  LISTEN_ROUTES.includes(route.path)
-  || LISTEN_PREFIXES.some(prefix => route.path.startsWith(prefix)),
-)
-
-watch(() => player.currentStation, (newStation, oldStation) => {
-  if (!newStation) return
-
-  recentlyPlayed.addStation(newStation)
-
-  if (oldStation) {
-    toast.show(`Now playing: ${newStation.name}`)
-  }
-})
 </script>

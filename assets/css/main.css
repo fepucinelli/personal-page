@@ -124,48 +124,6 @@
 }
 
 
-/* ---------- Range Slider ---------- */
-.range-slider {
-  -webkit-appearance: none;
-  appearance: none;
-  height: 3px;
-  background: rgb(var(--brand) / 0.15);
-  border-radius: 2px;
-  outline: none;
-  cursor: pointer;
-  transition: height 0.2s ease;
-}
-
-.range-slider:hover {
-  height: 5px;
-}
-
-.range-slider::-webkit-slider-thumb {
-  -webkit-appearance: none;
-  appearance: none;
-  width: 14px;
-  height: 14px;
-  background: rgb(var(--brand));
-  border-radius: 50%;
-  cursor: pointer;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-  box-shadow: 0 0 0 3px rgb(var(--brand) / 0.2);
-}
-
-.range-slider::-webkit-slider-thumb:hover {
-  transform: scale(1.2);
-  box-shadow: 0 0 0 5px rgb(var(--brand) / 0.3);
-}
-
-.range-slider::-moz-range-thumb {
-  width: 14px;
-  height: 14px;
-  background: rgb(var(--brand));
-  border-radius: 50%;
-  border: none;
-  cursor: pointer;
-}
-
 /* ---------- Animations ---------- */
 @keyframes fade-up {
   from {
@@ -176,20 +134,6 @@
     opacity: 1;
     transform: translateY(0);
   }
-}
-
-@keyframes pulse-glow {
-  0%, 100% {
-    box-shadow: 0 0 0 0 rgb(var(--brand) / 0.4);
-  }
-  50% {
-    box-shadow: 0 0 24px 6px rgb(var(--brand) / 0.18);
-  }
-}
-
-@keyframes spin-slow {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
 }
 
 .animate-fade-up {
@@ -211,138 +155,6 @@
 
 .animate-fade-up-lcp {
   animation: fade-up-lcp 0.5s ease both;
-}
-
-.animate-pulse-glow {
-  animation: pulse-glow 2.5s ease-in-out infinite;
-}
-
-.animate-spin-slow {
-  animation: spin-slow 2s linear infinite;
-}
-
-
-/* ---------- Avatar blob animation ---------- */
-/* Lime aura that morphs behind the home portrait's head while a station plays */
-.portrait {
-  contain: layout style;
-}
-
-/* Larger than the head and centred on it, so the lime only shows as a halo around the hair */
-.portrait .avatar-blob {
-  width: 84%;
-  height: auto;
-  aspect-ratio: 1;
-  left: 12%;
-  top: -6%;
-  /* On stop, keep the blur until the 0.8s fade-out has finished, so the exit mirrors the entrance
-     (removing the filter instantly would show the sharp blob shapes while they fade) */
-  transition: opacity 0.8s ease, filter 0s linear 0.8s;
-}
-
-.avatar-blob {
-  position: absolute;
-  width: 75%;
-  height: 75%;
-  left: 12.5%;
-  top: 12.5%;
-  border-radius: 100%;
-  opacity: 0;
-  transition: opacity 0.8s ease;
-  will-change: border-radius;
-}
-
-.avatar-blob::before,
-.avatar-blob::after {
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  opacity: 0.5;
-  border-radius: 100%;
-  content: "";
-  will-change: border-radius;
-}
-
-.avatar-blob::after {
-  left: 3%;
-  top: 3%;
-}
-
-.avatar-blob.blob1 {
-  background: rgb(var(--brand));
-  animation: blob-rotate 4s linear infinite, blob-morph 6s linear infinite;
-}
-
-.avatar-blob.blob1::before {
-  left: 0;
-  background: rgb(var(--brand) / 0.7);
-  animation: blob-morph 6s 0.5s linear infinite;
-}
-
-.avatar-blob.blob1::after {
-  background: rgb(var(--brand) / 0.8);
-  animation: blob-morph 6s 1s linear infinite;
-}
-
-.avatar-blob.blob2 {
-  background: rgb(var(--brand) / 0.8);
-  animation: blob-rotate 3.5s linear infinite, blob-morph 5.5s linear infinite;
-}
-
-.avatar-blob.blob2::before {
-  left: 0;
-  background: rgb(var(--brand) / 0.55);
-  animation: blob-morph 5.5s 0.5s linear infinite;
-}
-
-.avatar-blob.blob2::after {
-  background: rgb(var(--brand) / 0.65);
-  animation: blob-morph 5.5s 1s linear infinite;
-}
-
-/* Only visible when playing: a soft, blurred halo rather than a solid disk */
-.portrait.is-playing .avatar-blob {
-  opacity: 0.22;
-  filter: blur(48px);
-  /* On play, apply the blur immediately, before the fade-in starts */
-  transition: opacity 0.8s ease, filter 0s;
-}
-
-@keyframes blob-rotate {
-  from { transform: rotate(0); }
-  to { transform: rotate(360deg); }
-}
-
-@keyframes blob-morph {
-  0%   { border-radius: 100%; }
-  10%  { border-radius: 100% 70% 100%; }
-  20%  { border-radius: 91% 88% 75% 69%; }
-  30%  { border-radius: 100% 100% 85%; }
-  40%  { border-radius: 88% 100% 70%; }
-  50%  { border-radius: 75% 100% 100%; }
-  60%  { border-radius: 87% 78% 55% 84%; }
-  70%  { border-radius: 79% 90% 80% 72%; }
-  80%  { border-radius: 76% 92% 90% 77%; }
-  90%  { border-radius: 83% 77% 99% 88%; }
-  100% { border-radius: 100%; }
-}
-
-/* ---------- Toast transitions ---------- */
-.toast-enter-active,
-.toast-leave-active {
-  transition: opacity 0.3s ease, transform 0.3s ease;
-}
-
-.toast-enter-from {
-  opacity: 0;
-  transform: translateY(12px);
-}
-
-.toast-leave-to {
-  opacity: 0;
-  transform: translateY(-8px);
 }
 
 /* ---------- Page transitions ---------- */

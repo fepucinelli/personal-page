@@ -7,30 +7,6 @@
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://pucinelli.me/listen</loc>
-    <lastmod>2026-10-24</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://pucinelli.me/stations</loc>
-    <lastmod>2026-03-07</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://pucinelli.me/countries</loc>
-    <lastmod>2026-03-07</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://pucinelli.me/genres</loc>
-    <lastmod>2026-03-07</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
     <loc>https://pucinelli.me/about</loc>
     <lastmod>2026-03-07</lastmod>
     <changefreq>monthly</changefreq>
