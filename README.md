@@ -8,12 +8,6 @@ Personal site and portfolio of [Felipe Pucinelli](https://pucinelli.me) — Seni
 
 ## Features
 
-- **Split Hero** — Cut-out portrait facing the intro on desktop, stacked and centred on phones and tablets
-- **Scramble Animation** — Name and rotating roles decode with a glitch-scramble effect, respects `prefers-reduced-motion`
-- **Clients Marquee** — CSS-only infinite logo carousel that pauses on hover/focus and becomes a static grid under reduced motion
-- **About Page** — Bio with the same cut-out portrait
-- **Dark Mode** — Light/dark theme toggle, preference persisted in localStorage; one lime accent on graphite
-- **Particle Background** — Subtle animated character rain in the brand colour
 - **SEO Optimized** — Static pre-rendering, meta tags, Open Graph image, structured data (JSON-LD), sitemap, and robots.txt
 - **Google Analytics 4** — GA4 via `@nuxt/scripts`, deferred with an idle timeout to protect Core Web Vitals
 - **Performance Optimized** — Preloaded responsive LCP portrait, non-blocking self-hosted fonts, compositor-only animations, no layout shift
